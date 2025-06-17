@@ -1,6 +1,6 @@
-<?php 
-  $fs = $data['facet_inf'];
-  $url = url('redirect.facet', ['id' => $fs['facet_id']]);
+<?php
+$fs = $data['facet_inf'];
+$url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
@@ -15,11 +15,13 @@
                 'id'        => 'topic',
                 'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.edit_' . $data['type'],
-              ], [
+              ],
+              [
                 'id'        => 'topic',
                 'url'       => url('facet.form.logo.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.logo',
-              ], [
+              ],
+              [
                 'id'        => 'team',
                 'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.team',
@@ -31,10 +33,10 @@
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
 
-	<form class="max-w-md" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w-md" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/facet-type', ['type' => $fs['facet_type']]); ?>
-	  
+
       <fieldset>
         <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
         <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= htmlEncode($fs['facet_title']); ?>">
@@ -114,8 +116,8 @@
 
     <?php if ($container->user()->admin()) : ?>
       <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
-	  
-	  <?= insert('/_block/form/content-tl', ['data' => $fs['facet_tl']]); ?>
+
+      <?= insert('/_block/form/content-tl', ['data' => $fs['facet_tl']]); ?>
     <?php endif; ?>
 
     <fieldset>

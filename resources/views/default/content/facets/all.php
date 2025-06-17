@@ -9,7 +9,6 @@
 
     <div class="nav-bar">
       <ul class="nav scroll-menu">
-
         <?= insert(
           '/_block/navigation/nav',
           [
@@ -34,10 +33,9 @@
           ]
         );
         ?>
-
       </ul>
 
-	  <?php $type =  $data['type'] === 'blogs' ? 'blog' : 'topic'; ?>
+      <?php $type =  $data['type'] === 'blogs' ? 'blog' : 'topic'; ?>
       <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_' . $type))) : ?>
         <?php if ($data['countUserFacet'] == 0 || $container->user()->admin()) : ?>
           <p class="text-xl">

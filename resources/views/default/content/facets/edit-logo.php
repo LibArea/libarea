@@ -15,11 +15,13 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
                 'id'        => 'topic',
                 'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.edit_' . $data['type'],
-              ], [
+              ],
+              [
                 'id'        => 'topic',
                 'url'       => url('facet.form.logo.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.logo',
-              ], [
+              ],
+              [
                 'id'        => 'team',
                 'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.team',
@@ -32,9 +34,9 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </div>
 
     <?= insert('/_block/form/cropper/facet-logo', ['data' => $fs]); ?>
-	 
-	<br> 
-	 
+
+    <br>
+
     <?php if ($fs['facet_type'] == 'blog') : ?>
       <?= insert('/_block/form/cropper/facet-cover', ['data' => $fs]); ?>
     <?php endif; ?>

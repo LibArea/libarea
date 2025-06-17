@@ -15,7 +15,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
                 'id'        => 'topic',
                 'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.edit_' . $data['type'],
-              ], [
+              ],
+              [
                 'id'        => 'blog',
                 'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.team',
