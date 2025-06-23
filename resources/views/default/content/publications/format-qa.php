@@ -55,10 +55,7 @@
                         <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                       <?php endif; ?>
                     <?php endif; ?>
-
-
                   </div>
-
                 </div>
                 <?php if ($indent == '0_0') : ?><div class="mt5 mb5 br-bottom"></div><?php endif; ?>
                 <?php if ($level == 1) : ?><div class="br-dotted"></div><?php endif; ?>

@@ -60,7 +60,7 @@
       <?php endif; ?>
 
       <?php if ($type == 'qa') : ?>
-        <?php if ($item['post_comments_count'] > 1 && $level == 0) : ?>
+        <?php if ($item['post_comments_count'] > 1 && $level == '0_0') : ?>
           <?php if ($container->user()->id() == $item['post_user_id'] || $container->user()->admin()) : ?>
             <li>
               <a id="best_<?= $comment['comment_id']; ?>" data-id="<?= $comment['comment_id']; ?>" class="comment-best">
