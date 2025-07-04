@@ -5,6 +5,10 @@
     <form class="mb20" action="<?= url('edit.' . $item['post_type'], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/content/publications/edit/edit-form-' . $item['post_type'], ['item' => $item, 'data' => $data]); ?>
+      <p>
+        <input type="hidden" name="id" value="<?= $item['post_id']; ?>">
+        <?= Html::sumbit(__('app.edit')); ?>
+      </p>
     </form>
     <div class="box-info">
       <?= __('help.edit_' . $item['post_type']); ?>

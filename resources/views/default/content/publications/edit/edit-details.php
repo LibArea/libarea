@@ -54,3 +54,5 @@
 <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_poll'))) : ?>
   <?= insert('/_block/form/select/poll', ['poll' => $data['poll']]); ?>
 <?php endif; ?>
+
+<?= insert('/_block/form/content-type', ['type' => $item['post_type']]); ?>

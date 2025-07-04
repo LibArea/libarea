@@ -4,6 +4,7 @@
     <form class="mb20" action="<?= url('add.' . $data['type'], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/content/publications/add/add-form-' . $data['type'], ['data' => $data]); ?>
+      <p><?= Html::sumbit(__('app.create')); ?></p>
     </form>
     <div class="box-info">
       <?= __('help.add_' . $data['type']); ?>

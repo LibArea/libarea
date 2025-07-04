@@ -49,8 +49,3 @@
   <summary><?= __('app.other'); ?></summary>
   <?= insert('/content/publications/edit/edit-details', ['data' => $data, 'item' => $item]); ?>
 </details>
-
-<p>
-  <input type="hidden" name="id" value="<?= $item['post_id']; ?>">
-  <?= Html::sumbit(__('app.edit')); ?>
-</p>

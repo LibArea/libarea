@@ -36,8 +36,3 @@
     </fieldset>
   <?php endif; ?>
 <?php endif; ?>
-
-<p>
-  <input type="hidden" name="id" value="<?= $item['post_id']; ?>">
-  <?= Html::sumbit(__('app.edit')); ?>
-</p>

@@ -13,5 +13,3 @@
 <fieldset>
   <input type="checkbox" name="draft"> <?= __('app.is_draft'); ?>
 </fieldset>
-
-<p><?= Html::sumbit(__('app.create')); ?></p>

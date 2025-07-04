@@ -14,5 +14,3 @@
   <summary><?= __('app.other'); ?></summary>
   <?= insert('/content/publications/add/add-details', ['data' => $data]); ?>
 </details>
-
-<p><?= Html::sumbit(__('app.create')); ?></p>

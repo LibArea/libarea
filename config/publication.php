@@ -12,4 +12,30 @@ return [
     // Enable (true) merging of comments if a participant posts multiple comments one after the other on a single comment
     // Включить (true) слияние комментариев, если участник публикует множество комментариев один за другим на один комментарий
     'merge_comments' => true,
+	
+	// Permitted publication types: article, post, question, page, note
+	// Разрешенные типы публикаций: статья, пост, вопрос, страница, заметка
+	'allowed_types'  => [
+		[
+		  'title' => 'app.article',
+		  'type' => 'article',
+		],
+		[
+		  'title' => 'app.post',
+		  'type' => 'post',
+		],
+		[
+		  'title' => 'app.question',
+		  'type' => 'question',
+		],
+		[
+		  'title' => 'app.page',
+		  'type' => 'page',
+		],
+		[
+		  'title' => 'app.note',
+		  'type' => 'note',
+		]
+	],
+	
 ]; 

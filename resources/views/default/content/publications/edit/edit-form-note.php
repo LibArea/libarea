@@ -1,19 +1,19 @@
 <fieldset class="form-big">
-	<div class="form-label input-label"><label><?= __('app.heading'); ?></label></div>
-	<div class="form-element">
-		<input minlength="6" maxlength="250" id="title" value="<?= htmlEncode($item['post_title']); ?>" type="text" required name="title">
-		<div class="help">6 - 250 <?= __('app.characters'); ?></div>
-	</div>
+  <div class="form-label input-label"><label><?= __('app.heading'); ?></label></div>
+  <div class="form-element">
+    <input minlength="6" maxlength="250" id="title" value="<?= htmlEncode($item['post_title']); ?>" type="text" required name="title">
+    <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+  </div>
 </fieldset>
 
 <?php if ($container->user()->admin()) : ?>
-	<fieldset>
-		<div class="form-label input-label"><label>SLUG (URL)</label></div>
-		<div class="form-element">
-			<input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
-			<div class="help">> 6  <?= __('app.characters'); ?></div>
-		</div>
-	</fieldset>
+  <fieldset>
+    <div class="form-label input-label"><label>SLUG (URL)</label></div>
+    <div class="form-element">
+      <input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
+      <div class="help">> 6 <?= __('app.characters'); ?></div>
+    </div>
+  </fieldset>
 <?php endif; ?>
 
 <?= insert('/_block/form/select/topic', ['data' => $data, 'action' => 'edit']); ?>
@@ -49,8 +49,3 @@
   <summary><?= __('app.other'); ?></summary>
   <?= insert('/content/publications/edit/edit-details', ['data' => $data, 'item' => $item]); ?>
 </details>
-
-<p>
-  <input type="hidden" name="id" value="<?= $item['post_id']; ?>">
-  <?= Html::sumbit(__('app.edit')); ?>
-</p>

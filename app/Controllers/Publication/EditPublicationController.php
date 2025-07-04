@@ -130,11 +130,15 @@ class EditPublicationController extends Controller
 			}
 		}
 
+		if (!in_array($data['content_type'], ['article', 'post', 'note', 'question', 'page'])) {
+			$data['content_type'] = 'article';
+        }
+
 		PublicationModel::editPost([
 			'post_id' 			=> $data['id'],
 			'post_title' 		=> $data['title'] ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
-			'post_type' 		=> $type,
+			'post_type' 		=> $data['content_type'],
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
 			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::post('user_id')->value()),
