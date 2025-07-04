@@ -13,8 +13,8 @@ return [
     // Включить (true) слияние комментариев, если участник публикует множество комментариев один за другим на один комментарий
     'merge_comments' => true,
 	
-	// Permitted publication types: article, post, question, page, note
-	// Разрешенные типы публикаций: статья, пост, вопрос, страница, заметка
+	// Permitted publication types: article, post, question, note
+	// Разрешенные типы публикаций: статья, пост, вопрос, заметка
 	'allowed_types'  => [
 		[
 		  'title' => 'app.article',
@@ -27,10 +27,6 @@ return [
 		[
 		  'title' => 'app.question',
 		  'type' => 'question',
-		],
-		[
-		  'title' => 'app.page',
-		  'type' => 'page',
 		],
 		[
 		  'title' => 'app.note',
