@@ -29,7 +29,7 @@ $topic = $data['facet'];
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky">
         <div class="box text-sm">
-          <h4 class="uppercase-box"><?= __('app.writers'); ?></h4>
+          <h4 class="uppercase-box"><a class="black" href="<?= url('topic.writers', ['slug' => $topic['facet_slug']]); ?>"><?= __('app.writers'); ?></a></h4>
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) : ?>
               <li class="mb10">

@@ -46,6 +46,12 @@
         </svg>
       </a>
 
+		<a class="gray-600" title="<?= __('app.recommended'); ?>" href="<?= url('topic.recommend', ['slug' => $topic['facet_slug']]); ?>">
+			<svg class="icon">
+				<use xlink:href="/assets/svg/icons.svg#activity"></use>
+			</svg>
+		</a>
+
       <svg class="icon gray-600 pointer" data-a11y-dialog-show="id-share">
         <use xlink:href="/assets/svg/icons.svg#share"></use>
       </svg>

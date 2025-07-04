@@ -22,15 +22,7 @@
 				'id'    => 'main.notes',
 				'url'   => url('topic.notes', ['slug' => $slug]),
 				'title' => 'app.notes',
-			], [
-				'id'	=> 'facet.recommend',
-				'url'	=> url('topic.recommend', ['slug' => $slug]),
-				'title'	=> 'app.recommended',
-			], [
-				'id'	=> 'writers',
-				'url'	=> url('topic.writers', ['slug' => $slug]),
-				'title'	=> 'app.writers',
-			]
+			],
 		]
 	]
 ); ?>
