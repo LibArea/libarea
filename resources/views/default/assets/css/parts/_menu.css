@@ -5,16 +5,16 @@
  */
 
 nav {
-    left: 0;
-min-width: 19rem;
+  left: 0;
+  min-width: 18rem;
   overflow-x: hidden;
   overflow-y: auto;
-max-width: 19rem;
-    padding: 2rem;
-    display: block;
-    position: fixed;
-    top: 3.75rem;
-    height: 100%;
+  max-width: 18rem;
+  padding: 2rem;
+  display: block;
+  position: fixed;
+  top: 3.75rem;
+  height: 100%;
 }
 
 .dropdown,

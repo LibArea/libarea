@@ -4,6 +4,17 @@
  * Медиа-запросы
  */
 
+@media (max-width: 1310px) {
+  aside {
+    width: 18rem;
+  }
+
+  main {
+    margin-right: 18rem;
+    padding: 2rem 0 2rem 2rem;
+  }
+}
+
 @media (max-width: 1220px) {
   aside {
     display: none;
@@ -21,6 +32,7 @@
 
   main {
     width: var(--max-w-full);
+    max-width: var(--max-w-full);
     margin-left: 0;
     padding: 0;
   }
