@@ -25,6 +25,8 @@
       <thead>
         <th><?= __('admin.query'); ?></th>
         <th><?= __('admin.time'); ?></th>
+		<th># <?= __('app.user'); ?></th>
+		<th><?= __('admin.ip'); ?></th>
         <th class="w60"><?= __('admin.number'); ?></th>
       </thead>
       <?php foreach ($data['logs'] as $log) : ?>
@@ -35,6 +37,8 @@
             </a>
           </td>
           <td class="gray-600"> <?= __('admin.' . $log['action_type']); ?> | <?= langDate($log['add_date']); ?></td>
+		   <td class="gray-600"><?= $log['user_id']; ?></td>
+		  <td class="gray-600"><?= $log['add_ip']; ?></td>
           <td class="center">
             <?= $log['count_results']; ?>
           </td>
