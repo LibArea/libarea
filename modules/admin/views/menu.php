@@ -30,7 +30,7 @@
 
 <main class="max">
   <?php if ($data['type'] != 'admin') : ?>
-    <div class="mb15">
+
       <?= breadcrumb([
         [
           'name' => __('admin.home'),
@@ -42,7 +42,6 @@
         ],
       ]);
       ?>
-    </div>
 
     <ul class="nav">
       <?php foreach ($menus as $menu) : ?>

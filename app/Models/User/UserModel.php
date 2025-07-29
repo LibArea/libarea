@@ -145,7 +145,7 @@ class UserModel extends Model
      * @param [type] $tag_id
      * @return array|false
      */
-    public static function userFavorite($tag_id = null): array|false
+    public static function userFavorite($tag_id): array|false
     {
         $user_id = self::container()->user()->id();
 

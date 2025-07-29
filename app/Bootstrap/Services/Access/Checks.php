@@ -90,7 +90,7 @@ class Сhecks
      *
      * Лимиты на время после публикации.
      */
-    public static function limitTime(string $adding_time, ?int $limit_time = null): bool
+    public static function limitTime(string $adding_time, ?int $limit_time): bool
     {
         if ($limit_time == true) {
             $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($adding_time);

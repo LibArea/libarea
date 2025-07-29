@@ -104,7 +104,7 @@ class InvitationModel extends Model
     }
 
     // Проверим не активированный инвайт и поменяем статус
-    public static function activate($inv_uid, $active_uid, $invitation_code = null)
+    public static function activate($inv_uid, $active_uid, $invitation_code = '')
     {
         $params = [
             'uid'               => $inv_uid,

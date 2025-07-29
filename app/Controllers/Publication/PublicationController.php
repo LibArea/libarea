@@ -74,7 +74,7 @@ class PublicationController extends Controller
 
         $content = $this->presence($type, $id, $slug);
 
-        $this->setPostView($content['post_id'], $this->container->user()->id());
+        $this->setPostView((int)$content['post_id'], $this->container->user()->id());
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 

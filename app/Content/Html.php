@@ -147,7 +147,7 @@ class Html
     }
 
     // Page pagination
-    public static function pagination($pNum, $pagesCount, $sheet, $other, $sign = '?', $sort = null)
+    public static function pagination($pNum, $pagesCount, $sheet, $other, $sign = '?', $sort = '')
     {
         if ($pNum > $pagesCount) {
             return null;
