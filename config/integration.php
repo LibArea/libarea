@@ -16,10 +16,10 @@ return [
 
     // Captcha. If incl. - true, then we register the keys below
     // Капча. Если вкл. - true, то прописываем ключи ниже
-    'captcha'               => false, 
+    'captcha'               => false,
     'captcha_public_key'    => '******',
     'captcha_private_key'   => '******',
-    
+
     // Discord WEBHOOK URL
     // For Discord server settings, go to the Webhooks section and create a new one 
     // Для настроек сервера Discord зайти в раздел Вебхуки и создайте новый 
@@ -38,7 +38,7 @@ return [
     // Скриншоты сервиса https://screenshotone.com/
     'sc_access_key'         => '***',
     'sc_secret_key'         => '***',
-    
+
     // Enable spam detection (email) on stopforumspam.com
     // Включить определение спама (email) по stopforumspam.com 
     'stopforumspam'         => false,

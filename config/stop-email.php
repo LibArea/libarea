@@ -36,8 +36,8 @@ return [
     'mailopenr.com',
     'arpizol.com',
     'protonmail.com',
-	'mailwebber.com',
-	'farironalds.com',
+    'mailwebber.com',
+    'farironalds.com',
 
     'ustalks.xyz',
     'supmail.xyz',

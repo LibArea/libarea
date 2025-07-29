@@ -123,25 +123,25 @@ return [
             'https://www.google.com',
             'https://www.youtube.com',
             'https://rutube.ru',
-			'https://vk.com',
+            'https://vk.com',
             'https://rutube.ru/api',
             'https://mc.yandex.ru',
         ],
         'style-src' => [
-			'http://new.loc'
-		],
+            'http://new.loc'
+        ],
         'script-src' => [
             'https://www.google.com',
             'https://www.gstatic.com',
             'https://mc.yandex.ru',
             'https://yastatic.net',
         ],
-		'img-src' => [
-			'https://*.userapi.com/impg/',
-		],
-		// For some versions of Elge browser
-		'font-src' => [
-			'https://libarea.ru',
-		]
+        'img-src' => [
+            'https://*.userapi.com/impg/',
+        ],
+        // For some versions of Elge browser
+        'font-src' => [
+            'https://libarea.ru',
+        ]
     ],
 ];
