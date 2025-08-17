@@ -4,7 +4,7 @@
 
     <div class="gray-600 text-sm mb20"><?= __('auth.login_info'); ?></div> 
 
-    <form class="mt20 mb20" action="<?= url('authorization', method: 'post'); ?>" method="post">
+    <form class="mt20 mb20" action="<?= config('meta', 'url'); ?><?= url('authorization', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/login'); ?>
 

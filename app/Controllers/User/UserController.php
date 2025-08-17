@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     function favorites()
     {
-        $favorites = UserModel::userFavorite();
+        $favorites = UserModel::userFavorite(null);
 
         $result = [];
         foreach ($favorites as $ind => $row) {

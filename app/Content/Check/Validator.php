@@ -71,15 +71,15 @@ class Validator
 
         // Is it on the ban list
         // Находится ли в бан- листе
-        if (AuthModel::isBan($user['id'])) {
+        if (AuthModel::isBan((int)$user['id'])) {
             Msg::redirect(__('msg.account_verified'), 'error', $redirect);
         }
 
-        if (!AuthModel::isActivated($user['id'])) {
+        if (!AuthModel::isActivated((int)$user['id'])) {
             Msg::redirect(__('msg.not_activated'), 'error', $redirect);
         }
 
-        if (AuthModel::isDeleted($user['id'])) {
+        if (AuthModel::isDeleted((int)$user['id'])) {
             Msg::redirect(__('msg.no_user'), 'error', '/');
         }
 

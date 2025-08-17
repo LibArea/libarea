@@ -35,7 +35,7 @@
   <?php if (!$container->user()->active()) : ?>
     <div class="box text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
-      <form class="max-w-sm" action="<?= url('authorization', method: 'post'); ?>" method="post">
+      <form class="max-w-sm" action="<?= config('meta', 'url'); ?><?= url('authorization', method: 'post'); ?>" method="post">
         <?= $container->csrf()->field(); ?>
         <?= insert('/_block/form/login'); ?>
         <fieldset class="gray-600 center">

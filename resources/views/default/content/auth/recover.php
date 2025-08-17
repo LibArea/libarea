@@ -1,7 +1,7 @@
 <main class="max">
   <div class="box">
     <h1 class="title"><?= __('app.password_recovery'); ?></h1>
-    <form class="form max-w-sm" action="<?= url('recover.send', method: 'post'); ?>" method="post">
+    <form class="form max-w-sm" action="<?= config('meta', 'url'); ?><?= url('recover.send', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
 
       <fieldset>
