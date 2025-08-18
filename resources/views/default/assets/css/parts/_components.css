@@ -6,7 +6,7 @@
 
 #contentWrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.25rem;
 }
 
