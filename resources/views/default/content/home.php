@@ -32,20 +32,6 @@
 <aside>
   <?= insert('/banner/home-sidebar-240-400'); ?>
 
-  <?php if (!$container->user()->active()) : ?>
-   <!-- <div class="box text-sm">
-      <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
-      <form class="max-w-sm" action="<?= config('meta', 'url'); ?><?= url('authorization', method: 'post'); ?>" method="post">
-        <?= $container->csrf()->field(); ?>
-        <?= insert('/_block/form/login'); ?>
-        <fieldset class="gray-600 center">
-          <?= __('app.agree_rules'); ?>
-          <a href="<?= url('recover'); ?>"><?= __('app.forgot_password'); ?>?</a>
-        </fieldset>
-      </form>
-    </div> -->
-  <?php endif; ?>
-
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box">
