@@ -33,7 +33,7 @@
   <?= insert('/banner/home-sidebar-240-400'); ?>
 
   <?php if (!$container->user()->active()) : ?>
-    <div class="box text-sm">
+   <!-- <div class="box text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
       <form class="max-w-sm" action="<?= config('meta', 'url'); ?><?= url('authorization', method: 'post'); ?>" method="post">
         <?= $container->csrf()->field(); ?>
@@ -43,7 +43,7 @@
           <a href="<?= url('recover'); ?>"><?= __('app.forgot_password'); ?>?</a>
         </fieldset>
       </form>
-    </div>
+    </div> -->
   <?php endif; ?>
 
   <?php if (is_array($data['topics'])) : ?>

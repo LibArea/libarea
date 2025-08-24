@@ -79,6 +79,7 @@ body.dark .cherry.theme__light .cherry-floatmenu,
 body.dark .cherry.theme__light .cherry-bubble,
 body.dark .cherry.theme__light .cherry-sidebar,
 body.dark .cherry.theme__light .cherry-editor,
+body.dark .cherry.theme__light .cherry-previewer,
 body.dark .cherry.theme__light .cherry-editor .CodeMirror  {
   background-color: var(--form-bg-color);
   color: var(--form-text-color);
