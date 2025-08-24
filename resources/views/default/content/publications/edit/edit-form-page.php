@@ -36,3 +36,5 @@
     </fieldset>
   <?php endif; ?>
 <?php endif; ?>
+
+<?= insert('/_block/form/content-type', ['type' => $item['post_type']]); ?>

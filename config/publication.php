@@ -31,6 +31,10 @@ return [
 		[
 			'title' => 'app.note',
 			'type' => 'note',
+		],
+		[
+			'title' => 'app.page',
+			'type' => 'page',
 		]
 	],
 
