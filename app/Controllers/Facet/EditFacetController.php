@@ -56,7 +56,7 @@ class EditFacetController extends Controller
 
     public function edit()
     {
-        $data = Request::allPost();
+        $data = Request::getParsedBody();
 
         // Получим массив данных существующего фасета и проверим его наличие
         $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
