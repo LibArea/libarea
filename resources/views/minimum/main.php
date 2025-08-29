@@ -5,7 +5,7 @@ $facet  = $data['facet'] ?? false; ?>
 <?= insert('/global/header', ['meta' => $meta]); ?>
 
 <body class="body-minimum<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
-  <header class="d-header justify-between">
+  <header class="justify-between">
         <div class="flex"> 
         <a title="<?= __('app.home'); ?>" class="logo" href="/">
           L

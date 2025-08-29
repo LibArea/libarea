@@ -6,8 +6,12 @@
 
 #contentWrapper {
   display: flex;
-  justify-content: center;
-  gap: 1.25rem;
+  gap: var(--gap-base);
+  margin: 0 auto;
+  height: 100%;
+  max-width: 1536px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 h1,
@@ -16,6 +20,108 @@ h3,
 h4,
 h5 {
   font-weight: 600;
+}
+
+header {
+  display: flex;
+  top: 0;
+  z-index: 6;
+  position: sticky;
+  background-color: var(--header-bg);
+  color: var(--header-text-color);
+  box-shadow: var(--header-box-shadow);
+  backface-visibility: hidden;
+  align-items: center;
+  height: 3.5em;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+header.show .d-header-post.none,
+header.show .d-header-facet.none {
+  display: flex;
+  position: relative;
+  width: 100%;
+  font-size: 18px;
+  align-items: center;
+  max-width: 550px;
+}
+
+header.show .d-header-post.none a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+header.scroll-hide-search.show .button-search,
+header.scroll-hide-search.show .box-search {
+  display: none;
+}
+
+main {
+  padding: 2rem;
+  flex: 1;
+}
+
+aside {
+  flex-basis: 310px;
+  margin-top: 2rem;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+aside ul a {
+  color: var(--gray);
+}
+
+footer {
+  padding-top: 30px;
+}
+
+blockquote {
+  margin-left: 15px;
+  background-color: var(--blockquote-bg);
+  padding: 0.1rem 1rem;
+  border-left: 3px solid var(--gray-600);
+  display: table;
+}
+
+hr {
+  border: none;
+  clear: both;
+  background-color: var(--gray-100);
+  height: 1px;
+}
+
+details {
+  border-radius: var(--rounded);
+  background-color: var(--gray-100);
+  padding: 2px 6px;
+  margin: 0 0 15px 0;
+}
+
+summary {
+  background-color: var(--gray-100);
+  color: var(--gray);
+  font-size: 14px;
+}
+
+details[open]>summary {
+  padding: 0 0 10px 0;
+  color: var(--gray);
+}
+
+.content {
+  display: flex;
+  gap: var(--gap-base);
+  justify-content: space-between;
+  margin-left: 17rem;
+  width: 100%;
 }
 
 .number-svg {
@@ -126,21 +232,6 @@ h5 {
   margin: 0;
 }
 
-.d-header {
-  display: flex;
-  top: 0;
-  z-index: 6;
-  position: sticky;
-  background-color: var(--header-bg);
-  color: var(--header-text-color);
-  box-shadow: var(--header-box-shadow);
-  backface-visibility: hidden;
-  align-items: center;
-  height: 3.5em;
-  width: 100%;
-  padding: 0 1rem;
-}
-
 .banner {
   background-image: url(/assets/images/banner-fon.webp);
   background-size: cover;
@@ -195,33 +286,12 @@ h5 {
   z-index: 2;
 }
 
-.d-header.show .d-header-post.none,
-.d-header.show .d-header-facet.none {
-  display: flex;
-  position: relative;
-  width: 100%;
-  font-size: 18px;
-  align-items: center;
-  max-width: 550px;
-}
-
-.d-header.show .d-header-post.none a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .v-line {
   border-left: 1px solid var(--gray-600);
   height: 20px;
   display: inline-block;
   margin: 0 10px 0 5px;
   vertical-align: middle;
-}
-
-.d-header.scroll-hide-search.show .button-search,
-.d-header.scroll-hide-search.show .box-search {
-  display: none;
 }
 
 .box-logo {
@@ -240,55 +310,6 @@ h5 {
   text-overflow: ellipsis;
 }
 
-main {
-  padding: 2rem;
-  margin-left: 19rem;
-  margin-right: 21rem;
-  max-width: 1200px;
-  min-height: auto;
-  width: 100%;
-}
-
-aside {
-  width: 21rem;
-  padding: 2rem 1rem;
-  display: block;
-  position: fixed;
-  top: 3.75rem;
-  height: 100%;
-  right: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-aside ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.9375rem;
-}
-
-aside ul a {
-  color: var(--gray);
-}
-
-footer {
-  padding-top: 30px;
-}
-
-blockquote {
-  margin-left: 15px;
-  background-color: var(--blockquote-bg);
-  padding: 0.1rem 1rem;
-  border-left: 3px solid var(--gray-600);
-  display: table;
-}
-
-main.max {
-  margin-right: 0;
-  max-width: 1560px;
-}
-
 .blockquote-profile {
   border-left: 3px solid var(--gray-600);
   font-size: .91rem
@@ -296,31 +317,6 @@ main.max {
 
 .blockquote-profile p {
   margin: 2px;
-}
-
-hr {
-  border: none;
-  clear: both;
-  background-color: var(--gray-100);
-  height: 1px;
-}
-
-details {
-  border-radius: var(--rounded);
-  background-color: var(--gray-100);
-  padding: 2px 6px;
-  margin: 0 0 15px 0;
-}
-
-summary {
-  background-color: var(--gray-100);
-  color: var(--gray);
-  font-size: 14px;
-}
-
-details[open]>summary {
-  padding: 0 0 10px 0;
-  color: var(--gray);
 }
 
 .title {

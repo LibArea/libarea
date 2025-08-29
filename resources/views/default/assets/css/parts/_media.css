@@ -4,24 +4,9 @@
  * Медиа-запросы
  */
 
-@media (max-width: 1310px) {
-  aside {
-    width: 18rem;
-  }
-
-  main {
-    margin-right: 18rem;
-    padding: 2rem 0 2rem 2rem;
-  }
-}
-
-@media (max-width: 1220px) {
+@media (max-width: 1260px) {
   aside {
     display: none;
-  }
-
-  main {
-    margin-right: 0;
   }
 }
 
@@ -30,6 +15,11 @@
     display: none;
   }
 
+ .content {
+   margin-left: 0;
+   width: 100%;
+ }
+
   main {
     width: var(--max-w-full);
     max-width: var(--max-w-full);
@@ -37,10 +27,6 @@
     padding: 0;
   }
   
-  main.max {
-    padding: 1rem 0 1rem 1rem;
-  }
-
   .menu__button {
     transition: 0.3s ease;
     display: block;
@@ -98,8 +84,8 @@
     margin-left: 96px;
   }
 
-  .d-header.show .d-header-post.none,
-  .d-header.show .d-header-facet.none {
+  header.show .d-header-post.none,
+  header.show .d-header-facet.none {
     max-width: 300px;
   }
 }
@@ -172,12 +158,21 @@
   }
 
   .nav-bar {
-    margin: 0 10px 20px 10px;
+    margin: 10px 5px 15px 5px;
   }
+
+	#contentWrapper {
+      padding-left: 0; 
+      padding-right: 0;
+	}
 
   .mb-block,
   #contentWrapper {
     display: block;
+  }
+
+  article {
+    border-radius: 0;
   }
 
   .mb-w-100,

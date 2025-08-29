@@ -1,6 +1,6 @@
 // Header visibility on scroll
 let scrolled;
-let header = document.querySelector(".d-header");
+let header = document.querySelector("header");
 
 if (header) {
   window.onscroll = function () {

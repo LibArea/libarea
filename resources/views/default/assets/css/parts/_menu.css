@@ -5,12 +5,11 @@
  */
 
 nav {
-  left: 0;
-  min-width: 18rem;
+  min-width: 17rem;
   overflow-x: hidden;
   overflow-y: auto;
-  max-width: 18rem;
-  padding: 2rem;
+  max-width: 17rem;
+  padding: 1.5rem 1.5rem 1.5rem 0;
   display: block;
   position: fixed;
   top: 3.75rem;

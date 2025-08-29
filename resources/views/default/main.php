@@ -1,13 +1,13 @@
 <?php
 $type = $data['type'] ?? false;
 $post = $data['post'] ?? false;
-$facet = $data['facet'] ?? false
+$facet = $data['facet'] ?? false;
 ?>
 
 <?= insert('/global/header', ['meta' => $meta, 'type' => $type]); ?>
 
 <body class="<?= $type; ?><?= modeDayNight(); ?>">
-  <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
+  <header<?php if ($post || $facet) : ?> class="scroll-hide-search"<?php endif; ?>>
         <div class="flex flex-auto">
           <div class="box-logo">
             <svg class="icon large menu__button none">
@@ -16,7 +16,7 @@ $facet = $data['facet'] ?? false
             <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
           </div>
 
-          <?php if ($post) : ?>
+          <?php if ($post && $post['post_type'] != 'post') : ?>
             <div class="d-header-post none">
               <span class="v-line mb-none"></span>
               <a class="mb-none" href="<?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']) ?>">
@@ -65,7 +65,9 @@ $facet = $data['facet'] ?? false
           </div>
         </footer>
       </nav>
-    <?= $content; ?>
+	<div class="content">  
+      <?= $content; ?>
+	</div>
   </div>
 
   <?= insert('/global/footer'); ?>
