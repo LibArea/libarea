@@ -453,6 +453,8 @@ return [
     'not_confirmed'         => 'không được xác nhận.',
     'resend_email'          => 'Kiểm tra email của bạn hoặc gửi lại email mới.',
 
+	'refine_your_search'	=> 'more items, refine your search.',
+
     /* Thông báo */
     'notif_add_pm'              => 'đã viết cho bạn {url}tin nhắn riêng tư{a}',
     'notif_add_comment'         => 'đã nhận xét {url}câu trả lời của bạn{a}',

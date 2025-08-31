@@ -451,6 +451,8 @@ return [
     'not_confirmed'         => 'غير مؤكد.',
     'resend_email'          => 'تحقق من صندوق بريدك الإلكتروني أو أعد إرسال بريد إلكتروني جديد.',
 
+	'refine_your_search'	=> 'هناك المزيد. حسّن بحثك',
+
     /* Notifications and logs */
     'notif_add_pm'              => 'ارسل لك {url}رسالة خاصة{a}',
     'notif_add_comment'         => 'علق على {url}اجابتك{a}',

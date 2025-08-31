@@ -453,6 +453,8 @@ return [
     'not_confirmed'         => 'neconfirmat.',
     'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',
 
+	'refine_your_search'	=> 'si maj but. Laćharen tumaro rodipen.',
+
     /* Notificări */
     'notif_add_pm'              => 'ți-a trimis un {url}mesaj privat{a}',
     'notif_add_comment'         => 'a comentat {url}răspunsul tău{a}',

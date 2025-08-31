@@ -443,6 +443,8 @@ return [
 
     'not_confirmed'         => 'onaylanmadı.',
     'resend_email'          => 'E-posta gelen kutunuzu kontrol edin veya yeni bir e-postayı yeniden gönderin.',
+	
+	'refine_your_search'	=> 'daha fazlası var. Aramanızı daraltın.',
 
     /* Notifications and logs */
     'notif_add_pm'              => 'sana {url} özel mesaj {a} yazdım',

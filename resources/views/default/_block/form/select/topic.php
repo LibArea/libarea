@@ -48,7 +48,19 @@
         "dropdown:show": async (e) => await focus_search(),
       },
       whitelist: search,
-    };
+	  
+      templates: {
+			dropdownFooter(suggestions) {
+			  var hasMore = suggestions.length - this.settings.dropdown.maxItems;
+
+			  return hasMore > 0
+				? `<footer data-selector='tagify-suggestions-footer' class="${this.settings.classNames.dropdownFooter}">
+					${hasMore} - <?= __('app.refine_your_search'); ?>
+				  </footer>`
+				: '';
+			}
+		   },
+	   };
 
     let tagify = new Tagify(input, options);
 

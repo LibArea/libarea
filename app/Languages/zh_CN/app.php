@@ -452,6 +452,8 @@ return [
     'not_confirmed'         => '还没有确定',
     'resend_email'          => '检查您的电子邮件收件箱或重新发送新电子邮件',
 
+	'refine_your_search'	=> '还有更多。优化您的搜索',
+
     /* 通知和日志 */
     'notif_add_pm'              => '给你写了一个{url}私信{a}',
     'notif_add_comment'         => '评论{url}你的消息{a}',

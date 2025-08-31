@@ -443,7 +443,7 @@ return [
     'endless_scroll'        => 'Enable infinite scroll?',
     'notification_email'    => 'Notify by email',
     'notifications_limit'   => 'Showing last 100 notifications',
-    'notifications_page'       => 'All notifications',
+    'notifications_page'	=> 'All notifications',
 
     'ignore'                => 'Ignore',
     'ignored'               => 'Ignored',
@@ -451,14 +451,16 @@ return [
     'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
     'ignored_no'            => 'You don\'t have users that you ignore.',
 
-    'preferences_help'         => 'Spaces (topics, blogs) that you prefer. <p>They will also be shown on the main page of the site.</p>',
+    'preferences_help'		=> 'Spaces (topics, blogs) that you prefer. <p>They will also be shown on the main page of the site.</p>',
     'signed_facets'         => 'Topics, blogs you follow',
     'signed_facets_help'    => 'You can select any number, but only the first {num} will be shown',
-    'add_menu_signed'         => 'Add preferences',
-    'show_sites_block'         => 'Show the Sites block?',
+    'add_menu_signed'		=> 'Add preferences',
+    'show_sites_block'		=> 'Show the Sites block?',
 
     'not_confirmed'         => 'not confirmed.',
     'resend_email'          => 'Check your email inbox or resend a new email.',
+	
+	'refine_your_search'	=> 'more items, refine your search.',
 
     /* Notifications and logs */
     'notif_add_pm'              => 'wrote to you {url}private message{a}',
@@ -477,6 +479,6 @@ return [
 
     'github'    => 'GitHub',
     'skype'     => 'Skype',
-    'telegram'     => 'Telegram',
-    'vk'         => 'VK (service)',
+    'telegram'	=> 'Telegram',
+    'vk'		=> 'VK (service)',
 ];
