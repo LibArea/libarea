@@ -19,6 +19,17 @@
 );
 ?>
 
+<?php if ($data['type'] != 'section') : ?>
+  <p class="text-xl right mr20">
+    <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $data['type']]); ?>">
+      <svg class="icon">
+        <use xlink:href="/assets/svg/icons.svg#plus"></use>
+      </svg>
+      <?= __('app.add'); ?>
+    </a>
+  </p>
+<?php endif; ?>
+
 <div class="box">
   <?php if (!empty($data['facets'])) : ?>
     <?php foreach ($data['facets'] as $topic) : ?>
