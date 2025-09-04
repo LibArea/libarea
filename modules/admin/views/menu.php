@@ -28,8 +28,9 @@
   </footer>
 </nav>
 
-<main class="max">
-  <?php if ($data['type'] != 'admin') : ?>
+<div class="content">
+  <main class="max">
+    <?php if ($data['type'] != 'admin') : ?>
 
       <?= breadcrumb([
         [
@@ -43,14 +44,14 @@
       ]);
       ?>
 
-    <ul class="nav">
-      <?php foreach ($menus as $menu) : ?>
-        <li<?= is_current($menu['url']) ? ' class="active"' : ''; ?>>
-          <a class="gray" href="<?= $menu['url']; ?>">
-            <span><?= $menu['name']; ?></span>
-          </a>
-          </li>
-        <?php endforeach; ?>
-    </ul>
-    <div class="mb15"></div>
-  <?php endif; ?>
+      <ul class="nav">
+        <?php foreach ($menus as $menu) : ?>
+          <li<?= is_current($menu['url']) ? ' class="active"' : ''; ?>>
+            <a class="gray" href="<?= $menu['url']; ?>">
+              <span><?= $menu['name']; ?></span>
+            </a>
+            </li>
+          <?php endforeach; ?>
+      </ul>
+      <div class="mb15"></div>
+    <?php endif; ?>

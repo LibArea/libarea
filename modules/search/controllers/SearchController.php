@@ -54,11 +54,13 @@ class SearchController extends Module
 
             $stemmer = new PorterStemmerRussian(new PorterStemmerEnglish());
             $finder    = new Finder($storage, $stemmer);
+			
+			$num = Html::pageNumber() == 1 ? 0 : Html::pageNumber() * $this->limit - 10;
 
             $query = new Query($q);
             $query
                 ->setLimit($this->limit)  // 10 results per page
-                ->setOffset(Html::pageNumber() - 1) // third page
+                ->setOffset($num) // third page
             ;
 
             $finder->setHighlightTemplate('<mark>%s</mark>'); // Выделим найденный фрагмент желтым
