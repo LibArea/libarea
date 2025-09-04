@@ -6,6 +6,7 @@
 <textarea id="source" class="none"><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></textarea>
 
 <script src="/assets/js/editor/cherry-markdown.core.js"></script>
+<script src="/assets/js/editor/editorjs-like.js"></script>
 <script nonce="<?= config('main', 'nonce'); ?>">
 	async function fileUpload(file, callback) {
 		const formData = new FormData();
@@ -80,7 +81,11 @@
 			},
 
 			// Определим верхнюю панель инструментов
-			toolbar: ['switchModel', '|', 'bold', 'italic', 'strikethrough', 'image', '|', 'cut', 'help'],
+			// toolbar: ['switchModel', '|', 'bold', 'italic', 'strikethrough', 'image', '|', 'cut', 'help'],
+			
+			// Выключить верхнюю панель
+			showToolbar: false,
+			
 			toolbarRight: ['fullScreen'],
 
 			// Выключить верхнюю панель

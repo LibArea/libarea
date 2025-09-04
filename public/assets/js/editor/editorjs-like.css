@@ -1,0 +1,52 @@
+/* EditorJS-like block UI overlay for Cherry Markdown */
+
+/* Container wrapper */
+.cherry-editorjs-like { position: relative; }
+
+.cherry-editorjs-like .CodeMirror { padding-left: 48px; }
+
+/* Gutter container */
+.cmi-gutter-container { position: absolute; left: 10px; display: flex; flex-direction: column; gap: 4px; z-index: 5; }
+
+/* Gutter buttons */
+.cmi-gutter-btn { width: 28px; height: 28px; border-radius: 6px; background: #f3f4f6; border: 1px solid #e5e7eb; color: #374151; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 1px 1px rgba(0,0,0,0.04); transition: background 0.15s, transform 0.08s; }
+
+.cmi-preview-btn i { font-size: 16px; }
+.cmi-gutter-btn:hover { background: #e5e7eb; }
+.cmi-gutter-btn:active { transform: scale(0.98); }
+.cmi-gutter-btn svg { width: 16px; height: 16px; }
+
+/* Block menu */
+.cmi-block-menu { position: fixed; min-width: 180px; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 4px; z-index: 9999; }
+.cmi-menu-items-container { max-height: 200px; overflow-y: auto; }
+.cmi-block-menu .cmi-search { width: 100%; box-sizing: border-box; border: 1px solid #e5e7eb; border-radius: 4px; padding: 4px 6px; margin-bottom: 4px; font-size: 12px; }
+.cmi-menu-item { display: flex; align-items: center; gap: 8px; padding: 6px; border-radius: 4px; cursor: pointer; color: #111827; }
+.cmi-menu-item:hover { background: #f3f4f6; }
+.cmi-menu-item .cmi-ic { width: 16px; height: 16px; color: #6b7280; }
+.cmi-menu-item .cmi-title { font-weight: 500; font-size: 13px; }
+.cmi-menu-item .cmi-desc { font-size: 11px; color: #6b7280; }
+
+
+
+/* Placeholders */
+.cmi-placeholder { color: #9ca3af; }
+
+/* Only show gutter button when hovering editor area */
+.cherry .CodeMirror:hover + .cmi-gutter-btn,
+.cherry-editorjs-like:hover .cmi-gutter-btn { opacity: 1; }
+
+/* Keep container hidden until positioned */
+.cmi-gutter-container.hidden { display: none; }
+
+/* Hide cherry-sidebar */
+.cherry-sidebar { display: none !important; }
+
+.cherry-editorjs-like .cherry-previewer {
+    padding-left: 48px !important;
+}
+
+.cherry-editorjs-like .cherry-previewer img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below image */
+}

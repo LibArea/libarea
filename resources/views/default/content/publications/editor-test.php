@@ -1,61 +1,108 @@
 <main>
   <div class="box">
-    <h2 class="title">Tiptap</h2>
+    <h2 class="title1">Редактор</h2>
 
-    <div x-data="editor('')">
-      <template x-if="isLoaded()">
-        <div class="menu">
-          <button @click="toggleHeading({ level: 1 })" :class="{ 'is-active': isActive('heading', { level: 1 }, updatedAt) }">
-            H1
-          </button>
-          <button @click="toggleBold()" :class="{ 'is-active' : isActive('bold', updatedAt) }">
-            Bold
-          </button>
-          <button @click="toggleItalic()" :class="{ 'is-active' : isActive('italic', updatedAt) }">
-            Italic
-          </button>
-          <button @click="toggleStrike()" :class="{ 'is-active' : isActive('strike', updatedAt) }">
-            Strike
-          </button>
-        </div>
-      </template>
+<link rel="stylesheet" href="/assets/js/editor/cherry-markdown.min.css" type="text/css">
+<link as="font" href="/assets/js/editor/ch-icon.woff2">
+<?php if (!empty($title)) : ?><?= $title; ?>:<?php endif; ?>
 
-      <div class="bubble-menu">
-        <button @click="toggleBold()">
-          Bold
-        </button>
-        <button @click="toggleItalic()">
-          Italic
-        </button>
-        <button @click="toggleCode()">
-          Код
-        </button>
+<div name="content" id="markdown-container"></div>
+<textarea id="source" class="none"><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></textarea>
 
-        <button @click="toggleStrike()">
-          Strike
-        </button>
-      </div>
-
-      <div x-ref="element"></div>
-
-      <textarea type="hidden" name="content" id="hidden-content" hidden><?= $data['md']; ?> </textarea>
-
-
-
-      <RichTextEditor modules={{ table: {}, codeHighlight: true }} />
-    </div>
 </main>
 
-<script type="module" src="/assets/js/editor/1/quill-react-commercial.min.js"></script>
+<script src="/assets/js/editor/cherry-markdown.core.js"></script>
+<script src="/assets/js/editor/editorjs-like.js"></script>
+<script nonce="<?= config('main', 'nonce'); ?>">
+	async function fileUpload(file, callback) {
+		const formData = new FormData();
+		formData.append('file', file);
 
-<style>
-  .tiptap {
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border: 1px solid #eee;
-  }
+		try {
+			const response = await fetch('/backend/55555', {
+				method: 'POST',
+				body: formData
+			});
+			const data = await response.json();
+			callback(data.data.filePath);
+		} catch (err) {
+			console.error('Ошибка:', err);
+		}
+	};
 
-  .tiptap img {
-    max-width: 100%;
-  }
-</style>
+	var customMenuA = Cherry.createMenuHook('{cut}', {
+		iconName: '',
+		onClick: function(selection) {
+			return `{cut}`;
+		}
+	});
+
+	var customMenuB = Cherry.createMenuHook('<?= __('app.spoiler'); ?>', {
+		iconName: 'help',
+		subMenuConfig: [{
+				noIcon: true,
+				name: 'details',
+				onclick: (event) => {
+					return cherry.insert(' {details} *** {/details} ');
+				}
+			},
+			{
+				noIcon: true,
+				name: 'auth',
+				onclick: (event) => {
+					return cherry.insert(' {auth} *** {/auth} ');
+				}
+			},
+		]
+	});
+
+	var cherry = new Cherry({
+		id: 'markdown-container',
+		value: document.getElementById("source").value,
+
+		fileUpload: fileUpload,
+
+		fileTypeLimitMap: {
+			image: 'image/*',
+		},
+		multipleFileSelection: {
+			image: false,
+		},
+
+        <?= insert('/_block/form/editor/localization'); ?>
+
+		togglePreview: false,
+
+		editor: {
+			name: 'content',
+			defaultModel: 'editOnly', // edit&preview|editOnly|previewOnly
+			height: '500px',
+			showSuggestList: false,
+		},
+
+		toolbars: {
+			customMenu: {
+				cut: customMenuA,
+				help: customMenuB,
+			},
+
+			// Определим верхнюю панель инструментов
+			// toolbar: ['switchModel', '|', 'bold', 'italic', 'strikethrough', 'image', '|', 'cut', 'help'],
+			
+			// Выключить верхнюю панель
+			showToolbar: false,
+			
+			toolbarRight: ['fullScreen'],
+
+			// Выключить верхнюю панель
+			// showToolbar: false,
+			// Определим боковую панель, по умолчанию она пуста
+			// sidebar: ['togglePreview'],
+
+			// Плавающую панель инструментов, при выделении текста
+			bubble: ['bold', 'italic', 'strikethrough', 'quote', 'table', 'inlineCode'],
+			// Панель подсказок
+			float: ['h2', 'h3', '|', 'checklist', 'quote', 'table', 'code', 'image'],
+		},
+	});
+</script>

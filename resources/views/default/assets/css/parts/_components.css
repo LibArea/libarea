@@ -256,13 +256,13 @@ details[open]>summary {
 }
 
 .box-search {
-  width: 80%;
-  align-items: center;
-  display: flex;
+  width: 100%;
 }
 
 .form {
   width: 100%;
+  max-width: 600px;
+  margin: auto;
 }
 
 .box-search .search {
