@@ -38,11 +38,11 @@ class AuditsController extends Module
         foreach ($audits  as $ind => $row) {
 
             if ($row['action_type'] === 'post') {
-                $row['content'] = PublicationModel::getPost($row['content_id'], 'id', $this->container->user()->get());
+                $row['content'] = PublicationModel::getPost($row['content_id'], 'id');
             } elseif ($row['action_type'] === 'comment') {
                 $row['content'] = CommentModel::getCommentId($row['content_id']);
 
-                $row['post'] = PublicationModel::getPost($row['content']['comment_post_id'], 'id', $this->container->user()->get());
+                $row['post'] = PublicationModel::getPost($row['content']['comment_post_id'], 'id');
             }
 
             $result[$ind]   = $row;

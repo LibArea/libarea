@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Validate;
 
+use Msg;
 use Respect\Validation\Validator as v;
 
 class RulesBadge

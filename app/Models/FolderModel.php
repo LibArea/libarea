@@ -76,7 +76,7 @@ class FolderModel extends Model
 
         DB::run($sql, ['id' => $id, 'type' => $type, 'user_id' => self::container()->user()->id()]);
 
-        return self::deletingLinkedContent($id, $type, self::container()->user()->id());
+        self::deletingLinkedContent($id, $type);
     }
 
     // Removing a content link from a folder 

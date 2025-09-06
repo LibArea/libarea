@@ -71,11 +71,12 @@ class MessagesController extends Controller
             Msg::redirect(__('msg.no_topic'), 'error', url('messages'));
         }
 
-        // update views, etc. 
-        $dialog_id = MessagesModel::setMessageRead($id);
+        // update views, etc.
+        /** @toDo здесь метод получает и отдает одно и то же значение, скорее всего отдавать его не нужно. */
+        MessagesModel::setMessageRead($id);
 
         // id получателя и индификатор события
-        NotificationModel::updateMessagesUnread($dialog_id);
+        NotificationModel::updateMessagesUnread($id);
 
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
@@ -107,6 +108,7 @@ class MessagesController extends Controller
                 'data'  => [
                     'sheet'             => __('app.dialogue') . ' — <b>' . $list[$key]['login'] . '</b>',
                     'list'              => $list,
+                    /** @toDo recipient_user никак не определен если условие выше неверно. */
                     'recipient_user'    => $recipient_user,
                     'dialogs'           => $this->dialogs(),
                 ]

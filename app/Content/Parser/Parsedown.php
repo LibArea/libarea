@@ -1548,6 +1548,8 @@ class Parsedown
 
     protected function element(array $Element)
     {
+        $text = '';
+
         if ($this->safeMode) {
             $Element = $this->sanitiseElement($Element);
         }

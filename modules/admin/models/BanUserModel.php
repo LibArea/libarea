@@ -33,7 +33,7 @@ class BanUserModel extends Model
         $num    = DB::run($sql, ['uid' => $uid])->rowCount();
 
         if ($num != 0) {
-
+            $status = 0;
             foreach ($sample as $row) {
                 $status = $row['banlist_status'];
             }

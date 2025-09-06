@@ -85,7 +85,7 @@ class UserController extends Controller
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
                     'favorites' => $result,
-                    'tags'      => FolderModel::get('favorite', $this->container->user()->id()),
+                    'tags'      => FolderModel::get('favorite'),
                 ]
             ]
         );
@@ -99,8 +99,7 @@ class UserController extends Controller
      */
     function folders()
     {
-        /** @toDo здесь возможно, ошибка, так как у get() только один параметр */
-        $folders = FolderModel::get('favorite', $this->container->user()->id());
+        $folders = FolderModel::get('favorite');
 
         render(
             '/user/favorite/folders',

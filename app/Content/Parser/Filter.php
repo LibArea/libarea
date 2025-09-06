@@ -25,7 +25,7 @@ class Filter
         return self::fragment($str, $lenght);
     }
 
-    public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
+    public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8'): string
     {
 		$text = LitEmoji::encodeUnicode($text);
 		
@@ -38,6 +38,6 @@ class Filter
 
         if (empty($text)) $text = '...';
 
-        return $text ?? false;
+        return $text;
     }
 }
