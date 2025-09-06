@@ -29,6 +29,7 @@ class FavoriteController extends Controller
 
     public static function redirectItem(int $content_id, string $type)
     {
+        $content = '';
         switch ($type) {
             case 'post':
                 $content  = FavoriteModel::checkingPost($content_id);

@@ -12,6 +12,9 @@ class Yandex
     public static function callApi(): array
     {
         $code = Request::post('code')->value();
+        /** @toDo возможно здесь нужна ошибка, что код отсутствует. */
+
+        $data = [];
 
         if (!empty($code)) {
 

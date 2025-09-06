@@ -157,6 +157,8 @@ class MessagesModel extends Model
             foreach ($query as $val) {
                 $message[$val['message_id']] = $val;
             }
+        } else {
+            /** @toDo здесь нужно дефолтный ответ или ошибку, потому что  $message не определена далее */
         }
 
         return $message;

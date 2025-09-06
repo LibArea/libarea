@@ -295,7 +295,7 @@ class FacetModel extends Model
             $result[$ind] = $row['facet_id'];
         }
 
-        $result = $result ? $result : ['1' => 1];
+        $result = $result ?: ['1' => 1];
         $sql = "SELECT 
                     facet_id,
                     facet_title,
@@ -303,7 +303,7 @@ class FacetModel extends Model
                     facet_description,
                     facet_img
                         FROM facets
-                            WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
+                            WHERE facet_id NOT IN(" . implode(',', $result) . ")
                                 AND facet_type = 'topic' AND facet_is_deleted = 0 
                                     ORDER BY facet_count DESC LIMIT 5";
 

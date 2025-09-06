@@ -124,9 +124,8 @@ class ProfileController extends Controller
      * Sending personal messages
      *
      * @param integer $for_user_id
-     * @return void
      */
-    public function accessPm(int $for_user_id)
+    public function accessPm(int $for_user_id): bool
     {
         // We forbid sending to ourselves
         if ($this->container->user()->id() == $for_user_id) {

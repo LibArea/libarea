@@ -13,6 +13,7 @@ namespace App\Bootstrap\Services;
  */
 interface AuthInterface
 {
+    /** @deprecated - missing implementation */
     public function get(): array;
     public function logout(): void;
 }

@@ -41,10 +41,12 @@ class ActionController extends Controller
                 $action_type = $type;
                 break;
             case 'comment':
-                $post = PublicationModel::getPost($info_type['comment_post_id'], 'id', $this->container->user()->get());
+                $post = PublicationModel::getPost($info_type['comment_post_id'], 'id');
                 $url  = post_slug($post['post_type'], $info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
                 break;
+            default:
+                throw new \LogicException('Incorrect content type: ' . $type);
         }
 
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);

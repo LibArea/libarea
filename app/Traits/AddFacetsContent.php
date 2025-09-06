@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\FacetModel;
+use Msg;
 
 trait AddFacetsContent
 {

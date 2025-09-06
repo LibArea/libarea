@@ -33,6 +33,7 @@ class AddCommentController extends Controller
 
     public function add()
     {
+        $post = '';
         if ($post_id = Request::post('post_id')->asInt()) {
             $post = Availability::content($post_id);
         }

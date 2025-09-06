@@ -6,8 +6,13 @@ use App\Bootstrap\Services\Auth\Action;
 
 class AuthService implements AuthInterface
 {
-    public function logout()
+    public function logout(): void
     {
-        return Action::logout();
+        Action::logout();
+    }
+
+    public function get(): array
+    {
+        throw new \LogicException('The get() method is not used in this implementation, which will be fixed in the future.');
     }
 }
