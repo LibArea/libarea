@@ -22,7 +22,7 @@ class TeamFacetController extends Controller
         $users_team = FacetModel::getUsersTeam($facet['facet_id']);
 
         render(
-            '/facets/team',
+            '/facets/edit-team',
             [
                 'meta'  => Meta::get(__('app.team') . ' | ' . $facet['facet_title']),
                 'data'  => [

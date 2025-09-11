@@ -3,7 +3,7 @@ $fs = $data['facet'];
 $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
-<main>
+<main class="max">
   <div class="box">
     <div class="nav-bar">
       <ul class="nav">
@@ -17,6 +17,11 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
                 'title'     => 'app.edit_' . $data['type'],
               ],
               [
+                'id'        => 'topic',
+                'url'       => url('facet.form.logo.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+                'title'     => 'app.logo',
+              ],
+              [
                 'id'        => 'blog',
                 'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.team',
@@ -27,7 +32,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       </ul>
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
-
     <form class="max-w-md" action="<?= url('team.edit', ['id' => $fs['facet_id'], 'type' => $data['type']], method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
 
@@ -47,14 +51,13 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?php else : ?>
       <?= __('app.team_not_users'); ?>
     <?php endif; ?>
+
+    <div class="box-info mt20">
+      <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
+      <?= __('help.team_info'); ?>
+    </div>
   </div>
 </main>
-<aside>
-  <div class="box">
-    <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
-    <?= __('help.team_info'); ?>
-  </div>
-</aside>
 
 <script src="/assets/js/tag/tagify.min.js"></script>
 <link rel="stylesheet" href="/assets/js/tag/tagify.css" type="text/css">
