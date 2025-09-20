@@ -292,12 +292,12 @@ class AddPublicationController extends Controller
 
             // Discord
             if (config('integration', 'discord')) {
-                Discord::AddWebhook($content, $fields['post_title'], $url_content);
+                Discord::AddWebhook($content, $fields['title'], $url_content);
             }
 
             // Telegram
             if (config('integration', 'telegram')) {
-                Telegram::AddWebhook($content, $fields['post_title'], $url_content);
+                Telegram::AddWebhook($content, $fields['title'], $url_content);
             }
         }
     }

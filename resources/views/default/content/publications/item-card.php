@@ -67,10 +67,10 @@
             <?php endif; ?>
           <?php endif; ?>
 
-          <?php if ($item['post_type'] == 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
+          <a class="black" href="<?= $url; ?>">
             <?php $arr = \App\Content\Parser\Content::cut($item['post_content']);
             echo markdown($arr['content']); ?>
-            <?php if ($item['post_type'] == 'post') : ?></a><?php endif; ?>
+          </a>
         </div>
       </div>
 

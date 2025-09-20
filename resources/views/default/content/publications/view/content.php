@@ -123,7 +123,7 @@ $blog = $data['blog'][0] ?? null;
       <div class="mt15 mb15 items-center flex justify-between">
         <div class="items-center flex gap gray-600">
           <?= Html::votes($item, 'post'); ?>
-          <div class="items-center flex gap-sm">
+          <div class="items-center flex gap-sm mb-none">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>

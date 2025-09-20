@@ -59,7 +59,7 @@
                       </svg>
                     <?php endif; ?>
                     <?php if ($item['post_user_id'] == $node['comment_user_id']) : ?>
-                      <span class="small lowercase green">
+                      <span class="small lowercase green mb-none">
                         <?= __('app.author'); ?>
                       </span>
                     <?php endif; ?>

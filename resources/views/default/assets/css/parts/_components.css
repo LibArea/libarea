@@ -120,7 +120,7 @@ details[open]>summary {
   display: flex;
   gap: var(--gap-base);
   justify-content: space-between;
-  margin-left: 17rem;
+  margin-left: 15rem;
   width: 100%;
 }
 

@@ -17,7 +17,7 @@
 
  .content {
    margin-left: 0;
-   width: 100%;
+   display: block;
  }
 
   main {
@@ -65,23 +65,20 @@
   }
 
   .comment_level-left-1 {
-    margin-left: 16px;
+    margin-left: 10px;
   }
 
   .comment_level-left-2 {
-    margin-left: 36px;
+    margin-left: 15px;
   }
 
   .comment_level-left-3 {
-    margin-left: 56px;
+    margin-left: 30px;
   }
 
-  .comment_level-left-4 {
-    margin-left: 76px;
-  }
-
-  .comment_level-left-5 {
-    margin-left: 96px;
+  .comment_level-left-4,
+  .comment_level-left-5  {
+    margin-left: 45px;
   }
 
   header.show .d-header-post.none,
