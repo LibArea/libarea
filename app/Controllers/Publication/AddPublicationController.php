@@ -289,15 +289,17 @@ class AddPublicationController extends Controller
         $post_draft = $fields['post_draft'] ?? false;
 
         if ($fields['content_tl'] == 0 && $post_draft == 0) {
+			
+			$title = $fields['title'] ?? __('app.post');
 
             // Discord
             if (config('integration', 'discord')) {
-                Discord::AddWebhook($content, $fields['title'], $url_content);
+                Discord::AddWebhook($content, $title, $url_content);
             }
 
             // Telegram
             if (config('integration', 'telegram')) {
-                Telegram::AddWebhook($content, $fields['title'], $url_content);
+                Telegram::AddWebhook($content, $title, $url_content);
             }
         }
     }

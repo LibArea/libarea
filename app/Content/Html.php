@@ -41,13 +41,15 @@ class Html
         return implode($result);
     }
 
-    // Blog, topic or category
+    // Add: article, post, question, note
     public static function addPost($facet_id)
     {
         $url_article	= (!empty($facet_id)) ?  url('article.form.add', ['facet_id' => $facet_id]) : url('article.form.add', endPart: false);
 		$url_post 		= (!empty($facet_id)) ?  url('post.form.add', ['facet_id' => $facet_id]) : url('post.form.add', endPart: false);
 		$url_question 	= (!empty($facet_id)) ?  url('question.form.add', ['facet_id' => $facet_id]) : url('question.form.add', endPart: false);
 		$url_note 		= (!empty($facet_id)) ?  url('note.form.add', ['facet_id' => $facet_id]) : url('note.form.add', endPart: false);
+
+		$add_post = (config('publication', 'add_post') === true) ?  '<li><a href="' . $url_post  .  '" class="blue">' .   __('app.add_post') . '</a></li>' : false;
 
 		$html = '<div class="relative">
 			<div class="trigger pointer">
@@ -57,7 +59,7 @@ class Html
 			    <span class="right-close pointer">x</span>
 				<ul class="list-none user-nav">
 					<li><a href="' . $url_article . '" class="sky">' .   __('app.add_article') . '</a></li>
-					<li><a href="' . $url_post  .  '" class="blue">' .   __('app.add_post') . '</a></li>
+					' .  $add_post . '
 					<li><a href="' . $url_question  .  '" class="blue">' .   __('app.add_question') . '</a></li>
 					<li><a href="' . $url_note  .  '" class="blue">' .   __('app.add_note') . '</a></li>
 				</ul>	

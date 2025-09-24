@@ -13,6 +13,10 @@ return [
 	// Включить (true) слияние комментариев, если участник публикует множество комментариев один за другим на один комментарий
 	'merge_comments' => true,
 
+	// Enable (true) the use of posts. If not, then: false
+	// Включить (true) использование постов. Если нет, то: false
+	'add_post' => true,
+
 	// Permitted publication types: article, post, question, note
 	// Разрешенные типы публикаций: статья, пост, вопрос, заметка
 	'allowed_types'  => [
