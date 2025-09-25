@@ -27,7 +27,7 @@ $sw = $sw ?? '?';
 
       <?php foreach ($data['results'] as $result) :
         if (config('general', 'search_engine') == false) {
-          $url_content = '';
+          $url_content = post_slug($result['post_type'], $result['post_id'], $result['post_slug']);
         } else {
           $url_content =  ($type == 'comment') ? $url_content . '#comment_' . $result['comment_id'] : $result['url'];
         }

@@ -7,7 +7,7 @@ $q = $data['q'];
 
 <body class="search-page<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 
-  <header class="d-header justify-between">
+  <header class="justify-between">
      
         <div class="box-logo">
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
