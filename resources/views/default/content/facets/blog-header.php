@@ -5,7 +5,7 @@
   </div>
   <div class="flex justify-between mt20">
     <h1 class="mb-block mb-text-xl mt20 ml15 mb-mt5">
-      <?= $data['facet']['facet_seo_title']; ?>
+      <?= $data['facet']['facet_title']; ?>
       <?php if ($container->user()->admin() || $data['facet']['facet_user_id'] == $container->user()->id()) : ?>
         <sup>
           <a class="ml5" href="<?= url('facet.form.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">
