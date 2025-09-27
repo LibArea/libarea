@@ -1,4 +1,5 @@
 <?php foreach ($list as $key => $item) :
+  if ($item['id'] === 'main.posts' && !config('publication', 'add_post') === true)  continue;
   $tl = $item['tl'] ?? 0; ?>
   <?php if ($container->user()->tl() >= $tl) : ?>
     <?php if (is_current($item['url'])) : ?>
