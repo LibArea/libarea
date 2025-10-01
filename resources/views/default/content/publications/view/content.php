@@ -45,7 +45,7 @@ $blog = $data['blog'][0] ?? null;
         <?php endif; ?>
       </div>
 
-      <h1 class="m0 mb5"><?= $item['post_title']; ?>
+      <h1 class="title max"><?= $item['post_title']; ?>
         <?php if ($item['post_type'] != 'post') : ?>
           <?= insert('/content/publications/title', ['item' => $item]); ?>
         <?php endif; ?>

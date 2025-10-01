@@ -329,6 +329,11 @@ details[open]>summary {
   font-size: 1rem;
 }
 
+.title.max {
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+}
+
 .txt-closed {
   padding: 10px;
   background-color: var(--yellow);
