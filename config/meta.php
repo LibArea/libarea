@@ -5,7 +5,7 @@
  */
 
 return [
-    'url'               => 'https://libarea.ru',
+    'url'               => 'https://test.local',
 
     // SEO
     'name'              => 'LibArea',

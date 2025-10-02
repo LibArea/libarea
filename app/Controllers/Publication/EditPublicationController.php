@@ -130,7 +130,7 @@ class EditPublicationController extends Controller
 			}
 		}
 
-		if (!in_array($data['content_type'], ['article', 'post', 'note', 'question'])) {
+		if (!in_array($data['content_type'], ['article', 'post', 'note', 'question', 'page'])) {
 			$data['content_type'] = 'article';
         }
 
