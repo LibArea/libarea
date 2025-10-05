@@ -11,6 +11,8 @@ class RssController extends Controller
     // Route::get('/sitemap.xml')
     public function index()
     {
+        header('Content-Type: application/xml;');
+		
         insertCacheTemplate(
             'default/content/rss/sitemap',
             [
@@ -42,7 +44,7 @@ class RssController extends Controller
         );
     }
 
-    // Route::get('/rss/posts')->controller...
+    // Route::get('/rss/all/posts')->controller...
     public static function postsAll()
     {
         $posts  = RssModel::getPosts();
