@@ -106,7 +106,7 @@ class HomeController extends Controller
                 'data'  => [
                     'pages' => Html::pageNumber(),
                     'sheet' => 'main.feed',
-                    'posts' => HomeModel::feed($signed, Html::pageNumber(), $type),
+                    'contents' => HomeModel::feed($signed, Html::pageNumber(), $type),
                 ]
             ]
         );
