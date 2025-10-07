@@ -20,6 +20,7 @@
   <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
+	<div class="mb-mt25">&nbsp;</div>
   <?php else : ?>
     <?php
     $sort = $container->request()->get('sort')->value();

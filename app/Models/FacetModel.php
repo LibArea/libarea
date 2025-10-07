@@ -300,7 +300,7 @@ class FacetModel extends Model
                     facet_id,
                     facet_title,
                     facet_slug,
-                    facet_description,
+                    facet_short_description,
                     facet_img
                         FROM facets
                             WHERE facet_id NOT IN(" . implode(',', $result) . ")

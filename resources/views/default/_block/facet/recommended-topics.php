@@ -8,7 +8,7 @@
             <?= $topic['facet_title']; ?>
           </a>
           <div class="mt5 text-sm max-w-md gray">
-            <?= $topic['facet_description']; ?>
+            <?= $topic['facet_short_description']; ?>...
           </div>
         </div>
         <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id red"><?= __('app.read'); ?></div>

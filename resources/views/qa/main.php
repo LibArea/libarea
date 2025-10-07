@@ -6,8 +6,15 @@ $facet  = $data['facet'] ?? false;
 
 <body <?php if ($container->cookies()->get('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
-  <header class="bg-white mb10 ml20 mr20">
-    <div class="br-bottom wrap mb-none items-center flex gap mb5">
+  <header>
+      <div class="flex flex-auto" id="find">
+ 
+	  <div class="box-logo">
+        <a title="<?= __('app.home'); ?>" class="logo" href="/">
+          <?= config('meta', 'name'); ?>
+        </a>
+		 </div>
+		    <div class="wrap mb-none items-center flex gap">
       <a class="p5 black text-sm" href="/topics">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#hash"></use>
@@ -29,16 +36,11 @@ $facet  = $data['facet'] ?? false;
         </svg> <?= __('app.search'); ?>
       </a>
     </div>
-
-    <div class="wrap items-center flex justify-between mb-mt5">
-      <div class="flex items-center" id="find">
-        <a title="<?= __('app.home'); ?>" class="logo" href="/">
-          <?= config('meta', 'name'); ?>
-        </a>
       </div>
-
+		<div class="flex gap-lg items-center" id="find">
       <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
-    </div>
+	  </div>
+    
   </header>
   <div id="contentWrapper" class="wrap">
 
