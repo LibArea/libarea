@@ -13,7 +13,7 @@ class Html
         $facets = preg_split('/(@)/', (string)$facet ?? false);
 
         $result = [];
-        foreach (array_chunk($facets, 3) as $row) {
+        foreach (array_chunk($facets, 3) as $row) :
             if ($row[0] == $type) {
                 if ($type === 'category') {
                     $result[] = '<a class="' . $css . '" href="' . url($type, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
@@ -21,7 +21,7 @@ class Html
                     $result[] = '<a class="' . $css . '" href="' . url($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 }
             }
-        }
+        endforeach;
 
         return implode($result);
     }
@@ -32,11 +32,11 @@ class Html
         $facets = preg_split('/(@)/', $facet ?? false);
 
         $result = [];
-        foreach (array_chunk($facets, 3) as $row) {
+        foreach (array_chunk($facets, 3) as $row) :
             if ($row[0] === 'topic') {
                 $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . $row[2] . '</a>';
             }
-        }
+        endforeach;
 
         return implode($result);
     }
@@ -44,30 +44,27 @@ class Html
     // Add: article, post, question, note
     public static function addPost($facet_id)
     {
-        $url_article	= (!empty($facet_id)) ?  url('article.form.add', ['facet_id' => $facet_id]) : url('article.form.add', endPart: false);
-		$url_post 		= (!empty($facet_id)) ?  url('post.form.add', ['facet_id' => $facet_id]) : url('post.form.add', endPart: false);
-		$url_question 	= (!empty($facet_id)) ?  url('question.form.add', ['facet_id' => $facet_id]) : url('question.form.add', endPart: false);
-		$url_note 		= (!empty($facet_id)) ?  url('note.form.add', ['facet_id' => $facet_id]) : url('note.form.add', endPart: false);
-
-		$add_post = (config('publication', 'add_post') === true) ?  '<li><a href="' . $url_post  .  '" class="blue">' .   __('app.add_post') . '</a></li>' : false;
-
 		$html = '<div class="relative">
 			<div class="trigger pointer">
 				<svg class="icon large sky icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
 			</div>
 			<div class="dropdown user"> 
 			    <span class="right-close pointer">x</span>
-				<ul class="list-none user-nav">
-					<li><a href="' . $url_article . '" class="sky">' .   __('app.add_article') . '</a></li>
-					' .  $add_post . '
-					<li><a href="' . $url_question  .  '" class="blue">' .   __('app.add_question') . '</a></li>
-					<li><a href="' . $url_note  .  '" class="blue">' .   __('app.add_note') . '</a></li>
-				</ul>	
-			</div>
-		</div>';
+				<ul class="list-none user-nav">';
+
+        foreach (config('publication', 'allowed_types') as $item) :
+
+			$url = (!empty($facet_id)) ?  url($item['type'] . '.form.add', ['facet_id' => $facet_id]) : url($item['type'] . '.form.add', endPart: false);
+
+			if (config('trust-levels', 'tl_add_' . $item['type']) <= UserData::getUserTL()) {  
+				$html .=  '<li><a href="' . $url . '" class="blue">' . __('app.add_' . $item['type']) . '</a></li>'; 
+			}
+
+        endforeach;
+		
+		$html .= '</ul></div></div>';
 		
 		return $html;
-		
     }
 
     // Localization of dates and events....
@@ -331,7 +328,7 @@ class Html
         $start = null;
 
         $head = '<ul id="box-head" class="list-none">';
-        foreach ($resultats[2] as $i => $header) {
+        foreach ($resultats[2] as $i => $header) :
             $header = strip_tags(preg_replace('#\s+#', ' ', trim(rtrim($header, ':!.?;'))));
             $anchor = strip_tags(str_replace(' ', '-', $header));
             $header = "<a href=\"{$slug}#{$anchor}\">{$header}</a>";
@@ -358,7 +355,7 @@ class Html
             $from[$i] = $resultats[0][$i];
 
             $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . $resultats[0][$i] . '</a>';
-        }
+        endforeach;
 
         for ($i = 0; $i <= ($depth - $start); $i++) {
             $head .= "</ul>";
