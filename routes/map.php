@@ -122,7 +122,6 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	Route::get('/add/question/{facet_id?}')->controller(AddPublicationController::class, 'question')->where(['facet_id' => '[0-9]+'])->name('question.form.add');
 	Route::get('/add/post/{facet_id?}')->controller(AddPublicationController::class, 'post')->where(['facet_id' => '[0-9]+'])->name('post.form.add');
 	Route::get('/add/note/{facet_id?}')->controller(AddPublicationController::class, 'note')->where(['facet_id' => '[0-9]+'])->name('note.form.add');
-	 
 	
 	Route::get('/add/poll')->controller(AddPollController::class)->name('poll.form.add');
 	Route::get('/add/facet/{type}')->controller(AddFacetController::class)->where(['type' => '[a-z]+'])->name('facet.form.add');

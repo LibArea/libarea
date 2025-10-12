@@ -1,7 +1,9 @@
-<fieldset>
-  <label for="post_title"><?= __('app.heading'); ?> <sup class="red">*</sup></label>
-  <input id="title" type="text" required="" name="title">
-  <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+<fieldset class="form-big">
+  <div class="form-label input-label"><label><?= __('app.heading'); ?> <sup class="red">*</sup></label></div>
+  <div class="form-element">
+    <input id="title" type="text" required="" name="title">
+    <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+  </div>
 </fieldset>
 
 <?= insert('/_block/form/select/topic', ['topic'  => $data['topic'], 'action' => 'add']); ?>

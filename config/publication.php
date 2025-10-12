@@ -35,6 +35,7 @@ return [
 		[
 			'title' => 'app.page',
 			'type' => 'page',
+			'tl' => 15
 		]
 	],
 

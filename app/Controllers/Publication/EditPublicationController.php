@@ -130,7 +130,14 @@ class EditPublicationController extends Controller
 			}
 		}
 
-		if (!in_array($data['content_type'], ['article', 'post', 'note', 'question', 'page'])) {
+		// Let's check the allowed content type
+		// Проверим на разрешенный тип контента
+		$typeArray = [];
+		foreach (config('publication', 'allowed_types') as $ind => $row) :
+			$typeArray[] = $row['type'];
+		endforeach;
+
+		if (!in_array($data['content_type'], $typeArray)) {
 			$data['content_type'] = 'article';
         }
 

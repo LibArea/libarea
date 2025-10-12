@@ -53,12 +53,18 @@ class Html
 				<ul class="list-none user-nav">';
 
         foreach (config('publication', 'allowed_types') as $item) :
+			
+			$tl = $item['tl'] ?? 0;
+			
+			if (UserData::getUserTL() >= $tl) :
+			
+				$url = (!empty($facet_id)) ?  url($item['type'] . '.form.add', ['facet_id' => $facet_id]) : url($item['type'] . '.form.add', endPart: false);
 
-			$url = (!empty($facet_id)) ?  url($item['type'] . '.form.add', ['facet_id' => $facet_id]) : url($item['type'] . '.form.add', endPart: false);
-
-			if (config('trust-levels', 'tl_add_' . $item['type']) <= UserData::getUserTL()) {  
-				$html .=  '<li><a href="' . $url . '" class="blue">' . __('app.add_' . $item['type']) . '</a></li>'; 
-			}
+				if (config('trust-levels', 'tl_add_' . $item['type']) <= UserData::getUserTL()) {  
+					$html .=  '<li><a href="' . $url . '" class="blue">' . __('app.add_' . $item['type']) . '</a></li>'; 
+				}
+			
+			endif;			
 
         endforeach;
 		

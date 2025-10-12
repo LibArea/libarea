@@ -96,5 +96,5 @@ Route::toGroup()
 	Route::get('/deleted')->controller(HomeController::class, 'deleted')->name('main.deleted');
 	Route::get('comments/deleted')->controller(CommentController::class, 'deleted')->name('comments.deleted');
 	
-	Route::get('/add/page')->controller(AddPublicationController::class, 'page')->name('page.form.add');
+	Route::get('/add/page/{facet_id?}')->controller(AddPublicationController::class, 'page')->where(['facet_id' => '[0-9]+'])->name('page.form.add');
 Route::endGroup();
