@@ -14,6 +14,8 @@ namespace App\Commands;
 
 use Hleb\Base\Task;
 
+use Modules\Admin\Controllers\ConsoleController;
+
 class DefaultTask extends Task
 {
     /** php console default-task [arg] **/
@@ -36,6 +38,9 @@ class DefaultTask extends Task
         // Your code here.
         // Разместите здесь свой код.
         // ... //
+
+        // php console default-task all
+        ConsoleController::all();
 
         return self::SUCCESS_CODE;
     }

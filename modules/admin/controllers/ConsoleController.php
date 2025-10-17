@@ -23,11 +23,22 @@ class ConsoleController extends Module
     public static function index()
     {
         $choice  = Request::post('type')->value();
+		
         $allowed = ['css', 'topic', 'post', 'up', 'tl', 'allContents', 'allFacets', 'allIndex', 'newIndex'];
         if (!in_array($choice, $allowed, true)) {
             redirect(url('admin.tools'));
         }
         self::$choice();
+    }
+
+    public static function all()
+    {
+        self::topic();
+		self::post();
+		self::up();
+		self::tl();
+
+        self::consoleRedirect();
     }
 
     public static function topic()
