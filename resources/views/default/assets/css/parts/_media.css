@@ -158,9 +158,13 @@
     margin: 10px 5px 15px 5px;
   }
 
+  header .dropdown {
+	right: -70px;  
+  }
+
 	#contentWrapper {
-      padding-left: 0; 
-      padding-right: 0;
+	  padding-left: 0; 
+	  padding-right: 0;
 	}
 
   .mb-block,
@@ -237,6 +241,11 @@
   .cherry-toolbar-button.cherry-toolbar-split,
   .cherry-toolbar-button.cherry-toolbar-strike {
     display: none;
+  }
+
+  table {
+    overflow-y: scroll;
+    display: inline-block;
   }
 
 }

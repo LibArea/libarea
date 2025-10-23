@@ -36,8 +36,9 @@
           </a>
         <?php endif; ?>
         <div class="flex gap lowercase text-sm">
-          <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
-
+		  <span class="mb-none">
+            <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
+		  </span>
           <?php $type = $data['type'] ?? 'topic';
           if ($type == 'blog') : ?>
             <?= Html::facets_blog($data['facet']['facet_slug'], $item['facet_list'], 'gray-600 text-sm'); ?>
