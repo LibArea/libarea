@@ -60,7 +60,7 @@ class MetaImage
 		}
 
 		// Настройка шрифта
-		$fontPath = HLEB_PUBLIC_DIR . '/assets/fonts/Ubuntu-Regular.ttf';
+		$fontPath = HLEB_PUBLIC_DIR . '/assets/fonts/HelveticaWorld-Regular.ttf';
 		if (!file_exists($fontPath)) {
 			error_log("Шрифт не найден: " . $fontPath);
 			die("Ошибка: шрифт не найден");
