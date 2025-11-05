@@ -48,7 +48,7 @@ class Html
 			<div class="trigger pointer">
 				<svg class="icon large sky icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
 			</div>
-			<div class="dropdown user"> 
+			<div class="dropdown user publ"> 
 			    <span class="right-close pointer">x</span>
 				<ul class="list-none user-nav">';
 
