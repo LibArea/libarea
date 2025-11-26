@@ -38,7 +38,7 @@
               <?php if ($item['post_url_domain']) : ?>
                 <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
                   <svg class="icon">
-                    <use xlink:href="/assets/svg/icons.svg#link"></use>
+                    <use xlink:href="#link"></use>
                   </svg> <?= $item['post_url_domain']; ?>
                 </a>
               <?php endif; ?>

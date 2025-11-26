@@ -54,7 +54,7 @@
             <span class="mr5 ml5"> &#183; </span>
             <a class="mr5 ml5" href="<?= url('admin.user.edit.form', ['id' => $audit['id']]); ?>">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                <use xlink:href="#edit"></use>
               </svg>
             </a>
             <span class="mr5 ml5"> &#183; </span>
@@ -106,7 +106,7 @@
               <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
                 <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
                   <svg class="icon gray">
-                    <use xlink:href="/assets/svg/icons.svg#circle"></use>
+                    <use xlink:href="#selected"></use>
                   </svg>
                 </span>
               </div>

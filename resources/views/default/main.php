@@ -11,7 +11,7 @@ $facet = $data['facet'] ?? false;
         <div class="flex flex-auto">
           <div class="box-logo">
             <svg class="icon large menu__button none">
-              <use xlink:href="/assets/svg/icons.svg#menu"></use>
+              <use xlink:href="#menu"></use>
             </svg>
             <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
           </div>

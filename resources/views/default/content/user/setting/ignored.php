@@ -12,7 +12,7 @@
           </a>
           <a id="ignore_<?= $user['ignored_id']; ?>" class="add-ignore red" data-id="<?= $user['ignored_id']; ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#lock"></use>
+              <use xlink:href="#lock"></use>
             </svg></i>
           </a>
         </div>

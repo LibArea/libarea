@@ -25,7 +25,7 @@ $login = $user['login'] ?? false;
           <b><?= $blog['facet_slug']; ?></b>
         </div>
         <div class="right text-sm gray-600"><svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#chevron-right"></use>
+            <use xlink:href="#chevron-right"></use>
           </svg></div>
       </a>
       <hr>
@@ -43,7 +43,7 @@ $login = $user['login'] ?? false;
     <li>
       <a href="<?= url($item['url'], endPart: false); ?>">
         <?php if (!empty($item['icon'])) : ?><svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
+            <use xlink:href="#<?= $item['icon']; ?>"></use>
           </svg><?php endif; ?>
         <?= __($item['title']); ?>
       </a>

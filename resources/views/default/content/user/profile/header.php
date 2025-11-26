@@ -33,7 +33,7 @@ endif;
         <?php if ($profile['id'] == $container->user()->id()) : ?>
           <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#settings"></use>
+              <use xlink:href="#settings"></use>
             </svg>
           </a>
         <?php else : ?>
@@ -41,14 +41,14 @@ endif;
             <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
             <a title="<?= __('app.ignore'); ?>" id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#lock"></use>
+                <use xlink:href="#lock"></use>
               </svg></i>
             </a>
 
             <?php if ($data['button_pm'] === true) : ?>
               <a title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
                 <svg class="icon">
-                  <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                  <use xlink:href="#mail"></use>
                 </svg>
               </a>
             <?php endif; ?>
@@ -59,13 +59,13 @@ endif;
     <?php endif; ?>
 
     <div class="flex">
-      <h1 class="mb-block mb-text-xl m15 gap-sm flex flex-auto">
+      <h1 class="mb-block mb-text-xl m15">
         <?= $profile['login']; ?>
         <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
 
           <?php if ($profile['up_count'] > 0) : ?>
             <svg class="icon red">
-              <use xlink:href="/assets/svg/icons.svg#heart"></use>
+              <use xlink:href="#heart"></use>
             </svg>
             <span class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></span>
           <?php endif; ?>
@@ -108,7 +108,7 @@ endif;
 
   <div class="gray-600 mt5">
     <svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+      <use xlink:href="#calendar"></use>
     </svg>
     <span class="middle lowercase text-sm">
       <?= langDate($profile['created_at']); ?>

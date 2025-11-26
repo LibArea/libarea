@@ -22,7 +22,7 @@
         <?php if ($container->access()->author('post', $page) === true) : ?>
           <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('publication.form.edit', ['id' => $page['post_id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg>
           </a>
         <?php endif; ?>
@@ -35,7 +35,7 @@
         <h2 class="m0 mb20"><?= __('app.pages'); ?></h2>
         <?php if ($container->user()->admin()) : ?>
           <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg></a>
         <?php endif; ?>
       </div>
@@ -44,7 +44,7 @@
         <div class="mt5 mb10">
           <a class="gray" href="<?= url('page', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
+              <use xlink:href="#chevrons-right"></use>
             </svg> <?= $row['post_title']; ?>
           </a>
         </div>

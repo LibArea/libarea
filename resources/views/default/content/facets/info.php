@@ -12,7 +12,7 @@
 <aside>
   <div class="box gray-600 bg-beige">
     <svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+      <use xlink:href="#calendar"></use>
     </svg>
     <span class="middle"><?= langDate($topic['facet_date']); ?></span>
   </div>

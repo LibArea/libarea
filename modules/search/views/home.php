@@ -6,7 +6,7 @@
     <form method="get" action="<?= url('search.go'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
       <button class="search-button-icon br5 pointer"><svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#search"></use>
+          <use xlink:href="#search"></use>
         </svg></button>
     </form>
     <div class="center">
@@ -16,5 +16,7 @@
   </div>
 
 </body>
+
+<?= insert('/global/local-storage'); ?>
 
 </html>

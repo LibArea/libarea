@@ -6,6 +6,8 @@
 
 <script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
 
+<?= insert('/global/local-storage'); ?>
+
 </body>
 
 </html>

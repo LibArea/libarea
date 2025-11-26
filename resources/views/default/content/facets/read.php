@@ -6,7 +6,7 @@
       <?php if (!empty($data['read'])) : ?>
         <div class="flex gap items-center">
           <svg class="icon red">
-            <use xlink:href="/assets/svg/icons.svg#users"></use>
+            <use xlink:href="#users"></use>
           </svg>
           <h2 class="gray-600 m0"><?= __('app.reads'); ?></h2>
         </div>

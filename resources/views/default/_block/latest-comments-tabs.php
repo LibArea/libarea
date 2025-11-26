@@ -22,7 +22,7 @@
           <?php if ($comment['post_type'] != 'post') : ?>
             <div class="text-sm flex items-center">
               <svg class="icon gray-600">
-                <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
+                <use xlink:href="#corner-down-right"></use>
               </svg>
               <a href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>" class="black">
                 <?= fragment($comment['post_title'], 32); ?>

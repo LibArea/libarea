@@ -1,7 +1,7 @@
 <div class="relative ml10">
   <span class="trigger text-sm">
     <svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+      <use xlink:href="#more-horizontal"></use>
     </svg>
   </span>
   <ul class="dropdown">

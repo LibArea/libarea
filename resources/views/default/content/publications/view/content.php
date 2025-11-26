@@ -9,7 +9,7 @@ $blog = $data['blog'][0] ?? null;
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-yellow mb15 gray-600">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
+            <use xlink:href="#chevron-right"></use>
           </svg>
           <?= __('app.post_merged'); ?>
           <?php foreach ($data['united'] as $merged) : ?>
@@ -87,7 +87,7 @@ $blog = $data['blog'][0] ?? null;
           <div class="italic mb15 text-sm table gray">
             <?= __('app.source'); ?>:
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#link"></use>
+              <use xlink:href="#link"></use>
             </svg>
             <a class="gray" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
               <?= $item['post_url_domain']; ?>
@@ -103,7 +103,7 @@ $blog = $data['blog'][0] ?? null;
       <div class="flex flex-row items-center text-sm mt15">
         <?php if (!empty($data['facets'])) : ?>
           <svg class="icon gray-600">
-            <use xlink:href="/assets/svg/icons.svg#hash"></use>
+            <use xlink:href="#hash"></use>
           </svg>
           <?php foreach ($data['facets'] as $topic) : ?>
             <a class="gray-600 mr15 lowercase" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
@@ -125,7 +125,7 @@ $blog = $data['blog'][0] ?? null;
           <?= Html::votes($item, 'post'); ?>
           <div class="items-center flex gap-sm mb-none">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#eye"></use>
+              <use xlink:href="#eye"></use>
             </svg>
             <?= $item['post_hits_count'] == 0 ? 1 : Html::formatToHuman($item['post_hits_count']); ?>
           </div>
@@ -149,7 +149,7 @@ $blog = $data['blog'][0] ?? null;
 
           <div class="pointer" data-a11y-dialog-show="id-share">
             <svg class="icon gray-600">
-              <use xlink:href="/assets/svg/icons.svg#share"></use>
+              <use xlink:href="#share"></use>
             </svg>
           </div>
           <?php if ($item['post_draft'] == 0) : ?>

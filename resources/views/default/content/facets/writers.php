@@ -5,7 +5,7 @@
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex gap items-center">
         <svg class="icon red">
-          <use xlink:href="/assets/svg/icons.svg#award"></use>
+          <use xlink:href="#award"></use>
         </svg>
         <h2 class="gray-600 m0"><?= __('app.by_deposit'); ?></h2>
       </div>
@@ -38,7 +38,7 @@
 <aside>
   <div class="box gray-600">
     <svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+      <use xlink:href="#calendar"></use>
     </svg>
     <span class="middle"><?= langDate($topic['facet_date']); ?></span>
   </div>

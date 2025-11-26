@@ -8,3 +8,5 @@
 <script nonce="<?= config('main', 'nonce'); ?>">
   <?= Msg::get(); ?>
 </script>
+
+<?= insert('/global/local-storage'); ?>

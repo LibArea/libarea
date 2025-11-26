@@ -46,7 +46,7 @@ class Html
     {
 		$html = '<div class="relative">
 			<div class="trigger pointer">
-				<svg class="icon large sky icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
+				<svg class="icon large sky icon-bold"><use xlink:href="#write"></use></svg>
 			</div>
 			<div class="dropdown user publ"> 
 			    <span class="right-close pointer">x</span>
@@ -107,14 +107,14 @@ class Html
     {
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
-        $html = '<div class="flex gap-sm gray-600"><div class="up-id click-no-auth"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
+        $html = '<div class="flex gap-sm gray-600"><div class="up-id click-no-auth"><svg class="icon"><use xlink:href="#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
 
         if (UserData::checkActiveUser()) {
             if (UserData::getUserId() == $content[$type . '_user_id']) {
-                $html = '<div class="active flex gap-sm"><div class="up-id"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                $html = '<div class="active flex gap-sm"><div class="up-id"><svg class="icon"><use xlink:href="#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             } else {
                 $active = $content['votes_' . $type . '_user_id'] ? 'active ' : '';
-                $html = '<div id="up' . $content[$type . '_id'] . '" class="' . $active . 'flex gap-sm gray-600"><div data-id="' . $content[$type . '_id'] . '" data-type="' . $type . '" class="up-id pointer"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                $html = '<div id="up' . $content[$type . '_id'] . '" class="' . $active . 'flex gap-sm gray-600"><div data-id="' . $content[$type . '_id'] . '" data-type="' . $type . '" class="up-id pointer"><svg class="icon"><use xlink:href="#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             }
         }
 
@@ -125,10 +125,10 @@ class Html
     public static function favorite($content_id, $type, $tid, $heading = '')
     {
         $head = ($heading == 'heading') ? __('app.save') : '';
-        $html = '<div class="click-no-auth gray-600"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg>' . $head . '</div>';
+        $html = '<div class="click-no-auth gray-600"><svg class="icon"><use xlink:href="#bookmark"></use></svg>' . $head . '</div>';
         if (UserData::checkActiveUser()) {
             $active = $tid ? 'active' : 'gray-600';
-            $html = '<div id="favorite_' . $content_id . '" class="add-favorite pointer ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i>' . $head . '</div>';
+            $html = '<div id="favorite_' . $content_id . '" class="add-favorite pointer ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icon"><use xlink:href="#bookmark"></use></svg></i>' . $head . '</div>';
         }
 
         return $html;

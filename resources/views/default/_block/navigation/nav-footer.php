@@ -1,7 +1,7 @@
 <li>
   <a href="<?= url('page', ['facet_slug' => 'info', 'slug' => 'information']); ?>">
     <svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
+      <use xlink:href="#chevrons-right"></use>
     </svg>
     <div class="nav-overflow"><?= __('app.information'); ?></div>
   </a>
@@ -9,7 +9,7 @@
 <li>
   <a href="<?= url('page', ['facet_slug' => 'info', 'slug' => 'donate']); ?>">
     <svg class="icon red">
-      <use xlink:href="/assets/svg/icons.svg#donate"></use>
+      <use xlink:href="#donate"></use>
     </svg>
     <div class="nav-overflow"><?= __('app.donate'); ?></div>
   </a>

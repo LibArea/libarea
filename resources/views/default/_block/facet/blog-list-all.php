@@ -24,12 +24,12 @@
         <?= fragment($facet['facet_short_description'], 68); ?>
         <span class="flex right gap-sm gray-600 text-sm">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#post"></use>
+            <use xlink:href="#post"></use>
           </svg>
           <?= $facet['facet_count']; ?>
           <?php if ($facet['facet_focus_count'] > 0) : ?>
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#users"></use>
+              <use xlink:href="#users"></use>
             </svg>
             <?= $facet['facet_focus_count']; ?>
           <?php endif; ?>

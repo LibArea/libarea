@@ -25,7 +25,7 @@
         <?= fragment($facet['facet_short_description'], 32); ?>
         <span class="right gray-600">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#post"></use>
+            <use xlink:href="#post"></use>
           </svg>
           <?= $facet['facet_count']; ?>
         </span>

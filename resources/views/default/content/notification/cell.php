@@ -9,7 +9,7 @@ $profile = url('profile', ['login' => $notif['login']]);
 	  <div class="relative img-base mr5">
 		<?= Img::avatar($notif['avatar'], $notif['login'], 'img-base', 'min'); ?>
 		<svg class="number-svg <?= $n['css']; ?>">
-		  <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
+		  <use xlink:href="#<?= $n['icon']; ?>"></use>
 		</svg>
 	  </div>
 	  <div>

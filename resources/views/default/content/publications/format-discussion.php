@@ -55,7 +55,7 @@
                     </a>
                     <?php if ($node['comment_is_mobile']) : ?>
                       <svg class="icon small green">
-                        <use xlink:href="/assets/svg/icons.svg#mobile"></use>
+                        <use xlink:href="#mobile"></use>
                       </svg>
                     <?php endif; ?>
                     <?php if ($item['post_user_id'] == $node['comment_user_id']) : ?>
@@ -76,14 +76,14 @@
                     <?php endif; ?>
                     <?php if ($node['comment_lo']) : ?>
                       <svg class="icon red">
-                        <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                        <use xlink:href="#arrow-up"></use>
                       </svg>
                     <?php endif; ?>
 
                     <?php if ($node['comment_parent_id'] > 0) : ?>
                       <a class="reply-to" rel="nofollow" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
                         <svg class="icon small">
-                          <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                          <use xlink:href="#arrow-up"></use>
                         </svg></a>
                     <?php endif; ?>
 

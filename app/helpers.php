@@ -154,7 +154,6 @@ function redirect(string $url): void
     $container->redirect()->to($url, status: 303);
 }
 
-
 function modeDayNight()
 {
     $container = Container::getContainer();

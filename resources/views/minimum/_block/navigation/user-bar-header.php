@@ -2,7 +2,7 @@
 <?php if (!$container->user()->active()) : ?>
 	<div id="toggledark" class="gray-600">
 	  <svg class="icon large">
-		<use xlink:href="/assets/svg/icons.svg#sun"></use>
+		<use xlink:href="#sun"></use>
 	  </svg>
 	</div>
 	<?php if (config('general', 'invite') == false) : ?>
@@ -18,7 +18,7 @@
 
 	<a id="toggledark" class="gray-600">
 	  <svg class="icon large">
-		<use xlink:href="/assets/svg/icons.svg#sun"></use>
+		<use xlink:href="#sun"></use>
 	  </svg>
 	</a>
 
@@ -26,7 +26,7 @@
 	  <div id="el_notif" class="none"></div>
 	  <a id="notif" class="add-notif gray-600 relative">
 		<svg class="icon large">
-		  <use xlink:href="/assets/svg/icons.svg#bell"></use>
+		  <use xlink:href="#bell"></use>
 		</svg>
 		<span class="number-notif"></span>
 	  </a>

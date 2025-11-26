@@ -11,7 +11,7 @@
       <input class="w-100" id="inputText" value="<?= $url; ?>">
       <button class="btn btn-primary" id="copyText">
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#copy"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#copy"></use>
         </svg>
       </button>
     </fieldset>
@@ -19,31 +19,31 @@
     <div class="flex gap">
       <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $url; ?>" target="_blank">
         <svg class="icon icon-share fb">
-          <use xlink:href="/assets/svg/icons.svg#fb"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#fb"></use>
         </svg>
       </a>
 
       <a href="https://vk.com/share.php?url=<?= $url; ?>" target="_blank">
         <svg class="icon icon-share vk">
-          <use xlink:href="/assets/svg/icons.svg#vk"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#vk"></use>
         </svg>
       </a>
 
       <a href="https://connect.ok.ru/offer?url=<?= $url; ?>" target="_blank">
         <svg class="icon icon-share ok">
-          <use xlink:href="/assets/svg/icons.svg#ok"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#ok"></use>
         </svg>
       </a>
 
       <a href="https://twitter.com/intent/tweet?url=<?= $url; ?>" target="_blank">
         <svg class="icon icon-share tw">
-          <use xlink:href="/assets/svg/icons.svg#tw"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#tw"></use>
         </svg>
       </a>
 
       <a href="https://t.me/share/url?url=<?= $url; ?>" target="_blank">
         <svg class="icon icon-share tg">
-          <use xlink:href="/assets/svg/icons.svg#telegram"></use>
+          <use xlink:href="/assets/svg/icons-share.svg#telegram"></use>
         </svg>
       </a>
     </div>

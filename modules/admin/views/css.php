@@ -53,7 +53,7 @@
     <?php foreach ($data['lists'] as $topic) : ?>
       <div class="center box">
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#<?= $topic; ?>"></use>
+          <use xlink:href="#<?= $topic; ?>"></use>
         </svg>
         <div class="gray-600"><?= $topic; ?></div>
       </div>
@@ -61,7 +61,7 @@
   </div>
 
   <pre><code>&lt;svg class="icon"&gt;
-   &lt;use xlink:href="/assets/svg/icons.svg#ID"&gt;&lt;/use&gt;
+   &lt;use xlink:href="#ID"&gt;&lt;/use&gt;
 &lt;/svg&gt;</code></pre>
 
   <a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>

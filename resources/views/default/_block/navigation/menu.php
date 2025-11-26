@@ -15,7 +15,7 @@ foreach ($menu as $key => $item) :
             $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"' : '';
             echo '<li' . $class . '><a href="' . $item['url'] . '">';
             if (!empty($item['icon'])) {
-                echo '<svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $item['icon'] . '"></use></svg>';
+                echo '<svg class="icon" width="24" height="24"><use xlink:href="#' . $item['icon'] . '"></use></svg>';
             }
             echo '<div class="nav-overflow">' . __($item['title']) . '</div></a></li>';
         }
@@ -27,7 +27,7 @@ if ($container->user()->id() > 0) {
         echo '<div class="flex items-center">';
         echo '<h4 class="mt15 mb5 ml10 uppercase-box">' . __('app.preferences') . '</h3>';
         echo '<a class="text-sm gray-600" title="' . __('app.edit') . '" href="' . url('setting.preferences') . '">';
-        echo '<sup><svg class="icon gray-600"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>';
+        echo '<sup><svg class="icon gray-600"><use xlink:href="#edit"></use></svg></sup>';
         echo '</a></div>';
 
         $i = 0;

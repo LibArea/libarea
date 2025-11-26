@@ -100,7 +100,7 @@ class SearchModel extends Model
 
     public static function getLastIDContent()
     {
-        $sql = "SELECT  MAX(CAST(external_id AS SIGNED)) as id
+        $sql = "SELECT MAX(CAST(external_id AS SIGNED)) as id
 					FROM search_index_toc";
 
         $lastId = DB::run($sql)->fetch();

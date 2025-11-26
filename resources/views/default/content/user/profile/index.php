@@ -13,7 +13,7 @@
               <?php if ($data['profile']['id'] == $container->user()->id()) : ?>
                 <a class="add-profile right" data-post="<?= $data['my_post']['post_id']; ?>">
                   <svg class="icon gray-600">
-                    <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                    <use xlink:href="#trash"></use>
                   </svg>
                 </a>
               <?php endif; ?>
@@ -27,7 +27,7 @@
                 <?php if ($data['my_post']['post_comments_count'] != 0) : ?>
                   <span class="right">
                     <svg class="icon">
-                      <use xlink:href="/assets/svg/icons.svg#comments"></use>
+                      <use xlink:href="#comments"></use>
                     </svg> <?= $data['my_post']['post_comments_count']; ?>
                   </span>
                 <?php endif; ?>

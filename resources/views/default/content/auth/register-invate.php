@@ -20,7 +20,7 @@
         <label for="password"><?= __('app.password'); ?></label>
         <input id="password" name="password" type="password" required>
         <span class="showPassword"><svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#eye"></use>
+            <use xlink:href="#eye"></use>
           </svg></span>
         <div class="help">>= 8 <?= __('app.characters'); ?>...</div>
       </fieldset>

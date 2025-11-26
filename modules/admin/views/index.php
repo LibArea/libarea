@@ -11,7 +11,7 @@
   <h4 class="uppercase-box">
     <?= __('admin.users'); ?>
     <a href="<?= url('admin.users'); ?>"><svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+        <use xlink:href="#more-horizontal"></use>
       </svg>
     </a>
   </h4>
@@ -26,7 +26,7 @@
   <h4 class="uppercase-box mt15">
     <?= __('admin.search'); ?>
     <a href="<?= url('admin.logs.search'); ?>"><svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+        <use xlink:href="#more-horizontal"></use>
       </svg>
     </a>
   </h4>
@@ -46,7 +46,7 @@
 
   <h3 class="uppercase-box"><?= __('admin.useful_resources'); ?></h3>
   <p><svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#link"></use>
+      <use xlink:href="#link"></use>
     </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
   <p><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#github"></use>

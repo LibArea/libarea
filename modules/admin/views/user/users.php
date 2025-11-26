@@ -56,7 +56,7 @@ use App\Bootstrap\Services\Auth\RegType; ?>
             <?php if ($user['whisper']) : ?>
               <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
                 <svg class="icon green">
-                  <use xlink:href="/assets/svg/icons.svg#info"></use>
+                  <use xlink:href="#info"></use>
                 </svg>
               </span>
             <?php endif; ?>
@@ -122,7 +122,7 @@ use App\Bootstrap\Services\Auth\RegType; ?>
           <td class="center">
             <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit.form', ['id' => $user['id']]); ?>">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                <use xlink:href="#edit"></use>
               </svg>
             </a>
           </td>

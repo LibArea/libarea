@@ -63,7 +63,7 @@
         <?php else : ?>
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit.form', ['id' => $user['id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg>
           </a>
         <?php endif; ?>

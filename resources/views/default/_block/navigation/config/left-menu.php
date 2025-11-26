@@ -53,7 +53,7 @@
 				'tl'    => 10,
 				'url'   => url('admin.users'),
 				'title' => 'app.admin',
-				'icon'  => 'users',
+				'icon'  => 'users-2',
 				'id'    => 'admin',
 			],
 		],

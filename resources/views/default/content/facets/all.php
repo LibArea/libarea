@@ -41,7 +41,7 @@
           <p class="text-xl">
             <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $type]); ?>">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#plus"></use>
+                <use xlink:href="#plus"></use>
               </svg>
               <?= __('app.add'); ?>
             </a>

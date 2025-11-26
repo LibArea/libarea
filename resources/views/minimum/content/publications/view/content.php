@@ -70,7 +70,7 @@
         <?php if ($item['post_url_domain']) : ?>
           <?= __('app.source'); ?>:
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#link"></use>
+            <use xlink:href="#link"></use>
           </svg>
           <a class="gray" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
             <?= $item['post_url_domain']; ?>
@@ -85,7 +85,7 @@
         <?= Html::votes($item, 'post'); ?>
         <div class="items-center flex gap-sm">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#eye"></use>
+            <use xlink:href="#eye"></use>
           </svg>
           <?= $item['post_hits_count'] == 0 ? 1 : $item['post_hits_count']; ?>
         </div>

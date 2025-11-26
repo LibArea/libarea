@@ -52,7 +52,7 @@ use App\Bootstrap\Services\Auth\RegType; ?>
         <?php endif; ?>
         (ed. <?= $data['user']['updated_at']; ?>) |
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#eye"></use>
+          <use xlink:href="#eye"></use>
         </svg> <?= $data['user']['hits_count']; ?>
       </span>
     </fieldset>

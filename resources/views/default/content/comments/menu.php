@@ -1,7 +1,7 @@
   <div class="menu-comment">
     <span class="trigger gray-600 text-sm">
       <svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+        <use xlink:href="#more-horizontal"></use>
       </svg>
     </span>
     <ul class="dropdown text-sm">
@@ -10,7 +10,7 @@
         <li>
           <a class="editansw" href="<?= url('comment.form.edit', ['id' => $comment['comment_id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg>
             <?= __('app.edit'); ?>
           </a>
@@ -21,7 +21,7 @@
         <li>
           <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
             <svg class="icon<?php if ($comment['comment_is_deleted'] == 1) : ?> sky<?php endif; ?>">
-              <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
+              <use xlink:href="#trash-2"></use>
             </svg>
             <?php if ($comment['comment_is_deleted'] == 1) : ?>
               <span class="sky"><?= __('app.recover'); ?></span>
@@ -33,7 +33,7 @@
         <!--li>
           <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
+              <use xlink:href="#chevron-right"></use>
             </svg>
             <?= __('app.move'); ?>
           </a>
@@ -41,7 +41,7 @@
         <li>
           <a href="<?= url('admin.logip', ['item' => $comment['comment_ip']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#info"></use>
+              <use xlink:href="#info"></use>
             </svg>
             <?= $comment['comment_ip']; ?>
           </a>
@@ -52,7 +52,7 @@
         <li>
           <a data-post_id="<?= $item['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
+              <use xlink:href="#x-octagon"></use>
             </svg>
             <?= __('app.report'); ?>
           </a>
@@ -65,7 +65,7 @@
             <li>
               <a id="best_<?= $comment['comment_id']; ?>" data-id="<?= $comment['comment_id']; ?>" class="comment-best">
                 <svg class="icon">
-                  <use xlink:href="/assets/svg/icons.svg#award"></use>
+                  <use xlink:href="#award"></use>
                 </svg>
                 <?= __('app.raise_answer'); ?>
               </a>
@@ -81,7 +81,7 @@
       <li>
         <a rel="nofollow" class="gray-600" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#anchor"></use>
+            <use xlink:href="#anchor"></use>
           </svg>
           <?= __('app.link'); ?>
         </a>

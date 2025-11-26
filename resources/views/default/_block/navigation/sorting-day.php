@@ -17,7 +17,7 @@ $day = $container->request()->get('sort')->value();
     <?php endif; ?>
   </span>
   <svg class="icon pointer gray-600">
-    <use xlink:href="/assets/svg/icons.svg#sort-descending"></use>
+    <use xlink:href="#sort-descending"></use>
   </svg>
 </span>
 <ul class="dropdown menu">

@@ -3,7 +3,7 @@
 	<div class="form-element">
 	  <input id="password" name="password" type="password" required="">
 	  <span class="showPassword"><svg class="icon">
-		  <use xlink:href="/assets/svg/icons.svg#eye"></use>
+		  <use xlink:href="#eye"></use>
 		</svg></span>
 		</div>
 </fieldset>

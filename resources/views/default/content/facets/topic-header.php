@@ -7,7 +7,7 @@
         <?php if ($container->user()->admin() || $topic['facet_user_id'] == $container->user()->id()) : ?>
           <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg>
           </a>
         <?php endif; ?>
@@ -30,35 +30,35 @@
   <div class="flex justify-between text-sm gray-600 lowercase">
     <div class="flex gap-sm">
       <svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#users"></use>
+        <use xlink:href="#users"></use>
       </svg>
       <?= $topic['facet_focus_count']; ?> <span class="mb-none"><?= __('app.reads'); ?></span>
 
       <svg class="icon ml15">
-        <use xlink:href="/assets/svg/icons.svg#post"></use>
+        <use xlink:href="#post"></use>
       </svg>
       <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
     <div class="flex gap">
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#info"></use>
+          <use xlink:href="#info"></use>
         </svg>
       </a>
 
       <a class="gray-600" title="<?= __('app.recommended'); ?>" href="<?= url('topic.recommend', ['slug' => $topic['facet_slug']]); ?>">
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#activity"></use>
+          <use xlink:href="#activity"></use>
         </svg>
       </a>
 
       <svg class="icon gray-600 pointer" data-a11y-dialog-show="id-share">
-        <use xlink:href="/assets/svg/icons.svg#share"></use>
+        <use xlink:href="#share"></use>
       </svg>
 
       <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
         <svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#rss"></use>
+          <use xlink:href="#rss"></use>
         </svg>
       </a>
     </div>

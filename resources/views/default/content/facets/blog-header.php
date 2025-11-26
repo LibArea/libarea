@@ -10,7 +10,7 @@
         <sup>
           <a class="ml5" href="<?= url('facet.form.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              <use xlink:href="#edit"></use>
             </svg>
           </a>
         </sup>

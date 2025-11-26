@@ -7,7 +7,7 @@
         <label for="password"><?= __('app.new_password'); ?></label>
         <input id="password" type="password" name="password">
         <span class="showPassword"><svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#eye"></use>
+            <use xlink:href="#eye"></use>
           </svg></span>
       </fieldset>
       <p>

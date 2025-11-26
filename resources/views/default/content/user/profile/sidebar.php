@@ -17,7 +17,7 @@
   <div class="box">
     <div class="gray-600 mt5">
       <svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+        <use xlink:href="#calendar"></use>
       </svg>
       <span class="middle lowercase text-sm">
         <?= langDate($profile['created_at']); ?>
@@ -95,11 +95,11 @@
     <h4 class="uppercase-box"><?= __('app.badges'); ?></h4>
     <div class="text-3xl">
       <span title="<?= __('app.medal_reg'); ?>"><svg class="icon sky">
-          <use xlink:href="/assets/svg/icons.svg#gift"></use>
+          <use xlink:href="#gift"></use>
         </svg></span>
       <?php if ($profile['id'] < 50) : ?>
         <span title="<?= __('app.first_days'); ?>"><svg class="icon green">
-            <use xlink:href="/assets/svg/icons.svg#award"></use>
+            <use xlink:href="#award"></use>
           </svg></span>
       <?php endif; ?>
       <?php foreach ($data['badges'] as $badge) : ?>
@@ -114,20 +114,20 @@
       <div class="mt5">
         <a class="gray mb5 block" href="<?= url('admin.user.edit.form', ['id' => $profile['id']]); ?>">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#settings"></use>
+            <use xlink:href="#settings"></use>
           </svg>
           <span class="middle"><?= __('app.edit'); ?></span>
         </a>
         <a class="gray block mb5" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#award"></use>
+            <use xlink:href="#award"></use>
           </svg>
           <span class="middle"><?= __('app.reward_user'); ?></span>
         </a>
         <?php if ($profile['whisper']) : ?>
           <div class="tips text-sm gray-600">
             <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#info"></use>
+              <use xlink:href="#info"></use>
             </svg>
             <?= $profile['whisper']; ?>
           </div>
@@ -136,14 +136,14 @@
           <?php if ($profile['ban_list'] == 1) : ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#user"></use>
+                <use xlink:href="#user"></use>
               </svg>
               <span class="red text-sm"><?= __('app.unban'); ?></span>
             </span>
           <?php else : ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
+                <use xlink:href="#x-octagon"></use>
               </svg>
               <span class="middle"><?= __('app.ban_it'); ?></span>
             </span>

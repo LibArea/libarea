@@ -38,7 +38,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       </ul>
       <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
         <svg class="icon pointer gray-600">
-          <use xlink:href="/assets/svg/icons.svg#grid"></use>
+          <use xlink:href="#grid"></use>
         </svg>
       </div>
     </div>
@@ -57,7 +57,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         </a>
         <div class="gray-600 text-sm mt5">
           <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+            <use xlink:href="#calendar"></use>
           </svg>
           <span class="middle lowercase"><?= langDate($blog['facet_date']); ?></span>
         </div>
@@ -109,7 +109,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
   <main>
     <div class="box center gray-600">
       <svg class="icon max">
-        <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
+        <use xlink:href="#x-octagon"></use>
       </svg>
       <div class="mt5 gray"><?= __('app.remote'); ?></div>
     </div>

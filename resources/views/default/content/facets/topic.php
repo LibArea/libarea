@@ -15,7 +15,7 @@ $topic = $data['facet'];
   <?php else : ?>
     <div class="box center gray-600">
       <svg class="icon max">
-        <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
+        <use xlink:href="#x-octagon"></use>
       </svg>
       <div class="mt5 gray"><?= __('app.topic_deleted'); ?></div>
     </div>
