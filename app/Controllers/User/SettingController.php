@@ -18,36 +18,6 @@ class SettingController extends Controller
 {
     protected $limit = 25;
 
-    public function profile(): void
-    {
-        $this->edit();
-    }
-
-    public function avatar(): void
-    {
-        $this->avatarEdit();
-    }
-
-    public function security(): void
-    {
-        $this->securityEdit();
-    }
-
-    public function preferences(): void
-    {
-        $this->preferencesEdit();
-    }
-
-    public function notification(): void
-    {
-        $this->notificationEdit();
-    }
-
-    public function coverUserRemove(): void
-    {
-        $this->coverRemove();
-    }
-
     /**
      * Profile setup form
      * Форма настройки профиля

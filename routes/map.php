@@ -92,12 +92,12 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	 * Настройки участника
 	 */
 	Route::get('/setting/')->controller(SettingController::class)->name('setting');
-	Route::get('/setting/avatar')->controller(SettingController::class, 'avatarForm')->where(['type' => '[a-z_]+'])->name('setting.avatar');
-	Route::get('/setting/ignored')->controller(SettingController::class, 'ignoredForm')->where(['type' => '[a-z_]+'])->name('setting.ignored');
-	Route::get('/setting/security')->controller(SettingController::class, 'securityForm')->where(['type' => '[a-z_]+'])->name('setting.security');
-	Route::get('/setting/notifications')->controller(SettingController::class, 'notificationForm')->where(['type' => '[a-z_]+'])->name('setting.notification');
-	Route::get('/setting/preferences')->controller(SettingController::class, 'preferencesForm')->where(['type' => '[a-z_]+'])->name('setting.preferences');
-	Route::get('/setting/notifications')->controller(SettingController::class, 'deletionForm')->where(['type' => '[a-z_]+'])->name('setting.deletion');
+	Route::get('/setting/avatar')->controller(SettingController::class, 'avatarForm')->name('setting.avatar');
+	Route::get('/setting/ignored')->controller(SettingController::class, 'ignoredForm')->name('setting.ignored');
+	Route::get('/setting/security')->controller(SettingController::class, 'securityForm')->name('setting.security');
+	Route::get('/setting/notifications')->controller(SettingController::class, 'notificationForm')->name('setting.notification');
+	Route::get('/setting/preferences')->controller(SettingController::class, 'preferencesForm')->name('setting.preferences');
+	Route::get('/setting/notifications')->controller(SettingController::class, 'deletionForm')->name('setting.deletion');
 
 	Route::get('/messages')->controller(MessagesController::class)->name('messages');
     Route::get('/messages/{id}')->controller(MessagesController::class, 'dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
@@ -138,7 +138,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	Route::get('/redirect/facet/{id}')->controller(RedirectController::class)->where(['id' => '[0-9]+'])->name('redirect.facet');
 	
 	Route::get('/post/img/{id}/remove')->controller(EditPublicationController::class, 'coverPostRemove')->where(['id' => '[0-9]+'])->name('delete.post.cover');
-	Route::get('/cover/img/{id}/remove')->controller(SettingController::class, 'coverUserRemove')->where(['id' => '[0-9]+'])->name('delete.user.cover');
+	Route::get('/cover/img/{id}/remove')->controller(SettingController::class, 'coverRemove')->where(['id' => '[0-9]+'])->name('delete.user.cover');
 
     Route::toGroup()->protect();
 		Route::post('/favorite')->controller(FavoriteController::class);
@@ -164,11 +164,11 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/new/email')->controller(SettingController::class, 'newEmail');
 		
 		// Отправка и изменение контента
-		Route::post('/user/edit/profile')->controller(SettingController::class, 'profile')->where(['type' => '[a-z]+'])->name('setting.edit.profile');
-		Route::post('/user/edit/avatar')->controller(SettingController::class, 'avatar')->where(['type' => '[a-z]+'])->name('setting.edit.avatar');
-		Route::post('/user/edit/security')->controller(SettingController::class, 'security')->where(['type' => '[a-z]+'])->name('setting.edit.security');
-		Route::post('/user/edit/preferences')->controller(SettingController::class, 'preferences')->where(['type' => '[a-z]+'])->name('setting.edit.preferences');
-		Route::post('/user/edit/notification')->controller(SettingController::class, 'notification')->where(['type' => '[a-z]+'])->name('setting.edit.notification');
+		Route::post('/user/edit/profile')->controller(SettingController::class, 'edit')->name('setting.edit.profile');
+		Route::post('/user/edit/avatar')->controller(SettingController::class, 'avatarEdit')->name('setting.edit.avatar');
+		Route::post('/user/edit/security')->controller(SettingController::class, 'securityEdit')->name('setting.edit.security');
+		Route::post('/user/edit/preferences')->controller(SettingController::class, 'preferencesEdit')->name('setting.edit.preferences');
+		Route::post('/user/edit/notification')->controller(SettingController::class, 'notificationEdit')->name('setting.edit.notification');
 		
 		Route::post('/edit/facet/logo/{type}/{facet_id}')->controller(EditFacetController::class, 'logoEdit')->where(['type' => '[a-z]+', 'facet_id' => '[0-9]+'])->name('edit.logo.facet');
 	Route::endGroup();	
@@ -289,6 +289,6 @@ Route::get('/og-image/{id}')->controller(PublicationController::class, 'OgImage'
 
 // Тестирование
 Route::toGroup()->protect();
-	Route::post('/add/content/test-edit')->controller(PublicationController::class, 'addEditTest')->name('add.post-edit');
+	// Route::post('/add/content/test-edit')->controller(PublicationController::class, 'addEditTest')->name('add.post-edit');
 Route::endGroup();	
 Route::get('/editor/test')->controller(PublicationController::class, 'editorTest');
