@@ -42,17 +42,17 @@
     </div>
   <?php endforeach; ?>
 
-  <p><a class="btn btn-outline-primary btn-small" href="<?= url('page.form.add'); ?>">+ <?= __('app.add_page'); ?></a></p>
+  <p><a class="btn btn-outline-primary btn-small" href="<?= url('page.form.add',  endPart: false); ?>">+ <?= __('app.add_page'); ?></a></p>
 
   <h3 class="uppercase-box"><?= __('admin.useful_resources'); ?></h3>
   <p><svg class="icon">
       <use xlink:href="#link"></use>
     </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
   <p><svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#github"></use>
+      <use xlink:href="/assets/svg/icons.svg#link"></use>
     </svg> <a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
   <p><svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#vk"></use>
+      <use xlink:href="/assets/svg/icons.svg#link"></use>
     </svg> <a href="https://vk.com/libarea">ВКонтакте</a></p>
   <hr>
   <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
