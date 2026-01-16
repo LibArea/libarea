@@ -4,6 +4,8 @@ $css = 'img-xl mt15 mb-mt25 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'img-2xl mb-mt25 mb-img-2xl profile-ava';
 endif;
+
+$counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
 ?>
 <style nonce="<?= config('main', 'nonce'); ?>">
   .bg-profile {
@@ -115,18 +117,21 @@ endif;
     </span>
   </div>
 
-  <?php foreach (config('profile', 'sidebar') as $block) : ?>
-    <?php if ($profile[$block['title']]) : ?>
-      <div class="mt5">
-        <span class="gray-600"><?= __($block['lang']); ?>:</span>
-        <?php if ($block['url']) : ?>
-          <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-            <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-          </a>
-        <?php else : ?>
-          <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-        <?php endif; ?>
-      </div>
-    <?php endif; ?>
-  <?php endforeach; ?>
+	<?php foreach (config('profile', 'sidebar') as $block) : ?>
+	  <?php if ($profile[$block['title']]) : ?>
+		<div class="mt5">
+		  <?php if ($block['url']) : ?>
+			<?php if ($counts > 3) : ?>
+			  <span class="gray-600"><?= __($block['lang']); ?>:</span>
+			  <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
+				<span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+			  </a>
+			<?php endif; ?>
+		  <?php else : ?>
+			<span class="gray-600"><?= __($block['lang']); ?>:</span>
+			<span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+		  <?php endif; ?>
+		</div>
+	  <?php endif; ?>
+	<?php endforeach; ?>
 </div>
