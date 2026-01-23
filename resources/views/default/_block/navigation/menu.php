@@ -48,8 +48,8 @@ if ($container->user()->id() > 0) {
 
             echo '<li>';
             echo '<a class="flex gap-sm items-center" href="' . $url . '">';
-            echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
-            echo '<div class="nav-overflow">' . $topic['facet_title'] . ' ' . $blog . '</div>';
+            echo Img::image($topic['facet_img'], htmlEncode($topic['facet_title']), 'img-sm', 'logo', 'max');
+            echo '<div class="nav-overflow">' . htmlEncode($topic['facet_title']) . ' ' . $blog . '</div>';
             echo '</a></li>';
         }
     }

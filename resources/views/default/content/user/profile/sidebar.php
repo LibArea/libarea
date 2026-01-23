@@ -49,11 +49,11 @@
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb15 flex flex-row">
           <a class="mr10" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
-            <?= Img::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
+            <?= Img::image($blog['facet_img'], htmlEncode($blog['facet_title']), 'img-lg', 'logo', 'max'); ?>
           </a>
           <div class="ml5 w-100">
             <a class="black" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
-              <?= $blog['facet_title']; ?>
+              <?= htmlEncode($blog['facet_title']); ?>
             </a>
             <div class="text-sm gray-600">
               <?= fragment($blog['facet_short_description'], 68); ?>
@@ -70,8 +70,8 @@
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb10">
           <a class="flex relative items-center hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'small'); ?>
-            <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
+            <?= Img::image($topic['facet_img'], htmlEncode($topic['facet_title']), 'img-base mr5', 'logo', 'small'); ?>
+            <span class="bar-name text-sm"><?= htmlEncode($topic['facet_title']); ?></span>
           </a>
         </div>
       <?php endforeach; ?>
@@ -84,7 +84,7 @@
       <div class="flex flex-wrap gap lowercase">
         <?php foreach ($data['participation'] as $part) : ?>
           <a class="gray-600 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
-            <?= $part['facet_title']; ?>
+            <?= htmlEncode($part['facet_title']); ?>
           </a>
         <?php endforeach; ?>
       </div>

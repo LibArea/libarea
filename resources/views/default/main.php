@@ -32,8 +32,8 @@ $facet = $data['facet'] ?? false;
             <div class="d-header-facet none">
               <span class="v-line mb-none"></span>
               <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
-                <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
-                <?= $facet['facet_title']; ?>
+                <?= Img::image($facet['facet_img'], htmlEncode($facet['facet_title']), 'img-base mr15', 'logo', 'max'); ?>
+                <?= htmlEncode($facet['facet_title']); ?>
               </a>
               <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
             </div>

@@ -1,11 +1,11 @@
 <?php foreach ($facets as $key => $facet) : ?>
   <div class="mb20 items-center flex gap flex-row">
-    <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-      <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-lg', 'logo', 'max'); ?>
+    <a title="<?= htmlEncode($facet['facet_title']); ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+      <?= Img::image($facet['facet_img'], htmlEncode($facet['facet_title']), 'img-lg', 'logo', 'max'); ?>
     </a>
     <div class="w-100">
-      <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-        <?= $facet['facet_title']; ?>
+      <a class="black text-xl" title="<?= htmlEncode($facet['facet_title']); ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+        <?= htmlEncode($facet['facet_title']); ?>
       </a>
       <span class="gray-600">•
         <?= Html::signed([

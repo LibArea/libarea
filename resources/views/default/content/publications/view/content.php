@@ -106,7 +106,7 @@ $blog = $data['blog'][0] ?? null;
             <use xlink:href="#hash"></use>
           </svg>
           <?php foreach ($data['facets'] as $topic) : ?>
-            <a class="gray-600 mr15 lowercase" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
+            <a class="gray-600 mr15 lowercase" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= htmlEncode($topic['facet_title']); ?></a>
           <?php endforeach; ?>
         <?php endif; ?>
       </div>
@@ -114,8 +114,8 @@ $blog = $data['blog'][0] ?? null;
       <?php if (!empty($data['blog'])) : ?>
         <div class="flex flex-row items-center mt15 text-sm">
           <span class="gray-600 mr5 mb-none"><?= __('app.published'); ?> </span>
-          <a title="<?= $blog['facet_title']; ?>" class="bg-white p5 brown" href="/blog/<?= $blog['facet_slug']; ?>">
-            <?= $blog['facet_title']; ?>
+          <a title="<?= htmlEncode($blog['facet_title']); ?>" class="bg-white p5 brown" href="/blog/<?= $blog['facet_slug']; ?>">
+            <?= htmlEncode($blog['facet_title']); ?>
           </a>
         </div>
       <?php endif; ?>
@@ -220,9 +220,9 @@ $blog = $data['blog'][0] ?? null;
       <?php foreach ($data['facets'] as $topic) : ?>
         <div class="flex justify-between items-center">
           <div class="mt5 mb5">
-            <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-            <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-              <?= $topic['facet_title']; ?>
+            <?= Img::image($topic['facet_img'], htmlEncode($topic['facet_title']), 'img-base mr5', 'logo', 'max'); ?>
+            <a title="<?= htmlEncode($topic['facet_title']); ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+              <?= htmlEncode($topic['facet_title']); ?>
             </a>
           </div>
           <?php if (!$topic['signed_facet_id'] && $container->user()->id()) : ?>

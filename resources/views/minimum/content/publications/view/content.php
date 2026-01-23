@@ -5,8 +5,8 @@
     <?php if ($item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
         <div class="flex flex-row gap items-center">
           <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <?= $data['blog'][0]['facet_title']; ?>
+            <a title="<?= htmlEncode($data['blog'][0]['facet_title']); ?>" class="text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <?= htmlEncode($data['blog'][0]['facet_title']); ?>
             </a>
           <?php endif; ?>
 
@@ -14,7 +14,7 @@
             <div class="lowercase">
               <?php foreach ($data['facets'] as $topic) : ?>
                 <a class="tag-yellow" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-                  <?= $topic['facet_title']; ?>
+                  <?= htmlEncode($topic['facet_title']); ?>
                 </a>
               <?php endforeach; ?>
             </div>

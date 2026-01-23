@@ -3,9 +3,9 @@
     <?php foreach ($data['topics'] as $topic) : ?>
       <div class="box shadow-bottom flex gap items-center justify-between">
         <div>
-          <a class="" title="<?= $topic['facet_title']; ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
-            <?= $topic['facet_title']; ?>
+          <a class="" title="<?= htmlEncode($topic['facet_title']); ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+            <?= Img::image($topic['facet_img'], htmlEncode($topic['facet_title']), 'img-base', 'logo', 'max'); ?>
+            <?= htmlEncode($topic['facet_title']); ?>
           </a>
           <div class="mt5 text-sm max-w-md gray">
             <?= $topic['facet_short_description']; ?>...

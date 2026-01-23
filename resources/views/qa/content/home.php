@@ -38,8 +38,8 @@
           <?php foreach ($data['topics'] as $recomm) : ?>
             <li class="flex justify-between items-center mb10">
               <a class="flex items-center gap-sm" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base', 'logo', 'max'); ?>
-                <?= $recomm['facet_title']; ?>
+                <?= Img::image($recomm['facet_img'], htmlEncode($recomm['facet_title']), 'img-base', 'logo', 'max'); ?>
+                <?= htmlEncode($recomm['facet_title']); ?>
               </a>
               <?php if ($container->user()->id()) : ?>
                 <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">

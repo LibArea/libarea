@@ -1,5 +1,5 @@
 <div class="flex gap items-center">
-  <?= Img::image($data['facet_img'], $data['facet_title'], 'img-xl', 'logo', 'max'); ?>
+  <?= Img::image($data['facet_img'], htmlEncode($data['facet_title']), 'img-xl', 'logo', 'max'); ?>
   <input type="file" id="txtCaminhoImagemAva" accept="image/*">
 </div>
 

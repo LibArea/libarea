@@ -1,9 +1,9 @@
 <div class="flex or-width flex-col box shadow-bottom">
   <div class="flex gap items-center mb20">
-    <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-lg', 'logo', 'max'); ?>
+    <?= Img::image($topic['facet_img'], htmlEncode($topic['facet_title']), 'img-lg', 'logo', 'max'); ?>
     <div>
       <h1 class="text-2xl mb-text-xl m0">
-        <?= $topic['facet_title']; ?>
+        <?= htmlEncode($topic['facet_title']); ?>
         <?php if ($container->user()->admin() || $topic['facet_user_id'] == $container->user()->id()) : ?>
           <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
             <svg class="icon">

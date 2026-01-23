@@ -49,7 +49,7 @@ class AddFacetController extends Controller
 
         $new_facet_id = FacetModel::add(
             [
-                'facet_title'               => $data['facet_title'],
+                'facet_title'               => strip_tags($data['facet_title']),
                 'facet_description'         => __('app.meta_description'),
                 'facet_short_description'   => $data['facet_short_description'],
                 'facet_slug'                => strtolower($data['facet_slug']),

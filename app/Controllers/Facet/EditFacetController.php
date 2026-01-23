@@ -75,8 +75,8 @@ class EditFacetController extends Controller
 
         FacetModel::edit(
             [
-                'facet_id'                  => $data['facet_id'],
-                'facet_title'               => $data['facet_title'],
+                'facet_id'                  => $facet['facet_id'],
+                'facet_title'               => strip_tags($data['facet_title']),
                 'facet_description'         => $data['facet_description'],
                 'facet_short_description'   => $data['facet_short_description'],
                 'facet_info'                => $data['facet_info'],

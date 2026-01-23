@@ -16,9 +16,9 @@ class Html
         foreach (array_chunk($facets, 3) as $row) :
             if ($row[0] == $type) {
                 if ($type === 'category') {
-                    $result[] = '<a class="' . $css . '" href="' . url($type, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                    $result[] = '<a class="' . $css . '" href="' . url($type, ['sort' => $sort, 'slug' => $row[1]]) . '">' . htmlEncode($row[2]) . '</a>';
                 } else {
-                    $result[] = '<a class="' . $css . '" href="' . url($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                    $result[] = '<a class="' . $css . '" href="' . url($type, ['slug' => $row[1]]) . '">' . htmlEncode($row[2]) . '</a>';
                 }
             }
         endforeach;
@@ -34,7 +34,7 @@ class Html
         $result = [];
         foreach (array_chunk($facets, 3) as $row) :
             if ($row[0] === 'topic') {
-                $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . $row[2] . '</a>';
+                $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . htmlEncode($row[2]) . '</a>';
             }
         endforeach;
 

@@ -16,10 +16,10 @@
           <?php foreach ($data['signed'] as $facet) : ?>
             <div class="flex flex-row items-center gap-sm mb15 tasks__item">
               <input name="id[]" value="<?= $facet['facet_id']; ?>" type="checkbox" <?php if ($facet['facet_output']) : ?> checked<?php endif; ?>>
-              <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-                <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-sm', 'logo', 'max'); ?>
+              <a title="<?= htmlEncode($facet['facet_title']); ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+                <?= Img::image($facet['facet_img'], htmlEncode($facet['facet_title']), 'img-sm', 'logo', 'max'); ?>
               </a>
-              <?= $facet['facet_title']; ?>
+              <?= htmlEncode($facet['facet_title']); ?>
               <?php if ($facet['facet_type'] == 'blog') : ?><sup class="red lowercase"><?= __('app.blog'); ?></sup><?php endif; ?>
             </div>
           <?php endforeach; ?>

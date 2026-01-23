@@ -5,9 +5,9 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       <div class="flex items-center justify-between">
         <div>
           <div class="text-lg gray-600">
-            <a href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>"><?= $blog['facet_title']; ?></a> / <?= __('app.topic'); ?>
+            <a href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>"><?= htmlEncode($blog['facet_title']); ?></a> / <?= __('app.topic'); ?>
           </div>
-          <h1 class="m0"><?= $data['topic']['facet_title']; ?></h1>
+          <h1 class="m0"><?= htmlEncode($data['topic']['facet_title']); ?></h1>
           <div class="text-sm gray-600">#<?= $data['topic']['facet_slug']; ?></div>
         </div>
         <div class="right">
