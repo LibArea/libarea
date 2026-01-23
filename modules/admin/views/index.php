@@ -64,7 +64,7 @@
     <?php foreach ($data['posts_no_topic'] as $post) : ?>
       <div class="gray">
         <a href="<?= url('publication.form.edit', ['id' => $post['post_id']]) ?>">
-          id:<?= $post['post_id']; ?></a> | <?= $post['post_title']; ?>
+          id:<?= $post['post_id']; ?></a> | <?= htmlEncode($post['post_title']); ?>
       </div>
     <?php endforeach; ?>
   <?php endif; ?>

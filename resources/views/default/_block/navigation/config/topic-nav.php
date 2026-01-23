@@ -22,7 +22,7 @@
 				'url'   => url('topic.questions', ['slug' => $slug]),
 				'title'	=> 'app.questions',
 			],
-			[
+		   [
 				'id'    => 'main.notes',
 				'url'   => url('topic.notes', ['slug' => $slug]),
 				'title' => 'app.notes',

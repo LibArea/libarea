@@ -160,7 +160,7 @@ class AddPublicationController extends Controller
 
         $last_id = PublicationModel::create(
             [
-                'post_title'            => $data['title'] ?? '',
+                'post_title'            => strip_tags($data['title']) ?? '',
                 'post_content'          => $data['content'],
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',

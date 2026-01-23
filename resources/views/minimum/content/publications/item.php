@@ -14,7 +14,7 @@
         <div>
           <div>
             <a class="text-xl" href="<?= $url; ?>">
-              <?= $item['post_title']; ?>
+              <?= htmlEncode($item['post_title']); ?>
               <?= insert('/content/publications/title', ['item' => $item]); ?>
             </a>
             <?= Html::facets($item['facet_list'], 'blog', 'tag'); ?>

@@ -28,7 +28,7 @@
             <span><?= __('app.news'); ?>:</span>
           <?php endif; ?>
           <a class="text-xl" href="<?= $url; ?>">
-            <?= $item['post_title']; ?>
+            <?= htmlEncode($item['post_title']); ?>
             <?= insert('/content/publications/title', ['item' => $item]); ?>
           </a>
           <div class="flex flex-row flex-auto items-center justify-between lowercase">

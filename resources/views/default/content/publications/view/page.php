@@ -4,7 +4,7 @@
   <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($page['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <h1>
-        <?= $page['post_title']; ?>
+        <?= htmlEncode($page['post_title']); ?>
       </h1>
       <div class="max-w-md mb20">
         <?= markdown($page['post_content'], 'text'); ?>
@@ -45,7 +45,7 @@
           <a class="gray" href="<?= url('page', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
             <svg class="icon">
               <use xlink:href="#chevrons-right"></use>
-            </svg> <?= $row['post_title']; ?>
+            </svg> <?= htmlEncode($row['post_title']); ?>
           </a>
         </div>
       <?php endforeach; ?>

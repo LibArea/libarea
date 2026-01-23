@@ -20,7 +20,7 @@ $facet = $data['facet'] ?? false;
             <div class="d-header-post none">
               <span class="v-line mb-none"></span>
               <a class="mb-none" href="<?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']) ?>">
-                <?= $data['post']['post_title'] ?>
+                <?= htmlEncode($data['post']['post_title']); ?>
               </a>
             </div>
           <?php endif; ?>

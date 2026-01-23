@@ -19,7 +19,7 @@
 
           <?php if ($item['post_type'] != 'post') : ?>
             <a class="black" href="<?= $url; ?>">
-              <h3 class="title"><?= $item['post_title']; ?></h3>
+              <h3 class="title"><?= htmlEncode($item['post_title']); ?></h3>
             </a>
           <?php endif; ?>
           <div class="flex gap text-sm lowercase">
@@ -51,13 +51,13 @@
         <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>
           <div class="w200 mb-w80 mb-none">
             <?php if ($item['post_content_img']) : ?>
-              <a title="<?= $item['post_title']; ?>" href="<?= $url; ?>">
-                <?= Img::image($item['post_content_img'], $item['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>
+              <a title="<?= htmlEncode($item['post_title']); ?>" href="<?= $url; ?>">
+                <?= Img::image($item['post_content_img'], htmlEncode($item['post_title']), 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>
               </a>
             <?php else : ?>
               <?php if ($item['post_thumb_img']) : ?>
-                <a title="<?= $item['post_title']; ?>" href="<?= $url; ?>">
-                  <?= Img::image($item['post_thumb_img'], $item['post_title'],  'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'thumbnails'); ?>
+                <a title="<?= htmlEncode($item['post_title']); ?>" href="<?= $url; ?>">
+                  <?= Img::image($item['post_thumb_img'], htmlEncode($item['post_title']),  'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'thumbnails'); ?>
                 </a>
               <?php endif; ?>
             <?php endif; ?>

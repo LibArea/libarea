@@ -21,7 +21,7 @@
           <?php endif; ?>
         </div>
 
-        <h1 class="m0"><?= $item['post_title']; ?>
+        <h1 class="m0"><?= htmlEncode($item['post_title']); ?>
           <?= insert('/content/publications/title', ['item' => $item]); ?>
         </h1>
         <div class="text-sm lowercase flex gap gray-600">
@@ -53,7 +53,7 @@
         </div>
 
       <?php if ($item['post_thumb_img']) : ?>
-        <?= Img::image($item['post_thumb_img'], $item['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
+        <?= Img::image($item['post_thumb_img'], htmlEncode($item['post_title']),  'thumb right ml15', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
       <div class="max-w-md">

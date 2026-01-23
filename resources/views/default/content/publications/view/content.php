@@ -15,9 +15,9 @@ $blog = $data['blog'][0] ?? null;
           <?php foreach ($data['united'] as $merged) : ?>
             (id <?= $merged['post_id']; ?>):
             <?php if ($container->user()->admin()) : ?>
-              <a href="/post/<?= $merged['post_id']; ?>"><?= $merged['post_title']; ?></a>
+              <a href="/post/<?= $merged['post_id']; ?>"><?= htmlEncode($merged['post_title']); ?></a>
             <?php else : ?>
-              <?= $merged['post_title']; ?>
+              <?= htmlEncode($merged['post_title']); ?>
             <?php endif; ?>
           <?php endforeach; ?>
         </div>
@@ -45,7 +45,7 @@ $blog = $data['blog'][0] ?? null;
         <?php endif; ?>
       </div>
 
-      <h1 class="title max"><?= $item['post_title']; ?>
+      <h1 class="title max"><?= htmlEncode($item['post_title']); ?>
         <?php if ($item['post_type'] != 'post') : ?>
           <?= insert('/content/publications/title', ['item' => $item]); ?>
         <?php endif; ?>
@@ -53,7 +53,7 @@ $blog = $data['blog'][0] ?? null;
 
       <?php if ($item['post_thumb_img']) : ?>
         <div class="img-preview mt10">
-          <?= Img::image($item['post_thumb_img'], $item['post_title'],  'zooom', 'post', 'thumbnails'); ?>
+          <?= Img::image($item['post_thumb_img'], htmlEncode($item['post_title']),  'zooom', 'post', 'thumbnails'); ?>
         </div>
       <?php endif; ?>
 
@@ -237,7 +237,7 @@ $blog = $data['blog'][0] ?? null;
 
   <?php if ($item['post_content_img']) : ?>
     <div class="box br-lightgray img-preview">
-      <img class="w-100" src="<?= Img::PATH['posts_cover'] . $item['post_content_img']; ?>" alt="<?= $item['post_title']; ?>">
+      <img class="w-100" src="<?= Img::PATH['posts_cover'] . $item['post_content_img']; ?>" alt="<?= htmlEncode($item['post_title']); ?>">
     </div>
   <?php endif; ?>
 

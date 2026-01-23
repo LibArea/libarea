@@ -143,7 +143,7 @@ class EditPublicationController extends Controller
 
 		PublicationModel::editPost([
 			'post_id' 			=> $data['id'],
-			'post_title' 		=> $data['title'] ?? '',
+			'post_title' 		=> strip_tags($data['title']) ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
 			'post_type' 		=> $data['content_type'],
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,

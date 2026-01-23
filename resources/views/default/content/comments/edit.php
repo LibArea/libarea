@@ -1,7 +1,7 @@
 <main class="max">
   <div class="box">
     <a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.edit_comment'); ?>:</span>
-    <a class="mb5 block" href="<?= post_slug($data['post']['post_type'], $data['post']['post_id'], $data['post']['post_slug']); ?>"><?= $data['post']['post_title']; ?></a>
+    <a class="mb5 block" href="<?= post_slug($data['post']['post_type'], $data['post']['post_id'], $data['post']['post_slug']); ?>"><?= htmlEncode($data['post']['post_title']); ?></a>
 
     <form class="max-w-md" action="<?= url('edit.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
       <?= $container->csrf()->field(); ?>

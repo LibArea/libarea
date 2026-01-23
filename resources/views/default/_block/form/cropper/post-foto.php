@@ -1,6 +1,6 @@
 <div class="mb20">
 	<?php if (!empty($post['post_content_img'])) : ?>
-		<?= Img::image($post['post_content_img'], $post['post_title'], 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
+		<?= Img::image($post['post_content_img'], htmlEncode($post['post_title']), 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
 		<a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
 			<?= __('app.remove'); ?>
 		</a>

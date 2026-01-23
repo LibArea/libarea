@@ -18,7 +18,7 @@
         <?php if ($comment['post_type'] === 'post') : ?>
           <div class="comment-text black"><?= markdown($comment['comment_content']); ?></div>
         <?php else : ?>
-          <?= $comment['post_title']; ?>
+          <?= htmlEncode($comment['post_title']); ?>
         <?php endif; ?>
       </a>
       <?php if ($comment['post_type'] != 'post') : ?>
