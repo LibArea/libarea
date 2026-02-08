@@ -65,7 +65,7 @@ $facet = $data['facet'] ?? false;
           </div>
         </footer>
       </nav>
-	<div class="content">  
+	<div class="content">
       <?= $content; ?>
 	</div>
   </div>
