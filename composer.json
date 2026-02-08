@@ -36,7 +36,6 @@
 		"donatj/phpuseragentparser": "dev-master",
 		"utopia-php/domains": "^0.5.0",
 		"matthiasmullie/minify": "dev-master",
-		"akh/typograf": "dev-master",
 		"phpmailer/phpmailer": "^6.9.3",
 		"symfony/dom-crawler": "7.2.x-dev",
 		"symfony/css-selector": "7.2.x-dev",
@@ -44,9 +43,9 @@
 		"gemorroj/stop-spam": "dev-master",
 		"phphleb/idnaconv": "dev-main",
 		"elvanto/litemoji": "dev-master",
-		"league/html-to-markdown": "5.2.x-dev",
 		"respect/validation": "2.4.x-dev",
-		"s2/rose": "dev-master"
+		"s2/rose": "dev-master",
+		"php-collective/djot": "dev-master"
     },
     "autoload": {
         "classmap": [
