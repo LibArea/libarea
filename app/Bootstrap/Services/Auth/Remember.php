@@ -26,6 +26,11 @@ class Remember
 
         // Получим наш селектор | значение валидатора
         [$selector, $validator] = explode(':', $remember);
+		
+        if (empty($validator)) {
+            return false;
+        }
+		
         $validator = hash('sha256', $validator);
 
         $token = AuthModel::getAuthTokenBySelector($selector);

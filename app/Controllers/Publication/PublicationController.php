@@ -15,9 +15,6 @@ use App\Traits\Poll;
 use App\Traits\LastDataModified;
 use BuildTree, Html, Meta, MetaImage, Img;
 
-use Parsedown;
-use League\HTMLToMarkdown\HtmlConverter;
-
 use Modules\Search\Models\SearchModel;
 use S2\Rose\Entity\ExternalId;
 
@@ -271,32 +268,4 @@ class PublicationController extends Controller
         MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::publicationImage($post));
     }
 
-    public function editorTest()
-    {
-        $md = Availability::content(1936);
-
-        $Parsedown = new Parsedown();
-        $Parsedown->setSafeMode(true);
-
-        $md_content =  $Parsedown->text($md['post_content']);
-
-        render(
-            '/publications/editor-test',
-            [
-                'meta'  => Meta::get(__('app.development'), __('meta.development'), ['og'    => false]),
-                'data'  => ['type' => 'test', 'md' => $md_content]
-            ]
-        );
-    }
-
-    public function addEditTest()
-    {
-        $html = Request::post('content')->value();
-
-        $converter = new HtmlConverter(array('strip_tags' => true));
-
-        $markdown = $converter->convert($html);
-
-        print_r('<pre>' . $markdown . '</pre>');
-    }
 }

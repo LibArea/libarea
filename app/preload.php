@@ -13,3 +13,6 @@ $constraint = "default-src 'self' " . implode(' ', $resources['default-src']) .
     " 'nonce-{$nonce}'; font-src " . implode(' ', $resources['font-src']) . "; img-src 'self' " . implode(' ', $resources['img-src']) . " data: blob:;";
 
 header('Content-Security-Policy: ' . $constraint);
+
+// Пример строгой пол.
+// header("Content-Security-Policy: style-src 'self';");

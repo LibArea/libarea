@@ -95,12 +95,12 @@ function closing()
 
 function markdown(string $content, string $type = 'text')
 {
-    return App\Content\Parser\Content::text($content, $type);
+    return Parser::text($content, $type);
 }
 
 function fragment(string $content, int $limit = 0)
 {
-    return \App\Content\Parser\Filter::noHTML($content, $limit);
+    return Parser::noHTML($content, $limit);
 }
 
 function notEmptyOrView404($params)
