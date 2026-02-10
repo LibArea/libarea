@@ -22,6 +22,7 @@ return [
     'teams'             => 'الفرق',
     'subsections'       => 'الأقسام الفرعية',
     'table'             => 'الطاولة',
+    'write_text'        => 'اكتب النص...',
     'team_not_users'    => 'لا يوجد أعضاء في الفريق بعد...',
     'total_votes'       => 'مجموع الأصوات',
     'owner'             => 'مالك',
@@ -451,7 +452,7 @@ return [
     'not_confirmed'         => 'غير مؤكد.',
     'resend_email'          => 'تحقق من صندوق بريدك الإلكتروني أو أعد إرسال بريد إلكتروني جديد.',
 
-	'refine_your_search'	=> 'هناك المزيد. حسّن بحثك',
+    'refine_your_search'    => 'هناك المزيد. حسّن بحثك',
 
     /* Notifications and logs */
     'notif_add_pm'              => 'ارسل لك {url}رسالة خاصة{a}',

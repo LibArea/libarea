@@ -22,6 +22,7 @@ return [
     'teams'             => 'Đội',
     'subsections'       => 'Tiểu mục',
     'table'             => 'Bàn',
+    'write_text'        => 'Viết văn bản...',
     'team_not_users'    => 'Vẫn chưa có thành viên nào trong nhóm...',
     'total_votes'       => 'Tổng số phiếu bầu',
     'owner'             => 'Người sở hữu',
@@ -453,7 +454,7 @@ return [
     'not_confirmed'         => 'không được xác nhận.',
     'resend_email'          => 'Kiểm tra email của bạn hoặc gửi lại email mới.',
 
-	'refine_your_search'	=> 'more items, refine your search.',
+    'refine_your_search'    => 'more items, refine your search.',
 
     /* Thông báo */
     'notif_add_pm'              => 'đã viết cho bạn {url}tin nhắn riêng tư{a}',

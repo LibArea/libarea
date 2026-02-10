@@ -35,16 +35,22 @@
 		iconName: 'help',
 		subMenuConfig: [{
 				noIcon: true,
-				name: 'details',
+				name: 'ℹ️ note',
 				onclick: (event) => {
-					return cherry.insert(' {details} *** {/details} ');
+					return cherry.insert(' ::: note \n <?= __('app.write_text'); ?> \n :::');
+				}
+			}, {
+				noIcon: true,
+				name: '💡 tip',
+				onclick: (event) => {
+					return cherry.insert(' ::: tip \n <?= __('app.write_text'); ?> \n ::: ');
 				}
 			},
 			{
 				noIcon: true,
-				name: 'auth',
+				name: '⚠️ warning',
 				onclick: (event) => {
-					return cherry.insert(' {auth} *** {/auth} ');
+					return cherry.insert(' ::: warning \n <?= __('app.write_text'); ?> \n ::: ');
 				}
 			},
 		]

@@ -22,6 +22,7 @@ return [
     'teams'             => 'Echipe',
     'subsections'       => 'Subsecțiuni',
     'table'             => 'Masa',
+    'write_text'        => 'Xramosar o tèksto...',
     'team_not_users'    => 'Întrucât să nu știți...',
     'total_votes'       => 'Total de voturi',
     'owner'             => 'Proprietar',
@@ -453,7 +454,7 @@ return [
     'not_confirmed'         => 'neconfirmat.',
     'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',
 
-	'refine_your_search'	=> 'si maj but. Laćharen tumaro rodipen.',
+    'refine_your_search'    => 'si maj but. Laćharen tumaro rodipen.',
 
     /* Notificări */
     'notif_add_pm'              => 'ți-a trimis un {url}mesaj privat{a}',
