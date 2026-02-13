@@ -12,7 +12,7 @@
           </a>
         <?php endif; ?>
       </h1>
-      <div class="text-sm gray-600"><?= $topic['facet_short_description']; ?></div>
+      <div class="text-sm gray-600"><?= htmlEncode($topic['facet_short_description'] ?? ''); ?></div>
     </div>
   </div>
 

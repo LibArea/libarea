@@ -34,6 +34,7 @@ class Img
     public static function image(string $file, string $alt, string $style, string $type, string $size): string
     {
         $imgPath = self::generateImagePath($file, $type, $size);
+		$alt = htmlspecialchars($alt, ENT_QUOTES, null, false);
 
         return '<img class="' . $style . '" src="' . $imgPath . '" alt="' . $alt . '">';
     }
@@ -50,6 +51,7 @@ class Img
     public static function avatar(string $file, string $alt, string $style, string $size): string
     {
         $imgPath = self::generateImagePath($file, 'avatar', $size);
+		$alt = htmlspecialchars($alt, ENT_QUOTES, null, false);
 
         return '<img class="' . $style . '" src="' . $imgPath . '" alt="' . $alt . '">';
     }

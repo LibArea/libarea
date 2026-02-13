@@ -79,13 +79,13 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
       <fieldset>
         <label for="facet_description"><?= __('app.meta_description'); ?><sup class="red">*</sup></label>
-        <textarea class="add max-w-md" rows="6" minlength="3" name="facet_description"><?= $fs['facet_description']; ?></textarea>
+        <textarea class="add max-w-md" rows="6" minlength="3" name="facet_description"><?= htmlEncode($fs['facet_description'] ?? ''); ?></textarea>
         <div class="help">> 3 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_short_description"><?= __('app.short_description'); ?><sup class="red">*</sup></label>
-        <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
+        <input minlength="11" maxlength="120" value="<?= htmlEncode($fs['facet_short_description'] ?? ''); ?>" type="text" required="" name="facet_short_description">
         <div class="help">> 3 <?= __('app.characters'); ?></div>
       </fieldset>
 

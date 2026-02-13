@@ -35,7 +35,7 @@ $facet = $data['facet'] ?? false;
                 <?= Img::image($facet['facet_img'], htmlEncode($facet['facet_title']), 'img-base mr15', 'logo', 'max'); ?>
                 <?= htmlEncode($facet['facet_title']); ?>
               </a>
-              <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
+              <span class="gray-600 text-sm lowercase mb-none"> - <?= htmlEncode($facet['facet_short_description'] ?? ''); ?></span>
             </div>
           <?php endif; ?>
 

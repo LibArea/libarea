@@ -28,6 +28,6 @@
   </div>
 
   <div class="ml15 mb15 mb-none">
-    <?= $data['facet']['facet_short_description']; ?>
+    <?= htmlEncode($data['facet']['facet_short_description'] ?? ''); ?>
   </div>
 </div>
