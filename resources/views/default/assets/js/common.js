@@ -1,264 +1,206 @@
-// Header visibility on scroll
-let scrolled;
-let header = document.querySelector("header");
+(function () {
+  "use strict";
 
-if (header) {
-  window.onscroll = function () {
-    scrolled = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrolled > 70) {
-      header.classList.add('show');
-    } else {
-      header.classList.remove('show');
-    }
-  };
-}
+  const token = getCsrfToken();
 
-// Fetch CSRF token
-let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-
-// Activate form event listeners
-queryAll(".activ-form").forEach(element => {
-  element.addEventListener("click", function () {
-    let reply = document.querySelector('#el_addentry' + element.dataset.id);
-    fetch("/activatingform/" + element.dataset.type, {
-      method: "POST",
-      body: "id=" + element.dataset.id + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(response => response.text())
-      .then(text => {
-        reply.classList.add("block");
-        reply.innerHTML = text;
-        queryAll("#cancel").forEach(cancelButton => {
-          cancelButton.addEventListener("click", function () {
-            reply.classList.remove("block");
-          });
-        });
-      });
-  });
-});
-
-// Activate form event listeners
-queryAll(".add-notif").forEach(element => {
-  element.addEventListener("click", function () {
-    let notif = document.querySelector('#el_notif');
-    fetch("/activatingnatifpopup", {
-      method: "POST",
-      body: "id=" + element.dataset.id + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(response => response.text())
-      .then(text => {
-        notif.classList.add("block");
-        notif.innerHTML = text;
-        queryAll("#cancel").forEach(cancelButton => {
-          cancelButton.addEventListener("click", function () {
-            notif.classList.remove("block");
-          });
-        });
-      });
-  });
-});
-
-// Toggle dark mode
-isIdEmpty('toggledark').onclick = function () {
-  let mode = getCookie("dayNight");
-  let expires = getDefaultTime();
-  let firstMode = "dark";
-  let secondMode = "light";
-  let cookieName = "dayNight";
-
-  if (mode == firstMode) {
-    document.cookie = cookieName + "=" + secondMode + "; " + expires + ";path=/";
-  } else {
-    document.cookie = cookieName + "=" + firstMode + "; " + expires + ";path=/";
+  // --- Header visibility on scroll ---
+  const header = document.querySelector("header");
+  if (header) {
+    window.addEventListener("scroll", () => {
+      const scrolled = window.pageYOffset ?? document.documentElement.scrollTop;
+      header.classList.toggle("show", scrolled > 70);
+    }, { passive: true });
   }
-  location.reload();
-};
 
-// When you click, the search bar pops up
-let input = document.querySelector('.search')
-const btnSearch = document.querySelector(".button-search");
-const search = document.querySelector(".box-search");
-const toggleSearch = function () {
-  search.classList.toggle("active");
-  input.focus()
-}
+  // --- Popup form helper: fetch HTML and show in container, bind #cancel to close ---
+  function showPopupReply(replyEl, url, bodyParams) {
+    if (!replyEl) return;
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody(bodyParams, token),
+    })
+      .then((r) => r.text())
+      .then((html) => {
+        replyEl.classList.add("block");
+        replyEl.innerHTML = html;
+        replyEl.querySelectorAll("#cancel").forEach((btn) => {
+          btn.addEventListener("click", () => replyEl.classList.remove("block"));
+        });
+      })
+      .catch(() => {});
+  }
 
-if (btnSearch) {
-  btnSearch.addEventListener("click", function (e) {
-    e.stopPropagation();
-    toggleSearch();
+  queryAll(".activ-form").forEach((el) => {
+    el.addEventListener("click", () => {
+      const reply = document.querySelector("#el_addentry" + el.dataset.id);
+      showPopupReply(reply, "/activatingform/" + (el.dataset.type || ""), { id: el.dataset.id });
+    });
   });
-}
 
-document.addEventListener("click", function (e) {
-  const target = e.target;
-  if (search) {
-    const its_search = target == search || search.contains(target);
-    const its_btnSearch = target == btnSearch;
-    const search_is_active = search.classList.contains("active");
+  queryAll(".add-notif").forEach((el) => {
+    el.addEventListener("click", () => {
+      const notif = document.querySelector("#el_notif");
+      showPopupReply(notif, "/activatingnatifpopup", { id: el.dataset.id });
+    });
+  });
 
-    if (!its_search && !its_btnSearch && search_is_active) {
+  // --- Dark mode toggle ---
+  const toggledark = isIdEmpty("toggledark");
+  if (toggledark) {
+    toggledark.onclick = function () {
+      const mode = getCookie("dayNight");
+      const next = mode === "dark" ? "light" : "dark";
+      document.cookie = `dayNight=${next}; ${getDefaultTime()}; path=/`;
+      location.reload();
+    };
+  }
+
+  // --- Search bar ---
+  const input = document.querySelector(".search");
+  const btnSearch = document.querySelector(".button-search");
+  const search = document.querySelector(".box-search");
+
+  function toggleSearch() {
+    if (search) search.classList.toggle("active");
+    if (input) input.focus();
+  }
+
+  if (btnSearch) {
+    btnSearch.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleSearch();
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!search?.classList.contains("active")) return;
+    const target = e.target;
+    if (target !== search && !search.contains(target) && target !== btnSearch) {
       toggleSearch();
     }
-  }
-});
-
-
-
-// Function to render links based on type
-function renderLink(baseURL, identifier, title) {
-  if (identifier) {
-    return '<a class="sky block text-sm mb15 mr10" href="' + baseURL + identifier + '">' + title + '</a>';
-  }
-  return '';
-}
-
-// Show/hide password functionality
-let showPasswordButtons = queryAll('.showPassword');
-showPasswordButtons.forEach(button => {
-  button.addEventListener('click', togglePasswordVisibility);
-});
-
-function togglePasswordVisibility() {
-  let passwordInput = getById('password');
-  let icon = this.querySelector('svg');
-
-  if (icon.classList.contains('sky')) {
-    icon.classList.remove('sky');
-    passwordInput.type = 'password';
-  } else {
-    icon.classList.add('sky');
-    passwordInput.type = 'text';
-  }
-}
-
-// Item cleek event listeners
-queryAll(".item_cleek").forEach(element => {
-  element.addEventListener("click", function () {
-    let id = element.dataset.id;
-    fetch("/cleek", {
-      method: "POST",
-      body: "id=" + id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(() => {
-        // Handle response if needed
-      });
-  });
-});
-
-// Drop-down menus (user) and lists
-let triggerElements = queryAll(".trigger");
-
-triggerElements.forEach(triggerElement => {
-  triggerElement.addEventListener("click", function (event) {
-    event.stopPropagation();
-    let sibling = triggerElement.nextElementSibling;
-    let firstVisible = triggerElement.querySelector('.block');
-
-    if (firstVisible) {
-      firstVisible.classList.remove("block");
-    }
-
-    if (!sibling.classList.contains("block")) {
-      sibling.classList.add("block");
-    } else {
-      sibling.classList.remove("block");
-    }
   });
 
-  document.addEventListener("click", function () {
-    let block = document.querySelector(".dropdown.block");
-    if (block) {
-      block.classList.remove("block");
-    }
-  });
-});
-
-// Left drop-down general menu (navigation)
-const menuButton = document.querySelector('.menu__button');
-const leftMenu = document.querySelector('nav.menu__left');
-
-if (menuButton) {
-  menuButton.addEventListener('click', () => {
-    if (leftMenu) {
-      leftMenu.classList.toggle('menu__active');
-    }
-  });
-}
-
-window.addEventListener('click', event => {
-  if (!event.target.closest('.menu__active') && !event.target.closest('.menu__button')) {
-    if (leftMenu) {
-      leftMenu.classList.remove('menu__active');
-    }
+  // --- Render link (escape for safe HTML; original idiom: baseURL + id, title) ---
+  function renderLink(baseURL, identifier, title) {
+    if (identifier == null || identifier === "") return "";
+    const href = baseURL + encodeURIComponent(String(identifier));
+    const safeTitle = String(title ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+    return `<a class="sky block text-sm mb15 mr10" href="${href}">${safeTitle}</a>`;
   }
-});
+  window.renderLink = renderLink;
 
-// Toast notifications library (MIT license)
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(factory);
-  } else if (typeof exports === "object") {
-    module.exports = factory();
-  } else {
-    global.Notice = factory();
-  }
-}(this, function (global) {
-
-  var Notice = function (text, timeout, options) {
-    var validate = function (arg, argName, type, isMandatory, allowedValues) {
-      var actualType = Array.isArray(arg) ? "array" : typeof arg;
-      if (isMandatory && (arg == null || arg === ''))
-        throw new Error("Invalid argument '" + argName + "'. Argument is either empty, null, or undefined");
-      if (actualType !== type)
-        throw new Error("Invalid argument '" + argName + "'. Type must be " + type + " but found " + actualType);
-      if (allowedValues && allowedValues.indexOf(arg) == -1)
-        throw new Error("Invalid value " + arg + " specified for argument '" + argName + "'. Allowed - " + allowedValues.join(" | "));
-    }
-
-    validate(text, "text", "string", true);
-    options = options || {};
-    validate(options, "options", "object");
-    timeout = timeout || 3000;
-    validate(timeout, "timeout", "number");
-    options.styles = options.styles || {};
-    validate(options.styles, "styles", "object");
-    options.align = options.align || "center";
-    validate(options.align, "align", "string", true, ["left", "center", "right"]);
-    options.valign = options.valign || "bottom";
-    validate(options.valign, "valign", "string", true, ["top", "bottom"]);
-    options.classList = options.classList || [];
-    validate(options.classList, "classList", "array");
-
-    var alignmentClasses = ["notice", "notice-" + options.valign, "notice-" + options.align];
-    options.classList = options.classList.concat(alignmentClasses);
-
-    var toast = document.createElement('div');
-
-    options.classList.forEach(function (cssClass) {
-      if (typeof cssClass != "string") throw new Error("Invalid css class '" + JSON.stringify(cssClass) + "'. CSS class must be of type string");
-      toast.classList.add(cssClass);
+  // --- Show/hide password ---
+  queryAll(".showPassword").forEach((button) => {
+    button.addEventListener("click", function () {
+      const passwordInput = getById("password");
+      const icon = this.querySelector("svg");
+      if (!passwordInput || !icon) return;
+      const show = !icon.classList.contains("sky");
+      icon.classList.toggle("sky", show);
+      passwordInput.type = show ? "text" : "password";
     });
+  });
 
-    var content = document.createTextNode(text);
-    toast.appendChild(content);
+  // --- Item cleek ---
+  queryAll(".item_cleek").forEach((element) => {
+    element.addEventListener("click", () => {
+      fetch("/cleek", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: buildFormBody({ id: element.dataset.id }),
+      }).catch(() => {});
+    });
+  });
 
-    toast.style.animationDuration = timeout / 1000 + "s";
-    for (var prop in options.styles) {
-      if (typeof options.styles[prop] != 'string' && typeof options.styles[prop] != "number")
-        throw new Error("Invalid value '" + JSON.stringify(options.styles[prop]) + "' specified for style '" +
-          prop + "'. Style value must be of type string or number");
-      toast.style[prop] = options.styles[prop];
-    }
+  // --- Dropdowns: single document listener ---
+  queryAll(".trigger").forEach((triggerElement) => {
+    triggerElement.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const sibling = triggerElement.nextElementSibling;
+      triggerElement.querySelector(".block")?.classList.remove("block");
+      if (sibling) {
+        sibling.classList.toggle("block");
+      }
+    });
+  });
 
-    document.body.appendChild(toast);
-    setTimeout(function () {
-      document.body.removeChild(toast);
-    }, timeout);
+  document.addEventListener("click", () => {
+    document.querySelector(".dropdown.block")?.classList.remove("block");
+  });
+
+  // --- Left nav menu ---
+  const menuButton = document.querySelector(".menu__button");
+  const leftMenu = document.querySelector("nav.menu__left");
+
+  if (menuButton && leftMenu) {
+    menuButton.addEventListener("click", () => leftMenu.classList.toggle("menu__active"));
   }
 
-  return Notice;
-}));
+  window.addEventListener("click", (e) => {
+    if (leftMenu && !e.target.closest(".menu__active") && !e.target.closest(".menu__button")) {
+      leftMenu.classList.remove("menu__active");
+    }
+  });
+
+  // --- Toast / Notice (MIT) ---
+  (function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+      define(factory);
+    } else if (typeof exports === "object") {
+      module.exports = factory();
+    } else {
+      global.Notice = factory();
+    }
+  })(typeof globalThis !== "undefined" ? globalThis : this, function () {
+    function validate(arg, argName, type, isMandatory, allowedValues) {
+      const actualType = Array.isArray(arg) ? "array" : typeof arg;
+      if (isMandatory && (arg == null || arg === "")) {
+        throw new Error("Invalid argument '" + argName + "': empty, null, or undefined");
+      }
+      if (actualType !== type) {
+        throw new Error("Invalid argument '" + argName + "': expected " + type + ", got " + actualType);
+      }
+      if (allowedValues && !allowedValues.includes(arg)) {
+        throw new Error("Invalid value for '" + argName + "'. Allowed: " + allowedValues.join(" | "));
+      }
+    }
+
+    return function Notice(text, timeout, options) {
+      validate(text, "text", "string", true);
+      options = options || {};
+      validate(options, "options", "object");
+      timeout = timeout ?? 3000;
+      validate(timeout, "timeout", "number");
+      options.styles = options.styles || {};
+      validate(options.styles, "styles", "object");
+      options.align = options.align || "center";
+      validate(options.align, "align", "string", true, ["left", "center", "right"]);
+      options.valign = options.valign || "bottom";
+      validate(options.valign, "valign", "string", true, ["top", "bottom"]);
+      options.classList = options.classList || [];
+      validate(options.classList, "classList", "array");
+
+      const classList = [...options.classList, "notice", "notice-" + options.valign, "notice-" + options.align];
+      const toast = document.createElement("div");
+      classList.forEach((cls) => {
+        if (typeof cls !== "string") throw new Error("CSS class must be string");
+        toast.classList.add(cls);
+      });
+      toast.appendChild(document.createTextNode(text));
+      toast.style.animationDuration = timeout / 1000 + "s";
+      Object.entries(options.styles || {}).forEach(([prop, value]) => {
+        if (typeof value !== "string" && typeof value !== "number") {
+          throw new Error("Style value must be string or number: " + prop);
+        }
+        toast.style[prop] = value;
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), timeout);
+    };
+  });
+})();

@@ -1,222 +1,235 @@
-const focusId = queryAll(".focus-id"),
-  saveFolder = queryAll(".save-folder"),
-  delFolderContent = queryAll(".del-folder-content"),
-  delFolder = queryAll(".del-folder"),
-  delVotingOption = queryAll(".del-voting-option"),
-  addProfile = queryAll(".add-profile"),
-  postRecommend = queryAll(".post-recommend"),
-  typeAction = queryAll(".type-action");
+const token = getCsrfToken();
 
-// Subscribe to a topic / post
-focusId.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
-}));
+const focusId = queryAll(".focus-id");
+const saveFolder = queryAll(".save-folder");
+const delFolderContent = queryAll(".del-folder-content");
+const delFolder = queryAll(".del-folder");
+const delVotingOption = queryAll(".del-voting-option");
+const addProfile = queryAll(".add-profile");
+const postRecommend = queryAll(".post-recommend");
+const typeAction = queryAll(".type-action");
 
-// Adding Folders
-saveFolder.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
-}));
-
-// Add or remove your post to your profile 
-addProfile.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/post/profile", options = { body: "post_id=" + el.dataset.post + "&_token=" + token })
-}));
-
-// Deleting a linked content folder 
-delFolderContent.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/folder/content/del", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
-}));
-
-// Removing a tag
-delFolder.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/folder/del", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
-}));
-
-// Recommend a post
-postRecommend.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
-}));
-
-// Deleting / restoring content
-typeAction.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
-}));
-
-// Profile Cover Color
-isIdEmpty('colorPicker').onclick = function () {
-  let box = getById("box");
-  let color = getById("color");
-
-  box.style.borderColor = colorPicker.value;
-
-  colorPicker.addEventListener("input", function (event) {
-    box.style.borderColor = event.target.value;
-  }, false);
-
-  colorPicker.addEventListener("change", function (event) {
-    color.value = colorPicker.value;
-  }, false);
+function postForm(url, params) {
+  return makeRequest(url, { body: buildFormBody(params, token) });
 }
 
-// Up
-queryAll(".up-id")
-  .forEach(el => el.addEventListener("click", function (e) {
+// Subscribe to topic / post
+focusId.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/focus", { content_id: el.dataset.id, type: el.dataset.type })
+  )
+);
+
+// Folders
+saveFolder.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/folder/content/save", {
+      id: el.dataset.id,
+      type: el.dataset.type,
+      tid: el.dataset.tid,
+    })
+  )
+);
+
+addProfile.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/post/profile", { post_id: el.dataset.post })
+  )
+);
+
+delFolderContent.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/folder/content/del", {
+      id: el.dataset.id,
+      type: el.dataset.type,
+      tid: el.dataset.tid,
+    })
+  )
+);
+
+delFolder.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/folder/del", { id: el.dataset.id, type: el.dataset.type })
+  )
+);
+
+postRecommend.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/post/recommend", { post_id: el.dataset.id })
+  )
+);
+
+typeAction.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/status/action", {
+      content_id: el.dataset.id,
+      type: el.dataset.type,
+    })
+  )
+);
+
+// Profile cover color (sync picker → box border and hidden color input)
+const colorPickerEl = isIdEmpty("colorPicker");
+if (colorPickerEl) {
+  const box = getById("box");
+  const colorInput = getById("color");
+  colorPickerEl.addEventListener("input", (e) => {
+    if (box) box.style.borderColor = e.target.value;
+  });
+  colorPickerEl.addEventListener("change", (e) => {
+    if (colorInput) colorInput.value = e.target.value;
+  });
+  colorPickerEl.onclick = () => {
+    if (box) box.style.borderColor = colorPickerEl.value;
+  };
+}
+
+// Votes (up)
+queryAll(".up-id").forEach((el) => {
+  el.addEventListener("click", () => {
     fetch("/votes", {
       method: "POST",
-      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody(
+        { content_id: el.dataset.id, type: el.dataset.type },
+        token
+      ),
+    }).then(() => {
+      const upVot = document.querySelector("#up" + el.dataset.id);
+      if (!upVot) return;
+      const act = upVot.classList.contains("active");
+      const upScr = upVot.querySelector(".score");
+      if (!upScr) return;
+      let number = parseInt(upScr.textContent, 10) || 0;
+      upVot.classList.toggle("active");
+      upScr.textContent = act ? number - 1 : number + 1;
+    });
+  });
+});
 
-        let upVot = document.querySelector('#up' + el.dataset.id);
-
-        if (!upVot) return;
-        let act = upVot.classList.contains('active');
-        let upScr = upVot.querySelector('.score');
-        let number = parseInt(upScr.innerText);
-
-        if (!number) {
-          number = 0;
-        }
-
-        if (act == true) {
-          new_cont = (number - parseInt(1));
-        } else {
-          new_cont = (number + parseInt(1));
-        }
-
-        upVot.classList.toggle('active');
-        upScr.innerHTML = new_cont;
-      });
-  }));
-
-// Add / Remove from favorites
-queryAll(".add-favorite")
-  .forEach(el => el.addEventListener("click", function (e) {
+// Favorites
+queryAll(".add-favorite").forEach((el) => {
+  el.addEventListener("click", () => {
     fetch("/favorite", {
       method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody(
+        { content_id: el.dataset.id, type: el.dataset.type },
+        token
+      ),
     })
-      .then(response => response.text())
-      .then(text => {
-        if (el.dataset.front == 'personal') {
+      .then((r) => r.text())
+      .then(() => {
+        if (el.dataset.front === "personal") {
           location.reload();
         } else {
-          let dom = document.querySelector("#favorite_" + el.dataset.id);
-          if (!dom) return;
-          dom.classList.toggle("active");
+          const dom = document.querySelector("#favorite_" + el.dataset.id);
+          dom?.classList.toggle("active");
         }
       });
-  }));
-
+  });
+});
 
 // Poll
-queryAll(".add-poll")
-  .forEach(el => el.addEventListener("click", function (e) {
+queryAll(".add-poll").forEach((el) => {
+  el.addEventListener("click", () => {
     fetch("/poll", {
       method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: "question_id=" + el.dataset.id + "&answer_id=" + el.dataset.answer + "&_token=" + token,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody(
+        {
+          question_id: el.dataset.id,
+          answer_id: el.dataset.answer,
+        },
+        token
+      ),
     })
-      .then(response => response.text())
-      .then(text => {
-        location.reload();
-      });
-  }));
+      .then((r) => r.text())
+      .then(() => location.reload());
+  });
+});
 
-// Deleting a voting option
-delVotingOption.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/poll/option/del", options = { body: "id=" + el.dataset.id + "&_token=" + token })
-}));
+delVotingOption.forEach((el) =>
+  el.addEventListener("click", () =>
+    postForm("/poll/option/del", { id: el.dataset.id })
+  )
+);
 
-// Ignoring members
-queryAll(".add-ignore")
-  .forEach(el => el.addEventListener("click", function (e) {
+// Ignore member
+queryAll(".add-ignore").forEach((el) => {
+  el.addEventListener("click", () => {
     fetch("/ignored", {
       method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: "user_id=" + el.dataset.id + "&_token=" + token,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody({ user_id: el.dataset.id }, token),
     })
-      .then(response => response.text())
-      .then(text => {
-        location.reload();
-      });
-  }));
+      .then((r) => r.text())
+      .then(() => location.reload());
+  });
+});
 
-
-// Choice of Best Comment  
-queryAll(".comment-best")
-  .forEach(el => el.addEventListener("click", function (e) {
+// Best comment
+queryAll(".comment-best").forEach((el) => {
+  el.addEventListener("click", () => {
     fetch("/best", {
       method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: "comment_id=" + el.dataset.id + "&_token=" + token,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody({ comment_id: el.dataset.id }, token),
     })
-      .then(response => response.text())
-      .then(text => {
-        let dom = document.querySelector("#best_" + el.dataset.id);
-        dom.classList.toggle("active");
+      .then((r) => r.text())
+      .then(() => {
+        const dom = document.querySelector("#best_" + el.dataset.id);
+        dom?.classList.toggle("active");
         location.reload();
       });
-  }));
+  });
+});
 
-// Parsing the title from the site for > TL1
-queryAll("#graburl")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let uri = getById('link').value;
-    if (uri === '') {
-      return;
-    }
+// Grab URL title
+queryAll("#graburl").forEach((el) => {
+  el.addEventListener("click", () => {
+    const uri = (getById("link")?.value || "").trim();
+    if (!uri) return;
 
     fetch("/post/grabtitle", {
       method: "POST",
-      body: "uri=" + uri,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: buildFormBody({ uri }),
     })
-      .then(function (response) {
-        if (!response.ok) {
-          // Сервер вернул код ответа за границами диапазона [200, 299]
-          return Promise.reject(new Error(
-            'Response failed: ' + response.status + ' (' + response.statusText + ')'
-          ));
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error("Response failed: " + r.status + " " + r.statusText);
         }
-        return response.json();
-      }).then(function (data) { //https://habr.com/ru/post/691088/
-        document.querySelector('input[name=title]').value = data.title;
-        document.querySelector('textarea.url').insertAdjacentHTML('afterBegin', data.description);
-      }).catch(function (error) {
-        // error
+        return r.json();
       })
-  }));
+      .then((data) => {
+        const titleInput = document.querySelector('input[name=title]');
+        const descArea = document.querySelector("textarea.url");
+        if (titleInput) titleInput.value = data.title ?? "";
+        if (descArea) descArea.insertAdjacentHTML("afterBegin", data.description ?? "");
+      })
+      .catch(() => {});
+  });
+});
 
-// Add post tab
+// Post tabs
 const tabs_post = document.querySelector(".tabs-post");
 if (tabs_post) {
-  const tabButton = queryAll(".tab-button");
+  const tabButtons = queryAll(".tab-button");
   const contents = queryAll(".content-tabs");
-  tabs_post.onclick = e => {
-    const id = e.target.dataset.id;
-    if (id) {
-      tabButton.forEach(btn => {
-        btn.classList.remove("active");
-      });
-      e.target.classList.add("active");
+  const inputQa = getById("inputQa");
 
-      contents.forEach(content => {
-        content.classList.remove("tab_active");
-      });
+  tabs_post.addEventListener("click", (e) => {
+    const id = e.target.dataset?.id;
+    if (!id) return;
 
-      getById('inputQa').value = 0;
-      if (id == 'qa') {
-        getById('inputQa').value = 1;
-      }
+    tabButtons.forEach((btn) => btn.classList.remove("active"));
+    e.target.classList.add("active");
 
-      const element = getById(id);
-      element.classList.add("tab_active");
-    }
-  }
+    contents.forEach((content) => content.classList.remove("tab_active"));
+    if (inputQa) inputQa.value = id === "qa" ? "1" : "0";
+
+    const panel = getById(id);
+    if (panel) panel.classList.add("tab_active");
+  });
 }
-
