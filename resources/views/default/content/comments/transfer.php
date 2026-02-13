@@ -7,7 +7,7 @@
 			<a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.move_comment'); ?>:</span>
 
 			<h2 class="m0"><?= htmlEncode($data['post']['post_title']); ?></h2>
-			<div class="label label-orange"><?= $data['comment']['comment_content'];  ?></div>
+			<div class="label label-orange"><?= htmlEncode($data['comment']['comment_content']);  ?></div>
 
 			<form class="max-w-md mb20" action="" accept-charset="UTF-8" method="post">
 				<?= $container->csrf()->field(); ?>
