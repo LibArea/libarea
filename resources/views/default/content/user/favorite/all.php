@@ -39,11 +39,11 @@
           </div>
         <?php endif; ?>
 
-        <a href="<?= post_slug($fav['post_type'], $fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
+        <a href="<?= post_slug($fav['post_type'], $fav['post_id'], $fav['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
           <?php if ($fav['post_type'] == 'post') : ?>
-            <?= markdown($fav['post']['post_content']); ?>
+            <?= markdown($fav['post_content']); ?>
           <?php else : ?>
-            <?= $fav['post']['post_title']; ?>
+            <?= $fav['post_title']; ?>
           <?php endif; ?>
         </a>
 
