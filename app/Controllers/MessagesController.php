@@ -202,6 +202,10 @@ class MessagesController extends Controller
     {
         $id = Request::post('id')->asInt();
         $message = MessagesModel::getMessage($id);
+		
+		if (!$message || (int)$message['message_sender_id'] !== (int)$this->container->user()->id()) {
+			redirect('/');
+		}
 
         insert(
             '/_block/form/form-for-editing',
