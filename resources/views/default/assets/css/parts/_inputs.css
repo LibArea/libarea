@@ -1,35 +1,47 @@
 /*
- * @form styles
- *
- * Стили для форм
+ * Form styles
+ * Стили форм
  */
 
 input,
 select,
 textarea {
+  padding: 6px;
+  font-size: 16px;
+  color: var(--form-text-color);
   background-color: var(--form-bg-color);
   border: 1px solid var(--form-border-color);
-  color: var(--form-text-color);
-  font-size: 16px;
   border-radius: var(--rounded);
-  padding: 6px;
 }
 
 textarea {
   width: 100%;
 }
 
-/*fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]),
-fieldset select {
-  width: 100%;
-  min-height: 34px;
-  padding: 5px;
-} */
+input:focus-visible,
+textarea:focus-visible {
+  border-color: var(--form-color-active);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--form-color-active);
+}
+
+::placeholder {
+  color: var(--gray);
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--font-size-sm);
+}
 
 fieldset {
   border: 0;
-  position: relative;
   padding: 10px 0;
+  position: relative;
 }
 
 fieldset.error input {
@@ -37,52 +49,37 @@ fieldset.error input {
 }
 
 .help {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--gray-600);
-}
-
-input:focus,
-textarea:focus {
-  border: 1px solid var(--form-color-active);
-}
-
-label {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.875rem;
-}
-
-::placeholder {
-  color: var(--gray);
 }
 
 .form-element .tagify,
 .form-element input,
 .form-element select,
 .form-element textarea {
+  width: 80%;
+  padding: 6px;
+  font-size: 16px;
+  color: var(--form-text-color);
   background-color: var(--form-bg-color);
   border: none;
-  color: var(--form-text-color);
-  font-size: 16px;
   border-radius: var(--rounded);
-  padding: 6px;
-  width: 80%;
 }
 
 .form-label {
   float: left;
   width: 17.07%;
   padding: 0 20px 0 0;
-  line-height: 18px;
   margin-top: 2px;
+  line-height: 18px;
   word-wrap: break-word;
   color: var(--gray);
 }
 
 .form-element {
-  margin-left: 17.07%;
-  margin-bottom: 4px;
   width: 82.93%;
+  margin-inline-start: 17.07%;
+  margin-bottom: 4px;
 }
 
 fieldset.form-big input[type="text"] {
@@ -95,9 +92,9 @@ fieldset.form-big .input-label {
 
 .showPassword {
   position: absolute;
-  color: var(--gray-600);
-  right: 5px;
+  inset-inline-end: 5px;
   margin: 2px;
+  color: var(--gray-600);
 }
 
 @media screen and (max-width: 735px) {
@@ -108,14 +105,14 @@ fieldset.form-big .input-label {
   .form-element,
   .form-control-sublabel {
     width: 100%;
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 
   fieldset .form-label {
     width: 100%;
     padding: 0 0 6px 0;
-    vertical-align: baseline;
     margin: 0;
+    vertical-align: baseline;
   }
 
   .form-element .tagify,

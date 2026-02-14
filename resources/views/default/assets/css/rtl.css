@@ -1,22 +1,31 @@
+/*
+ * RTL overrides
+ * Стили для правописания справа налево
+ *
+ * Load this file when the page is in RTL mode.
+ * Uses logical properties so they work with the refactored base utilities.
+ */
+
 .dropdown,
 .delet-count {
   right: unset;
   left: 0;
 }
 
+/* Margin utilities: in RTL, move "end" space to "start" */
 .mr5 {
-  margin-right: 0;
-  margin-left: 5px;
+  margin-inline-end: 0;
+  margin-inline-start: 5px;
 }
 
 .mr10 {
-  margin-right: 0;
-  margin-left: 10px;
+  margin-inline-end: 0;
+  margin-inline-start: 10px;
 }
 
 .ml5 {
-  margin-left: 0;
-  margin-right: 5px;
+  margin-inline-start: 0;
+  margin-inline-end: 5px;
 }
 
 .right-close {
@@ -30,7 +39,7 @@
 }
 
 .dropdown.user {
-  padding: 1rem .7rem .7rem 0;
+  padding: 1rem 0.7rem 0.7rem 0;
 }
 
 .box-search {
@@ -41,29 +50,13 @@
   float: left;
 }
 
-.comment_level-left-0 {
-  margin-right: 15px;
-}
-
-.comment_level-left-1 {
-  margin-right: 36px;
-}
-
-.comment_level-left-2 {
-  margin-right: 56px;
-}
-
-.comment_level-left-3 {
-  margin-right: 76px;
-}
-
-.comment_level-left-4 {
-  margin-right: 96px;
-}
-
-.comment_level-left-5 {
-  margin-right: 116px;
-}
+/* Comment nesting: mirror horizontal margins */
+.comment_level-left-0 { margin-inline-end: 15px; margin-inline-start: 0; }
+.comment_level-left-1 { margin-inline-end: 36px; margin-inline-start: 0; }
+.comment_level-left-2 { margin-inline-end: 56px; margin-inline-start: 0; }
+.comment_level-left-3 { margin-inline-end: 76px; margin-inline-start: 0; }
+.comment_level-left-4 { margin-inline-end: 96px; margin-inline-start: 0; }
+.comment_level-left-5 { margin-inline-end: 116px; margin-inline-start: 0; }
 
 li .comment-folder {
   float: right;

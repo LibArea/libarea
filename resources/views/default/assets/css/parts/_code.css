@@ -1,107 +1,99 @@
 /*
- * Code highlighting
- *
- * Выделение кода
+ * Code & syntax highlighting
+ * Выделение кода (Prism)
  */
 
 code {
+  padding: 3px;
+  font-size: 14px;
   color: var(--brown);
   background-color: var(--violet);
-  padding: 3px;
   border-radius: var(--rounded);
-  font-size: 14px;
 }
 
 pre {
+  padding: 0.2em 0.5em;
   white-space: pre-wrap;
   word-wrap: break-word;
   background: var(--violet);
-  padding: 0.2em 0.5em;
 }
 
-/* компенсируем tag*/
 .token.tag,
 .token.tag:hover {
   background-color: transparent;
 }
 
-/* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+cpp+markup-templating+php+sql&plugins=toolbar+copy-to-clipboard */
-code[class*=language-],
-pre[class*=language-] {
+/* Prism base */
+code[class*="language-"],
+pre[class*="language-"] {
   color: #000;
   background: 0 0;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1em;
+  line-height: 1.5;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  line-height: 1.5;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none
+  hyphens: none;
 }
 
-code[class*=language-] ::-moz-selection,
-code[class*=language-]::-moz-selection,
-pre[class*=language-] ::-moz-selection,
-pre[class*=language-]::-moz-selection {
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+  background: #b3d4fc;
   text-shadow: none;
-  background: #b3d4fc
 }
 
-code[class*=language-] ::selection,
-code[class*=language-]::selection,
-pre[class*=language-] ::selection,
-pre[class*=language-]::selection {
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection,
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection {
+  background: #b3d4fc;
   text-shadow: none;
-  background: #b3d4fc
 }
 
 @media print {
-
-  code[class*=language-],
-  pre[class*=language-] {
-    text-shadow: none
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none;
   }
 }
 
-pre[class*=language-] {
+pre[class*="language-"] {
+  margin: 0.5em 0;
   padding: 1em;
-  margin: .5em 0;
-  overflow: auto
+  overflow: auto;
 }
 
-:not(pre)>code[class*=language-],
-pre[class*=language-] {
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
   background: var(--violet);
 }
 
-:not(pre)>code[class*=language-] {
-  padding: .1em;
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em;
+  white-space: normal;
   border-radius: var(--rounded);
-  white-space: normal
 }
 
+/* Prism tokens */
 .token.cdata,
 .token.comment,
 .token.doctype,
 .token.prolog {
-  color: #708090
+  color: #708090;
 }
 
 .token.punctuation {
-  color: #999
+  color: #999;
 }
 
 .token.namespace {
-  opacity: .7
+  opacity: 0.7;
 }
 
 .token.boolean,
@@ -111,7 +103,7 @@ pre[class*=language-] {
 .token.property,
 .token.symbol,
 .token.tag {
-  color: #905
+  color: #905;
 }
 
 .token.attr-name,
@@ -120,7 +112,7 @@ pre[class*=language-] {
 .token.inserted,
 .token.selector,
 .token.string {
-  color: #690
+  color: #690;
 }
 
 .language-css .token.string,
@@ -134,94 +126,90 @@ pre[class*=language-] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #07a
+  color: #07a;
 }
 
 .token.class-name,
 .token.function {
-  color: #dd4a68
+  color: #dd4a68;
 }
 
 .token.important,
 .token.regex,
 .token.variable {
-  color: #e90
+  color: #e90;
 }
 
 .token.bold,
 .token.important {
-  font-weight: 700
+  font-weight: 700;
 }
 
 .token.italic {
-  font-style: italic
+  font-style: italic;
 }
 
 .token.entity {
-  cursor: help
+  cursor: help;
 }
 
+/* Code toolbar */
 div.code-toolbar {
   position: relative;
   max-width: 695px;
 }
 
-div.code-toolbar>.toolbar {
+div.code-toolbar > .toolbar {
   position: absolute;
+  top: 0.3em;
+  right: 0.2em;
   z-index: 10;
-  top: .3em;
-  right: .2em;
-  transition: opacity .3s ease-in-out;
-  opacity: 0
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
-div.code-toolbar:hover>.toolbar {
-  opacity: 1
+div.code-toolbar:hover > .toolbar,
+div.code-toolbar:focus-within > .toolbar {
+  opacity: 1;
 }
 
-div.code-toolbar:focus-within>.toolbar {
-  opacity: 1
+div.code-toolbar > .toolbar > .toolbar-item {
+  display: inline-block;
 }
 
-div.code-toolbar>.toolbar>.toolbar-item {
-  display: inline-block
+div.code-toolbar > .toolbar > .toolbar-item > a {
+  cursor: pointer;
 }
 
-div.code-toolbar>.toolbar>.toolbar-item>a {
-  cursor: pointer
-}
-
-div.code-toolbar>.toolbar>.toolbar-item>button {
-  background: 0 0;
-  border: 0;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
+div.code-toolbar > .toolbar > .toolbar-item > button {
   padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  line-height: normal;
+  background: 0 0;
+  overflow: visible;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  user-select: none;
 }
 
-div.code-toolbar>.toolbar>.toolbar-item>a,
-div.code-toolbar>.toolbar>.toolbar-item>button,
-div.code-toolbar>.toolbar>.toolbar-item>span {
+div.code-toolbar > .toolbar > .toolbar-item > a,
+div.code-toolbar > .toolbar > .toolbar-item > button,
+div.code-toolbar > .toolbar > .toolbar-item > span {
+  padding: 0 0.5em;
+  font-size: 0.8em;
   color: #bbb;
-  font-size: .8em;
-  padding: 0 .5em;
-  background: var(--violet);
-  background: rgba(224, 224, 224, .2);
-  box-shadow: 0 2px 0 0 rgba(0, 0, 0, .2);
+  background: rgb(224 224 224 / 0.2);
   border-radius: var(--rounded);
+  box-shadow: 0 2px 0 0 rgb(0 0 0 / 0.2);
 }
 
-div.code-toolbar>.toolbar>.toolbar-item>a:focus,
-div.code-toolbar>.toolbar>.toolbar-item>a:hover,
-div.code-toolbar>.toolbar>.toolbar-item>button:focus,
-div.code-toolbar>.toolbar>.toolbar-item>button:hover,
-div.code-toolbar>.toolbar>.toolbar-item>span:focus,
-div.code-toolbar>.toolbar>.toolbar-item>span:hover {
+div.code-toolbar > .toolbar > .toolbar-item > a:focus,
+div.code-toolbar > .toolbar > .toolbar-item > a:hover,
+div.code-toolbar > .toolbar > .toolbar-item > button:focus,
+div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+div.code-toolbar > .toolbar > .toolbar-item > span:focus,
+div.code-toolbar > .toolbar > .toolbar-item > span:hover {
   color: inherit;
   text-decoration: none;
 }

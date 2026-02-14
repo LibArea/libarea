@@ -1,79 +1,68 @@
 /*
- * modal
- *
- * всплывающее
+ * Modals & overlay dialogs
+ * Всплывающие окна
  */
 
 .modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
 }
 
 .model-inner {
-  background-color: white;
-  border-radius: var(--rounded);
   max-width: 600px;
-  padding: 2em;
   margin: auto;
+  padding: 2em;
+  background-color: var(--white);
+  border-radius: var(--rounded);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--black);
 }
 
 .overlay {
-  width: 100%;
-  height: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
-  background: black;
+  inset: 0;
+  background: var(--black);
   opacity: 0.75;
 }
 
 /* a11y-dialog */
 .dialog-container {
-  display: flex;
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  inset: 0;
   z-index: 99;
+  display: flex;
 }
 
-.dialog-container[aria-hidden='true'] {
+.dialog-container[aria-hidden="true"] {
   display: none;
 }
 
 .dialog-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(43, 46, 56, 0.9);
+  inset: 0;
+  background-color: rgb(43 46 56 / 0.9);
   animation: fade-in 200ms both;
 }
 
 .dialog-content {
-  background-color: rgb(255, 255, 255);
-  margin: auto;
-  z-index: 6;
   position: relative;
-  animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
-  padding: 1em;
-  max-width: 90%;
   width: 600px;
+  max-width: 90%;
+  margin: auto;
+  padding: 1em;
+  z-index: 6;
+  background-color: var(--white);
   border-radius: var(--rounded);
+  animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
 }
 
 @media screen and (min-width: 700px) {
@@ -86,14 +75,14 @@
   position: absolute;
   top: 0.5em;
   right: 0.5em;
-  border: 0;
   padding: 0;
-  background-color: transparent;
   font-size: 2em;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.15s;
   color: var(--gray-600);
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color var(--duration-fast);
 }
 
 @media screen and (min-width: 700px) {

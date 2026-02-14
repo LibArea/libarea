@@ -1,67 +1,59 @@
 /*
  * Polls
- *
  * Голосования, опросы
  */
 
 .poll {
   padding: 5px 10px;
-  list-style: none;
-  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
   border: 1px solid #f3f4f6;
+  list-style: none;
+  box-shadow: 0 0 5px rgb(0 0 0 / 0.1);
 }
 
 .poll-count {
   float: left;
-  padding-right: 10px;
   width: 48px;
-  font-size: .8em;
+  padding-inline-end: 10px;
   margin-top: 1px;
+  font-size: 0.8em;
   color: var(--gray-600);
 }
 
 .poll-result {
-  padding-left: 48px;
+  padding-inline-start: 48px;
 }
 
 .poll-label {
-  font-size: .9em;
+  font-size: 0.9em;
   color: var(--gray);
 }
 
+/* Progress: reset appearance */
 progress,
 progress[role] {
-  /* Отключает стилизацию — обычно не требуется, но полезно знать. */
   appearance: none;
-  -moz-appearance: none;
   -webkit-appearance: none;
-
-  /* Должен быть здесь для полифилла Safari, чтобы фоновые изображения работали должным образом. */
+  -moz-appearance: none;
   background-size: auto;
 }
 
 progress {
-  vertical-align: baseline;
   display: block;
   width: 100%;
-  border: 0;
-  margin-bottom: 20px;
-  background: #f8f8f8;
   height: 7px;
+  margin-bottom: 20px;
+  border: 0;
   border-radius: var(--rounded-full);
+  background: #f8f8f8;
   overflow: hidden;
+  vertical-align: baseline;
 }
 
 ::-webkit-progress-bar {
   background: #f8f8f8;
 }
 
-/* См. https://libarea.ru/post/1384/dev-protestiruem-opros-prikreplennyy-k-postu
-progress::-webkit-progress-bar,
-progress::-webkit-progress-value,
-progress::-moz-progress-bar { background: #0085ee; } */
-
-
+/* Progress bar colors by value range */
 progress[value^="0"]::-moz-progress-bar,
 progress[value^="1"]::-moz-progress-bar,
 progress[value^="2"]::-moz-progress-bar,
@@ -71,8 +63,6 @@ progress[value^="2"]::-webkit-progress-value {
   background-color: #0ea5e9;
 }
 
-
-
 progress[value^="3"]::-moz-progress-bar,
 progress[value^="4"]::-moz-progress-bar,
 progress[value^="5"]::-moz-progress-bar,
@@ -81,7 +71,6 @@ progress[value^="4"]::-webkit-progress-value,
 progress[value^="5"]::-webkit-progress-value {
   background-color: #0085ee;
 }
-
 
 progress[value^="6"]::-moz-progress-bar,
 progress[value^="7"]::-moz-progress-bar,

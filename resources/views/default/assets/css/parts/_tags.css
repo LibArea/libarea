@@ -1,39 +1,39 @@
 /*
- * Tags (facets)
- *
- * Теги (фасеты)
+ * Tags & labels (facets)
+ * Теги и этикетки
  */
 
+/* Tag base */
 .tag-grey,
 .tag-yellow,
 .tag-violet,
 .tag-clear {
+  margin-inline-start: 0.25em;
+  padding: 0.08rem 0.35rem 0.15rem;
   font-size: 0.9rem;
-  border-radius: var(--rounded);
-  margin-left: 0.25em;
-  padding: 0.08rem 0.35rem 0.15rem 0.35rem;
-  text-transform: lowercase;
   text-decoration: none;
+  text-transform: lowercase;
+  border-radius: var(--rounded);
 }
 
 .tag-grey {
-  background-color: #ececec;
   color: #6b3e4a;
+  background-color: #ececec;
 }
 
 .tag-grey:hover {
-  background-color: #fff;
   color: #444;
+  background-color: #fff;
 }
 
 .tag-yellow {
-  background-color: #fffcd7;
   color: #7b5d5d;
+  background-color: #fffcd7;
 }
 
 .tag-violet {
-  background-color: var(--violet);
   color: #544e4e;
+  background-color: var(--violet);
 }
 
 .tag-clear {
@@ -47,45 +47,46 @@
   background-color: #f5f7f8;
 }
 
-/* Этикетки */
+/* Labels */
 .label {
+  padding: 3px 10px;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
   font-style: italic;
   text-transform: lowercase;
-  font-size: 0.875rem;
-  padding: 3px 10px;
-  font-weight: 400;
 }
 
 .label-grey {
-  background-color: var(--violet);
   color: var(--gray-600);
+  background-color: var(--violet);
 }
 
 .label-orange {
-  background-color: #f9ddde;
   color: var(--gray);
+  background-color: #f9ddde;
 }
 
 .label-green {
-  background-color: #f0f6f3;
   color: var(--green);
+  background-color: #f0f6f3;
 }
 
 .label-teal {
-  background-color: var(--teal);
   color: var(--white);
+  background-color: var(--teal, #0d9488);
 }
 
 .label-teal:hover {
   background-color: #339a9c;
-  transition: background .2s ease-out;
+  transition: background 0.2s var(--ease-out);
 }
 
+/* Tagify */
 .tagify {
   width: 100%;
   max-width: 780px;
-  border-radius: var(--rounded);
   background-color: var(--white);
+  border-radius: var(--rounded);
 }
 
 .tagify--noTags[required] {

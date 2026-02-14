@@ -1,6 +1,5 @@
 /*
- * @media styles
- *
+ * Responsive breakpoints
  * Медиа-запросы
  */
 
@@ -15,71 +14,59 @@
     display: none;
   }
 
- .content {
-   margin-left: 0;
-   display: block;
- }
+  .content {
+    margin-inline-start: 0;
+    display: block;
+  }
 
   main {
     width: var(--max-w-full);
     max-width: var(--max-w-full);
-    margin-left: 0;
+    margin-inline-start: 0;
     padding: 0;
   }
-  
+
   .menu__button {
-    transition: 0.3s ease;
     display: block;
+    transition: 0.3s ease;
   }
 
   .menu__left {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    z-index: 98;
+    min-width: 180px;
+    padding-inline-end: 0;
+    overflow-x: hidden;
+    background-color: var(--dropdown-bg);
+    box-shadow: 5px 0 5px -5px rgb(0 0 0 / 0.25);
     opacity: 0;
     visibility: hidden;
     transition-property: opacity, visibility;
-    z-index: 98;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    min-width: 180px;
-    background-color: var(--dropdown-bg);
-    box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
-    overflow-x: hidden;
-    position: absolute;
-    padding-right: 0;
     scrollbar-width: thin;
   }
 
   nav.menu__active,
   nav.menu__active .menu__left,
   nav.menu__active .menu__left.menu-none {
+    position: fixed;
+    display: block;
+    padding-inline-end: 20px;
     opacity: 1;
     visibility: visible;
     transition: 0.25s;
-    position: fixed;
-    display: block;
-    padding-right: 20px;
   }
 
   .nav-sidebar.menu__active .menu__left .menu li {
-    padding-left: 10px;
+    padding-inline-start: 10px;
   }
 
-  .comment_level-left-1 {
-    margin-left: 10px;
-  }
-
-  .comment_level-left-2 {
-    margin-left: 15px;
-  }
-
-  .comment_level-left-3 {
-    margin-left: 30px;
-  }
-
+  .comment_level-left-1 { margin-inline-start: 10px; }
+  .comment_level-left-2 { margin-inline-start: 15px; }
+  .comment_level-left-3 { margin-inline-start: 30px; }
   .comment_level-left-4,
-  .comment_level-left-5  {
-    margin-left: 45px;
-  }
+  .comment_level-left-5 { margin-inline-start: 45px; }
 
   header.show .d-header-post.none,
   header.show .d-header-facet.none {
@@ -88,33 +75,13 @@
 }
 
 @media (max-width: 780px) {
-  .mb-w80 {
-    width: 80px;
-  }
-
-  .mb-w150 {
-    width: 150px;
-  }
-
-  .mb-p10 {
-    padding: 10px;
-  }
-
-  .mb-mt5 {
-    margin-top: 5px;
-  }
-
-  .mb-mt25 {
-    margin-top: 25px;
-  }
-
-  .mb-ml10 {
-    margin-left: 10px;
-  }
-
-  .mb-text-xl {
-    font-size: 1.25rem;
-  }
+  .mb-w80 { width: 80px; }
+  .mb-w150 { width: 150px; }
+  .mb-p10 { padding: 10px; }
+  .mb-mt5 { margin-top: 5px; }
+  .mb-mt25 { margin-top: 25px; }
+  .mb-ml10 { margin-inline-start: 10px; }
+  .mb-text-xl { font-size: 1.25rem; }
 
   .text-2xl {
     font-size: 1.1rem;
@@ -133,8 +100,8 @@
   }
 
   .mb-img-2xl {
-    height: 65px;
     width: 65px;
+    height: 65px;
   }
 
   .box-cover-img {
@@ -142,8 +109,8 @@
   }
 
   li .comment-folder {
+    margin-inline-start: -25px;
     font-size: 11pt;
-    margin-left: -25px;
   }
 
   .comment-body img {
@@ -159,13 +126,12 @@
   }
 
   header .dropdown.publ {
-	right: -70px;  
+    right: -70px;
   }
 
-	#contentWrapper {
-	  padding-left: 0; 
-	  padding-right: 0;
-	}
+  #contentWrapper {
+    padding-inline: 0;
+  }
 
   .mb-block,
   #contentWrapper {
@@ -200,33 +166,18 @@
   }
 
   footer ul {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .wrap {
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline: 0;
   }
 
-  .comment_level-left-1 {
-    margin-left: 10px;
-  }
-
-  .comment_level-left-2 {
-    margin-left: 20px;
-  }
-
-  .comment_level-left-3 {
-    margin-left: 30px;
-  }
-
-  .comment_level-left-4 {
-    margin-left: 40px;
-  }
-
-  .comment_level-left-5 {
-    margin-left: 40px;
-  }
+  .comment_level-left-1 { margin-inline-start: 10px; }
+  .comment_level-left-2 { margin-inline-start: 20px; }
+  .comment_level-left-3 { margin-inline-start: 30px; }
+  .comment_level-left-4 { margin-inline-start: 40px; }
+  .comment_level-left-5 { margin-inline-start: 40px; }
 
   .comment_level-left-3 img,
   .comment_level-left-4 img,
@@ -244,8 +195,7 @@
   }
 
   table {
-    overflow-y: scroll;
     display: inline-block;
+    overflow-y: scroll;
   }
-
 }

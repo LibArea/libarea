@@ -1,33 +1,27 @@
 /*
- * @Pop-up notifications
- *
- * Всплывающие уведомеления
+ * Toast / pop-up notifications
+ * Всплывающие уведомления
  */
 
 .notice {
-  animation-name: toastEffect;
-  animation-timing-function: ease-in;
-  background-color: var(--gray);
-  border-radius: var(--rounded);
-  color: var(--white);
+  position: fixed;
+  z-index: 2147483647;
   display: inline-block;
   padding: 2px 20px;
-  position: fixed;
+  color: var(--white);
   text-align: center;
   text-decoration: none;
-  z-index: 2147483647;
+  background-color: var(--gray);
+  border-radius: var(--rounded);
+  animation: toastEffect 3s ease-in;
+}
+
+.notice-top {
+  top: 1rem;
 }
 
 .notice-bottom {
   bottom: 1rem;
-}
-
-.notice-center {
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: fit-content;
-  right: 0;
 }
 
 .notice-left {
@@ -38,31 +32,20 @@
   right: 1rem;
 }
 
-.notice-top {
-  top: 1rem;
+.notice-center {
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  max-width: fit-content;
 }
-
 
 .dropdown.notif {
   margin-top: 40px;
-  padding: 1rem 0 0.7rem 0;
   min-width: 305px;
+  padding: 1rem 0 0.7rem 0;
 }
 
 @keyframes toastEffect {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  80% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0; }
+  20%, 80% { opacity: 1; }
 }

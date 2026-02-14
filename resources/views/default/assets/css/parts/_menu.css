@@ -1,19 +1,18 @@
 /*
- * Dropdown menu and navigation
- *
+ * Navigation & dropdown menu
  * Выпадающее меню и навигация
  */
 
 nav {
-  min-width: 15rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-width: 17rem;
-  padding: 1.5rem 1.5rem 1.5rem 0;
-  display: block;
   position: fixed;
   top: 3.75rem;
+  display: block;
+  min-width: 15rem;
+  max-width: 17rem;
   height: 100%;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .dropdown,
@@ -29,66 +28,66 @@ nav {
   margin: 0 0.5rem;
 }
 
+/* Dropdown base */
 .dropdown {
   display: none;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
+  min-width: 215px;
+  padding: 0.5rem;
   background-color: var(--dropdown-bg);
   box-shadow: var(--dropdown-box-shadow);
-  padding: 0.5rem;
-  z-index: 55;
-  min-width: 215px;
   border-radius: var(--rounded);
+  z-index: 55;
 }
 
-/* right user menu */
 .dropdown.user {
   margin-top: 10px;
   padding: 1rem 0 0.7rem 0;
 }
 
+.dropdown.left {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  width: 150px;
+}
+
 .right-close {
-  color: var(--gray-600);
-  padding: 3px 8px 0 0;
-  margin-top: -20px;
-  float: right;
   display: block;
+  float: right;
+  margin-top: -20px;
+  padding: 3px 8px 0 0;
+  color: var(--gray-600);
 }
 
 .user-box {
-  padding: 0 0 0.4rem 1rem;
   display: flex;
   align-items: center;
+  padding: 0 0 0.4rem 1rem;
   font-size: 0.975rem;
 }
 
 .user-nav li a {
-  margin-left: 10px;
+  margin-inline-start: 10px;
 }
 
-/* end */
-
-.dropdown.left {
-  left: 0;
-  width: 150px;
-}
-
+/* Dropdown & menu links */
 .menu a,
-.dropdown li>a,
-.dropdown li>div {
-  color: var(--black);
-  padding: 8px;
+.dropdown li > a,
+.dropdown li > div {
   display: flex;
   flex-direction: row;
   align-items: center;
   min-width: 0;
-  gap: .7rem;
   max-width: 190px;
+  padding: 8px;
+  gap: 0.7rem;
+  color: var(--black);
 }
 
-.dropdown li:hover>a,
-.dropdown li>a.active,
-.dropdown li>div.active {
+.dropdown li:hover > a,
+.dropdown li > a.active,
+.dropdown li > div.active {
   color: var(--link-color-hover);
 }
 
@@ -98,6 +97,7 @@ nav {
   text-overflow: ellipsis;
 }
 
+/* Menu list */
 .menu__left:not(.menu__active) li {
   margin-bottom: 5px;
 }
@@ -109,10 +109,10 @@ nav {
 }
 
 .menu li:hover {
-  transition-duration: .3s;
+  transition-duration: var(--duration-normal);
 }
 
-.menu li:hover>a {
+.menu li:hover > a {
   color: var(--gray);
 }
 
@@ -120,15 +120,7 @@ nav {
   background-color: var(--gray-100);
 }
 
-.breadcrumbs li {
-  display: inline;
-  color: var(--gray-600);
-}
-
-.breadcrumbs li:not(:last-child):after {
-  content: " / ";
-}
-
+/* Icons in menu */
 .menu .icon,
 .dropdown ul .icon {
   color: var(--gray);
@@ -146,7 +138,17 @@ nav {
   color: var(--gray-600);
 }
 
-/* Navigation */
+/* Breadcrumbs */
+.breadcrumbs li {
+  display: inline;
+  color: var(--gray-600);
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: " / ";
+}
+
+/* Nav bar & tabs */
 .nav-bar {
   display: flex;
   justify-content: space-between;
@@ -155,48 +157,40 @@ nav {
 }
 
 ul.nav {
-  list-style: none;
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: 0.7rem;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-ul.nav>li {
+ul.nav > li {
   padding: 2px 8px;
 }
 
-ul.nav.small>li {
+ul.nav.small > li {
   padding: 3px 6px;
 }
 
-ul.nav>li>a {
+ul.nav > li > a {
   color: var(--gray);
 }
 
-ul.nav>li.active {
+ul.nav > li.active {
   border-bottom: 2px solid var(--blue);
   color: var(--nav-color-active);
 }
 
-ul.nav>li.active>a {
+ul.nav > li.active > a,
+ul.nav > li.active a:hover {
   color: var(--nav-color-active);
 }
 
-ul.nav>li a:hover {
+ul.nav > li a:hover {
   color: var(--link-color-hover);
 }
 
-ul.nav>li.active>a {
-  color: var(--nav-color-active);
-}
-
-ul.nav>li.active a:hover {
-  color: var(--nav-color-active);
-}
-
-/* If it's tabs */
 .content-tabs {
   display: none;
 }

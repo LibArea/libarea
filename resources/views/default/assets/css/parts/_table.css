@@ -1,24 +1,23 @@
 /*
- * @table styles
- *
+ * Tables
  * Таблицы
  */
 
 table {
-  margin-bottom: 1.5rem;
   width: 100%;
+  margin-bottom: var(--space-6);
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 table td,
 table th {
-  font-size: 14px;
   padding: 5px;
+  font-size: 14px;
 }
 
 table thead th {
-  border-bottom: 2px solid rgba(222, 226, 230, 0.5);
+  border-bottom: 2px solid rgb(222 226 230 / 0.5);
   text-align: left;
 }
 
