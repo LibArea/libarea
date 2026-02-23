@@ -306,7 +306,7 @@ class PublicationModel extends Model
     // 10 доменов
     public static function listDomain(string $domain)
     {
-        $sql = "SELECT DISTINCT post_id, post_url_domain FROM posts
+        $sql = "SELECT DISTINCT post_url_domain, post_id FROM posts
                     WHERE post_url_domain != :domain AND post_url_domain != '' AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();

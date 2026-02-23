@@ -222,26 +222,26 @@ class PublicationController extends Controller
     {
         $site = PublicationModel::availabilityDomain($domain = Request::param('domain')->asString());
         notEmptyOrView404($site);
-
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'web.feed', $domain);
-        $pagesCount = FeedModel::feedCount('web.feed', $domain);
+ 
+        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'web.feed', $site['post_url_domain']);
+        $pagesCount = FeedModel::feedCount('web.feed', $site['post_url_domain']);
 
         $m = [
             'og'    => false,
-            'url'   => url('domain', ['domain' => $domain]),
+            'url'   => url('domain', ['domain' => $site['post_url_domain']]),
         ];
 
         render(
             '/publications/link',
             [
-                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
+                'meta'  => Meta::get(__('app.domain') . ': ' . $site['post_url_domain'], __('meta.domain_desc') . ': ' . $site['post_url_domain'], $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => Html::pageNumber(),
-                    'posts'         => $posts,
+                    'contents'		=> $posts,
                     'count'         => $pagesCount,
-                    'list'          => PublicationModel::listDomain($domain),
-                    'site'          => $domain,
+                    'list'          => PublicationModel::listDomain($site['post_url_domain']),
+                    'site'          => $site['post_url_domain'],
                     'type'          => 'domain',
                 ]
             ]

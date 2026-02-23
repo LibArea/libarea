@@ -18,6 +18,8 @@ use Djot\SafeMode;
 
 use MediaEmbed\MediaEmbed;
 
+use App\Models\User\UserModel;
+
 class Parser
 {
     public static function text(string $content, string $type)
@@ -163,4 +165,60 @@ class Parser
 
         return $text;
     }
+	
+    public static function parseUsers($content, $with_user = false, $to_uid = false)
+    {
+        preg_match_all('/(?<=^|\s|>)@([a-z0-9_]+)/i', strip_tags($content), $matchs);
+
+        if (is_array($matchs[1])) {
+            $match_name = [];
+            foreach ($matchs[1] as $key => $login) {
+                if (in_array($login, $match_name)) {
+                    continue;
+                }
+
+                $match_name[] = $login;
+            }
+
+            $match_name = array_unique($match_name);
+
+            arsort($match_name);
+
+            $all_users = [];
+
+            $content_uid = $content;
+
+            foreach ($match_name as $key => $login) {
+
+                if (preg_match('/^[0-9]+$/', $login)) {
+                    $user_info = UserModel::get($login, 'id');
+                } else {
+                    $user_info = UserModel::get($login, 'slug');
+                }
+
+                if ($user_info) {
+                    $content = str_replace('@' . $login, '[@' . $login . '](/@' .  $login . ')', $content);
+
+                    if ($to_uid) {
+                        $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
+                    }
+
+                    if ($with_user) {
+                        $all_users[] = $user_info['id'];
+                    }
+                }
+            }
+        }
+
+        if ($with_user) {
+            return $all_users;
+        }
+
+        if ($to_uid) {
+            return $content_uid;
+        }
+
+        return $content;
+    }
+	
 }

@@ -198,7 +198,7 @@ class AddPublicationController extends Controller
 
         // Contact via @
         // Обращение через @
-        if ($message = \App\Content\Parser\Content::parseUsers($data['content'], true, true)) {
+        if ($message = \Parser::parseUsers($data['content'], true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url_content);
         }
 
