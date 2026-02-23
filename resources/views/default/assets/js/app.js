@@ -188,7 +188,7 @@ queryAll(".comment-best").forEach((el) => {
 // Grab URL title
 queryAll("#graburl").forEach((el) => {
   el.addEventListener("click", () => {
-    const uri = (getById("link")?.value || "").trim();
+    const uri = (getById("linkUrl")?.value || "").trim();
     if (!uri) return;
 
     fetch("/post/grabtitle", {

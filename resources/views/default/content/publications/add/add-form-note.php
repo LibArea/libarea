@@ -17,7 +17,7 @@
 </fieldset>
 
 <fieldset class="flex items-center gap-sm form-element">
-  <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
+  <input id="linkUrl" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
   <div class="w-30"><input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" /></div>
 </fieldset>
 
