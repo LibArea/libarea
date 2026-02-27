@@ -39,6 +39,7 @@
       </svg>
       <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
+
     <div class="flex gap">
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
         <svg class="icon">

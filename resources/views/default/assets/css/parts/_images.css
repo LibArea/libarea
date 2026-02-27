@@ -100,3 +100,14 @@ img.emoji {
   max-height: 400px;
   margin: 20px 0 15px 0;
 }
+
+.foto {
+  text-align: center;
+  display: block;
+}
+
+.foto em {
+  display: block;
+  font-style: italic;
+  color: var(--gray-600);
+}

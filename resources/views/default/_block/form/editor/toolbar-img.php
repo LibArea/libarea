@@ -53,6 +53,13 @@
 					return cherry.insert(' ::: warning \n <?= __('app.write_text'); ?> \n ::: ');
 				}
 			},
+			{
+				noIcon: true,
+				name: '📸 foto',
+				onclick: (event) => {
+					return cherry.insert(' ::: foto \n IMG  \n _<?= __('app.write_text'); ?>_ \n ::: ');
+				}
+			},
 		]
 	});
 

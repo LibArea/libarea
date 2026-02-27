@@ -65,9 +65,9 @@ $facet = $data['facet'] ?? false;
           </div>
         </footer>
       </nav>
-	<div class="content">
-      <?= $content; ?>
-	</div>
+	  <div class="content">
+        <?= $content; ?>
+	  </div>
   </div>
 
   <?= insert('/global/footer'); ?>
