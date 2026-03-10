@@ -133,13 +133,12 @@ class FeedModel extends Model
 			'article'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'article\' ' . $hidden ,
 			'post'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'post\' ' . $hidden ,
 			'note'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'note\' ' . $hidden ,
-			'recommend'			=>	'WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = \'post\'' . $hidden,
+			'recommend'			=>	'WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0' . $hidden,
 			'web.feed'			=> 	'WHERE post_url_domain = :qa AND post_draft = 0 ' . $hidden,
 			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0',
 		};
         /** @toDo здесь возможно нужно выбрасывать ошибку вместо этой переменной. */
 		
-	
         return $string;
     }
 }

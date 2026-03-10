@@ -21,7 +21,7 @@
 		</span>
       <?php endif; ?>
       <div class="mt10 gray flex justify-between">
-        <?= fragment($facet['facet_short_description'], 68); ?>
+         <span class="mb-none"><?= fragment($facet['facet_short_description'], 68); ?></span>
         <span class="flex right gap-sm gray-600 text-sm">
           <svg class="icon">
             <use xlink:href="#post"></use>
