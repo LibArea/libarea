@@ -175,7 +175,7 @@ article,
 }
 
 .note {
-  padding: 5px 20px;
+  padding: 5px 5px 5px 20px;
   margin-bottom: 5px;
   overflow-wrap: break-word;
   background-color: var(--gray-100);
@@ -183,7 +183,7 @@ article,
 }
 
 .tip {
-  padding: 5px 20px;
+  padding: 5px 5px 5px 20px;
   margin-bottom: 5px;
   overflow-wrap: break-word;
   background-color: var(--beige);
@@ -191,7 +191,7 @@ article,
 }
 
 .warning {
-  padding: 5px 20px;
+  padding: 5px 5px 5px 20px;
   margin-bottom: 5px;
   overflow-wrap: break-word;
   background-color: var(--red-200);
@@ -269,6 +269,15 @@ article,
 .number-notif.show,
 .video-pl {
   display: block;
+}
+
+[data-icon]::before {
+  content: attr(data-icon);
+  font-family: 'YourIconFontName', sans-serif;
+  margin-left: 0.5em;
+  color: blue;
+  font-size: 1.2em;
+  float: right;
 }
 
 /* ========== List ========== */
