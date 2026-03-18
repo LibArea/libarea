@@ -37,27 +37,27 @@
 				noIcon: true,
 				name: 'ℹ️ note',
 				onclick: (event) => {
-					return cherry.insert(' ::: note \n <?= __('app.write_text'); ?> \n :::');
+					return cherry.insert('::: note \n <?= __('app.write_text'); ?> \n:::');
 				}
 			}, {
 				noIcon: true,
 				name: '💡 tip',
 				onclick: (event) => {
-					return cherry.insert(' ::: tip \n <?= __('app.write_text'); ?> \n ::: ');
+					return cherry.insert('::: tip \n <?= __('app.write_text'); ?> \n:::');
 				}
 			},
 			{
 				noIcon: true,
 				name: '⚠️ warning',
 				onclick: (event) => {
-					return cherry.insert(' ::: warning \n <?= __('app.write_text'); ?> \n ::: ');
+					return cherry.insert('::: warning \n <?= __('app.write_text'); ?> \n:::');
 				}
 			},
 			{
 				noIcon: true,
 				name: '📸 foto',
 				onclick: (event) => {
-					return cherry.insert(' ::: foto \n IMG  \n _<?= __('app.write_text'); ?>_ \n ::: ');
+					return cherry.insert('::: foto \n IMG  \n _<?= __('app.write_text'); ?>_ \n:::');
 				}
 			},
 		]

@@ -39,6 +39,31 @@ class Parser
 		// https://github.com/php-collective/djot-php/tree/master
 		$converter = new DjotConverter(safeMode: SafeMode::strict());
 		
+		$admonitionIcons = [
+			'note' => 'ℹ️',
+			'tip' => '💡',
+			'warning' => '⚠️',
+			'danger' => '🚨',
+			'success' => '✅',
+		];
+
+		$converter->on('render.div', function (RenderEvent $event) use ($admonitionIcons): void {
+			$div = $event->getNode();
+			if (!$div instanceof Div) {
+				return;
+			}
+
+			$class = $div->getAttribute('class') ?? '';
+			foreach ($admonitionIcons as $type => $icon) {
+				if (str_contains($class, $type)) {
+					$div->setAttribute('class', 'admonition ' . $class);
+					$div->setAttribute('data-icon', $icon);
+
+					return;
+				}
+			}
+		});
+	 
 		$parser = $converter->getParser();	
 		$parser->addBlockPattern('/^:::spoiler\s*$/', function($lines, $start, $parent, $parser) {
 		      $endPattern = '/^:::\s*$/';
@@ -65,7 +90,7 @@ class Parser
 			$link->setAttribute('class', 'green');
 			return $link;
 		});
-		
+
 		$text = $converter
 			->addExtension(new AutolinkExtension()) 
 			->addExtension(new ExternalLinksExtension())
