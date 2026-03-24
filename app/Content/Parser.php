@@ -16,8 +16,6 @@ use Djot\Extension\SmartQuotesExtension;
 use Djot\Extension\MentionsExtension;
 use Djot\SafeMode;
 
-use MediaEmbed\MediaEmbed;
-
 use App\Models\User\UserModel;
 
 class Parser
@@ -26,7 +24,7 @@ class Parser
     {
         $text = self::parse($content);
         $text = self::gif($text);
-		$text = self::video($text);
+        $text = self::video($text);
 
         return LitEmoji::encodeUnicode($text);
     }
@@ -34,71 +32,63 @@ class Parser
     public static function parse(string $content)
     {
         $content = str_replace('{cut}', '', $content);
-		$content = str_replace('[^1]', '', $content);
+        $content = str_replace('[^1]', '', $content);
 
-		// https://github.com/php-collective/djot-php/tree/master
-		$converter = new DjotConverter(safeMode: SafeMode::strict());
-		
-		$admonitionIcons = [
-			'note' => 'ℹ️',
-			'tip' => '💡',
-			'warning' => '⚠️',
-			'danger' => '🚨',
-			'success' => '✅',
-		];
+        // https://github.com/php-collective/djot-php/tree/master
+        $converter = new DjotConverter(safeMode: SafeMode::strict());
 
-		$converter->on('render.div', function (RenderEvent $event) use ($admonitionIcons): void {
-			$div = $event->getNode();
-			if (!$div instanceof Div) {
-				return;
-			}
+        self::reminders($converter);
 
-			$class = $div->getAttribute('class') ?? '';
-			foreach ($admonitionIcons as $type => $icon) {
-				if (str_contains($class, $type)) {
-					$div->setAttribute('class', 'admonition ' . $class);
-					$div->setAttribute('data-icon', $icon);
+        self::topic($converter);
 
-					return;
-				}
-			}
-		});
-	 
-		$parser = $converter->getParser();	
-		$parser->addBlockPattern('/^:::spoiler\s*$/', function($lines, $start, $parent, $parser) {
-		      $endPattern = '/^:::\s*$/';
-		      $content = [];
-		      $i = $start + 1;
-		      while ($i < count($lines) && !preg_match($endPattern, $lines[$i])) {
-		          $content[] = $lines[$i];
-		          $i++;
-		      }
-		      $div = new Div();
-		      $div->setAttribute('class', 'spoiler');
-		      // Parse content inside
-		      $parser->parseBlockContent($div, $content);
-		      $parent->appendChild($div);
-		      return $i - $start + 1; // +1 for closing :::
-		  });
-		
-		// Ссылка на темы, например: #libarea
-		$parser = $converter->getParser()->getInlineParser();
-		$parser->addInlinePattern('/#([a-zA-Z][a-zA-Z0-9_]*)/', function ($match, $groups, $p) {
-			$tag = $groups[1];
-			$link = new Link('/topic/' . strtolower($tag));
-			$link->appendChild(new Text('#' . $tag));
-			$link->setAttribute('class', 'green');
-			return $link;
-		});
+        $text = $converter
+            ->addExtension(new AutolinkExtension())
+            ->addExtension(new ExternalLinksExtension())
+            ->addExtension(new SmartQuotesExtension(locale: config('general', 'lang')))
+            ->addExtension(new MentionsExtension(urlTemplate: '/@{username}', cssClass: 'green',))
+            ->convert($content);
 
-		$text = $converter
-			->addExtension(new AutolinkExtension()) 
-			->addExtension(new ExternalLinksExtension())
-			->addExtension(new SmartQuotesExtension(locale: config('general', 'lang')))
-			->addExtension(new MentionsExtension(urlTemplate: '/@{username}', cssClass: 'green',))
-			->convert($content);
+        return $text;
+    }
 
-        return $text;  
+    public static function reminders($converter)
+    {
+        $admonitionIcons = [
+            'note' => 'ℹ️',
+            'tip' => '💡',
+            'warning' => '⚠️',
+            'danger' => '🚨',
+            'success' => '✅',
+        ];
+
+        $converter->on('render.div', function (RenderEvent $event) use ($admonitionIcons): void {
+            $div = $event->getNode();
+            if (!$div instanceof Div) {
+                return;
+            }
+
+            $class = $div->getAttribute('class') ?? '';
+            foreach ($admonitionIcons as $type => $icon) {
+                if (str_contains($class, $type)) {
+                    $div->setAttribute('class', 'admonition ' . $class);
+                    $div->setAttribute('data-icon', $icon);
+
+                    return;
+                }
+            }
+        });
+    }
+
+    public static function topic($converter)
+    {
+        $parser = $converter->getParser()->getInlineParser();
+        $parser->addInlinePattern('/#([a-zA-Z][a-zA-Z0-9_]*)/', function ($match, $groups, $p) {
+            $tag = $groups[1];
+            $link = new Link('/topic/' . strtolower($tag));
+            $link->appendChild(new Text('#' . $tag));
+            $link->setAttribute('class', 'green');
+            return $link;
+        });
     }
 
     public static function gif($content)
@@ -134,10 +124,10 @@ class Parser
 
     public static function video($content)
     {
-		// TODO
+        // TODO
         return $content;
-	}	
-		 
+    }
+
     // TODO: Let's check the simple version for now.
     public static function cut($text, $length = 800)
     {
@@ -165,8 +155,8 @@ class Parser
     // Content management
     public static function noHTML(string $content, int $lenght = 150)
     {
-		$converter = new DjotConverter(safeMode: SafeMode::strict());
-		$text = $converter->convert($content);
+        $converter = new DjotConverter(safeMode: SafeMode::strict());
+        $text = $converter->convert($content);
 
         $content = str_replace(["\r\n", "\r", "\n", "#"], ' ', $text);
 
@@ -177,8 +167,8 @@ class Parser
 
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8'): string
     {
-		$text = LitEmoji::encodeUnicode($text);
-		
+        $text = LitEmoji::encodeUnicode($text);
+
         if (mb_strlen($text, $charset) >= $lenght) {
             $wrap = wordwrap($text, $lenght, '~');
             $ret = mb_strpos($wrap, '~', 0, $charset);
@@ -190,7 +180,7 @@ class Parser
 
         return $text;
     }
-	
+
     public static function parseUsers($content, $with_user = false, $to_uid = false)
     {
         preg_match_all('/(?<=^|\s|>)@([a-z0-9_]+)/i', strip_tags($content), $matchs);
@@ -245,5 +235,4 @@ class Parser
 
         return $content;
     }
-	
 }
