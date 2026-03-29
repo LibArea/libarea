@@ -117,21 +117,5 @@ $counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
     </span>
   </div>
 
-	<?php foreach (config('profile', 'sidebar') as $block) : ?>
-	  <?php if ($profile[$block['title']]) : ?>
-		<div class="mt5">
-		  <?php if ($block['url']) : ?>
-			<?php if ($counts > 3) : ?>
-			  <span class="gray-600"><?= __($block['lang']); ?>:</span>
-			  <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-				<span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-			  </a>
-			<?php endif; ?>
-		  <?php else : ?>
-			<span class="gray-600"><?= __($block['lang']); ?>:</span>
-			<span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-		  <?php endif; ?>
-		</div>
-	  <?php endif; ?>
-	<?php endforeach; ?>
+  <?php insert('/content/user/profile/profile-fields', ['profile' => $profile]); ?>
 </div>

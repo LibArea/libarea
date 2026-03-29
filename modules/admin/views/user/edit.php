@@ -134,16 +134,7 @@ use App\Bootstrap\Services\Auth\RegType; ?>
 
     <h3><?= __('admin.contacts'); ?></h3>
 
-
-    <?php foreach (config('setting', 'contacts') as $block) : ?>
-      <fieldset class="max-w-sm">
-        <label for="post_title"><?= __($block['lang']); ?></label>
-        <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-        <?php if ($block['help']) : ?>
-          <div class="help"><?= $block['help']; ?></div>
-        <?php endif; ?>
-      </fieldset>
-    <?php endforeach; ?>
+    <?php insert('/content/user/setting/form/contacts-fields', ['data' => $data]); ?>
 
     <fieldset>
       <input type="hidden" name="nickname" id="nickname" value="">

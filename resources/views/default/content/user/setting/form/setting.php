@@ -36,20 +36,7 @@
 <h3 class="m0 mt15"><?= __('app.contacts'); ?></h3>
 <div class="gray-600 text-sm mb20"><?= __('app.public_data'); ?></div>
 
-<?php foreach (config('setting', 'contacts') as $block) : ?>
-
-  <fieldset>
-    <div class="form-label input-label"><label><?= __($block['lang']); ?></label></div>
-    <div class="form-element">
-      <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-
-      <?php if ($block['help']) : ?>
-        <div class="help"><?= $block['help']; ?></div>
-      <?php endif; ?>
-    </div>
-  </fieldset>
-
-<?php endforeach; ?>
+<?php insert('/content/user/setting/form/contacts-fields', ['data' => $data]); ?>
 
 <h3 class="m0 mt15"><?= __('app.other'); ?></h3>
 

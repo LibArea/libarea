@@ -496,7 +496,5 @@ return [
 		'notification'	=> '/config/notification.php',
 		'publication'	=> '/config/publication.php',
         'trust-levels'	=> '/config/trust-levels.php',
-        'setting'     	=> '/config/user/setting.php',
-        'profile'     	=> '/config/user/profile.php',
     ],
 ];
