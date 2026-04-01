@@ -62,3 +62,23 @@ if ($container->user()->id() > 0) {
         echo '</div>';
     }
 }
+
+?>
+
+<?php if (is_array($topics)) : ?>
+  <?php if (count($topics) > 0) : ?>
+    
+        <h4 class="uppercase-box mt20 ml10"><?= __('app.recommended'); ?></h4>
+        <ul class="menu">
+          <?php foreach ($topics as $recomm) : ?>
+            <li class="flex justify-between items-center mb10">
+              <a class="flex items-center gap-sm" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+                <?= Img::image($recomm['facet_img'], '', 'img-sm', 'logo', 'small'); ?>
+                <?= htmlEncode($recomm['facet_title']); ?>
+              </a>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      
+    <?php endif; ?>
+  <?php endif; ?>

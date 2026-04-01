@@ -184,12 +184,7 @@ class HomeModel extends Model
     public static function getSubscription()
     {
         $sql = "SELECT 
-                    facet_id, 
-                    facet_slug, 
-                    facet_title,
-                    facet_user_id,
-                    facet_img,
-                    facet_type                   
+                    facet_id                  
                         FROM facets 
                            LEFT JOIN facets_signed ON signed_facet_id = facet_id 
                                 WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')

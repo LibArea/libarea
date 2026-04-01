@@ -5,6 +5,7 @@ declare(strict_types=1);
 use LitEmoji\LitEmoji;
 
 use Djot\DjotConverter;
+use Djot\SafeMode;
 use Djot\Node\Inline\Link;
 use Djot\Node\Inline\Text;
 use Djot\Event\RenderEvent;
@@ -14,7 +15,6 @@ use Djot\Extension\AutolinkExtension;
 use Djot\Extension\ExternalLinksExtension;
 use Djot\Extension\SmartQuotesExtension;
 use Djot\Extension\MentionsExtension;
-use Djot\SafeMode;
 
 use App\Models\User\UserModel;
 
@@ -35,7 +35,10 @@ class Parser
         $content = str_replace('[^1]', '', $content);
 
         // https://github.com/php-collective/djot-php/tree/master
-        $converter = new DjotConverter(safeMode: SafeMode::strict());
+		$converter = new DjotConverter(
+			safeMode: SafeMode::strict(),
+			significantNewlines: true,
+		);
 
         self::reminders($converter);
 

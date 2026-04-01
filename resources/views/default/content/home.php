@@ -47,28 +47,5 @@
     </div>
   <?php endif; ?>
 
-  <?php if (is_array($data['topics'])) : ?>
-    <?php if (count($data['topics']) > 0) : ?>
-      <div class="box">
-        <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
-        <ul>
-          <?php foreach ($data['topics'] as $recomm) : ?>
-            <li class="flex justify-between items-center mb10">
-              <a class="flex items-center gap-sm" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Img::image($recomm['facet_img'], '', 'img-sm', 'logo', 'small'); ?>
-                <?= htmlEncode($recomm['facet_title']); ?>
-              </a>
-              <?php if ($container->user()->id()) : ?>
-                <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">
-                  <?= __('app.read'); ?>
-                </div>
-              <?php endif; ?>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
-  <?php endif; ?>
-
   <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 </aside>

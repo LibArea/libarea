@@ -57,10 +57,6 @@ class HomeController extends Controller
     {
         $subscription = HomeModel::getSubscription();
 
-        // Topics signed by the participant. If a guest, then default.    
-        // Темы на которые подписан участник. Если гость, то дефолтные.
-        $topics = \App\Models\FacetModel::advice($subscription);
-
         $signed = [];
         foreach ($subscription as $ind => $row) {
             $signed[$ind] = $row['facet_id'];
@@ -74,7 +70,6 @@ class HomeController extends Controller
                     'pagesCount'        => HomeModel::feedCount($signed, $sheet),
                     'pNum'              => Html::pageNumber(),
                     'sheet'             => $sheet,
-                    'topics'            => $topics,
                     'type'              => 'main',
                     'latest_comments'   => CommentModel::latestComments(6),
                     'contents'			=> HomeModel::feed($signed, Html::pageNumber(), $sheet),

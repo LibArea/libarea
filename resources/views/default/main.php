@@ -53,14 +53,14 @@ $facet = $data['facet'] ?? false;
   <div id="contentWrapper">
       <nav class="menu__left mb-none">
         <ul class="menu">
-          <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $data['topics_user']]); ?>
+          <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $data['topics_user'], 'topics' => $data['topics'] ?? []]); ?>
         </ul>
         <footer>
           <b class="uppercase-box ml10"><?= config('meta', 'name'); ?></b>
           <ul class="menu">
             <?= insert('/_block/navigation/nav-footer'); ?>
           </ul>
-          <div class="ml10 mb5 text-sm gray-600">
+          <div class="ml10 mb20 text-sm gray-600">
             <?= config('meta', 'name'); ?> &copy; <?= date('Y'); ?>
           </div>
         </footer>

@@ -59,6 +59,7 @@
 		],
 
 		'type' => $type,
+		'topics' => $topics,
 		'topics_user' => $topics_user,
 	]
 );

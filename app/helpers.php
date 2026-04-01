@@ -79,6 +79,11 @@ function render(string $name, array $data = [])
 
 	$data['data']['topics_user'] = UserData::getUserFacets();
 		
+    // Topics signed by the participant. If a guest, then default.    
+    // Темы на которые подписан участник. Если гость, то дефолтные.
+    $subscription = \App\Models\HomeModel::getSubscription();
+    $data['data']['topics'] = \App\Models\FacetModel::advice($subscription);
+		
 
 	echo view($mainTheme . '/main', ['content' => $page_content, 'data' => $data['data'], 'meta' => $data['meta']]);
 }

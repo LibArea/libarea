@@ -8,7 +8,7 @@ trait Related
 {
     private function relatedPost()
     {
-        $data = Request::allPost();
+        $data = Request::getParsedBody();
         $json_post  = $data['post_select'] ?? false;
         if ($json_post) {
             $arr_post   = json_decode($json_post, true);
