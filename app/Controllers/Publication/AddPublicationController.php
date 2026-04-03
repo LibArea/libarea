@@ -149,6 +149,7 @@ class AddPublicationController extends Controller
 			}
 		} else {
 			$slug = 'post-' . date('d-m-Y');
+			$data['title'] = '';
 		}
 
         $post_related = $this->relatedPost();
