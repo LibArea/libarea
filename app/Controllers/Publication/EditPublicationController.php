@@ -141,6 +141,10 @@ class EditPublicationController extends Controller
 			$data['content_type'] = 'article';
         }
 
+		if ($data['content_type'] == 'post') {
+			$data['title'] = '';
+		}
+
 		PublicationModel::editPost([
 			'post_id' 			=> $data['id'],
 			'post_title' 		=> strip_tags($data['title']) ?? '',

@@ -102,7 +102,7 @@
   <?php endforeach; ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>
-    <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
+    <?= insert('/_block/facet/recommended-topics', ['topics' => $data['topics']]); ?>
   <?php endif; ?>
   <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
 <?php endif; ?>

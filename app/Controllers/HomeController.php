@@ -71,6 +71,7 @@ class HomeController extends Controller
                     'pNum'              => Html::pageNumber(),
                     'sheet'             => $sheet,
                     'type'              => 'main',
+					'topics' 			=> \App\Models\FacetModel::advice($subscription),
                     'latest_comments'   => CommentModel::latestComments(6),
                     'contents'			=> HomeModel::feed($signed, Html::pageNumber(), $sheet),
                 ],

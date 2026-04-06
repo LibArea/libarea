@@ -1,6 +1,6 @@
 <?php if ($container->request()->getUri()->getPath() == '/') : ?>
   <div class="grid-cols-2 mt15">
-    <?php foreach ($data['topics'] as $topic) : ?>
+    <?php foreach ($topics as $topic) : ?>
       <div class="box shadow-bottom flex gap items-center justify-between">
         <div>
           <a class="" title="<?= htmlEncode($topic['facet_title']); ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
