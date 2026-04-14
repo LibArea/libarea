@@ -125,11 +125,25 @@ class Parser
         return  $content;
     }
 
-    public static function video($content)
-    {
-        // TODO
-        return $content;
-    }
+	public static function video($content)
+	{
+		preg_match_all('#\[video\](.*?)\[/video\]#is', $content, $matchs);
+
+		if (!empty($matchs[1])) {
+			foreach ($matchs[1] as $key => $videoUrl) {
+				// Очищаем ссылку от возможных пробелов или тегов
+				$videoUrl = trim(strip_tags($videoUrl));
+				
+				if ($videoUrl) {
+					$html = '<video width="100%" height="auto" src="' . $videoUrl . '" controls preload="metadata"></video>';
+					// Заменяем конкретное вхождение [video]...[/video] на HTML5 плеер
+					return str_replace($matchs[0][$key], $html, $content);
+				}
+			}
+		}
+
+		return $content;
+	}
 
     // TODO: Let's check the simple version for now.
     public static function cut($text, $length = 800)
