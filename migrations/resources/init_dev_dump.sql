@@ -382,7 +382,7 @@ CREATE TABLE `invitations` (
 
 CREATE TABLE `messages` (
   `message_id` int(11) NOT NULL,
-  `message_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `message_user_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
   `message_dialog_id` int(11) DEFAULT NULL,
   `message_content` text DEFAULT NULL,
   `message_date` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -1028,7 +1028,7 @@ ALTER TABLE `invitations`
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`message_id`),
   ADD KEY `message_dialog_id` (`message_dialog_id`),
-  ADD KEY `message_sender_id` (`message_sender_id`),
+  ADD KEY `message_user_id` (`message_user_id`),
   ADD KEY `message_add_time` (`message_date`),
   ADD KEY `message_sender_remove` (`message_sender_remove`),
   ADD KEY `message_recipient_remove` (`message_recipient_remove`),

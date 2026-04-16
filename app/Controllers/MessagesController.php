@@ -202,18 +202,18 @@ class MessagesController extends Controller
     {
         $id = Request::post('id')->asInt();
         $message = MessagesModel::getMessage($id);
-		
-		if (!$message || (int)$message['message_sender_id'] !== (int)$this->container->user()->id()) {
-			redirect('/');
-		}
+	
+        if (!$this->container->access()->author('message', $message)) {
+            return;
+        }
 
         insert(
             '/_block/form/form-for-editing',
             [
                 'data'  => [
                     'id'        => $id,
-                    'content'    => $message['message_content'],
-                    'type'         => 'message',
+                    'content'	=> $message['message_content'],
+                    'type'		=> 'message',
                 ]
             ]
         );
@@ -227,7 +227,7 @@ class MessagesController extends Controller
         $message = MessagesModel::getMessage($id);
         notEmptyOrView404($message);
 
-        if ($message['message_sender_id'] != $this->container->user()->id()) {
+        if ($message['message_user_id'] != $this->container->user()->id()) {
             Msg::redirect(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
         }
 

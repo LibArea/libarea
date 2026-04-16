@@ -108,7 +108,7 @@ class MessagesModel extends Model
 
     public static function getMessage(int $id)
     {
-        return DB::run("SELECT message_content, message_sender_id, message_dialog_id FROM messages WHERE message_id = ?", [$id])->fetch();
+        return DB::run("SELECT message_content, message_user_id, message_date, message_dialog_id FROM messages WHERE message_id = ?", [$id])->fetch();
     }
 
     /**
@@ -121,7 +121,7 @@ class MessagesModel extends Model
     {
         $sql = "SELECT  
                     message_id,
-                    message_sender_id,
+                    message_user_id,
                     message_dialog_id,
                     message_content,
                     message_date,
@@ -139,7 +139,7 @@ class MessagesModel extends Model
     {
         $sql = "SELECT  
                     message_id,
-                    message_sender_id,
+                    message_user_id,
                     message_dialog_id,
                     message_content,
                     message_date,
@@ -201,7 +201,7 @@ class MessagesModel extends Model
             [
                 'message_dialog_id' => $messages_dialog_id,
                 'message_content'   => $message_content,
-                'message_sender_id' => $dialog_sender_id,
+                'message_user_id' => $dialog_sender_id,
             ]
         );
 
@@ -248,7 +248,7 @@ class MessagesModel extends Model
      */
     public static function createMessage(array $params)
     {
-        $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id) VALUES(:message_dialog_id, :message_content, :message_sender_id)";
+        $sql = "INSERT INTO messages(message_dialog_id, message_content, message_user_id) VALUES(:message_dialog_id, :message_content, :message_user_id)";
 
         DB::run($sql, $params);
     }

@@ -1428,3 +1428,7 @@ ALTER TABLE `votes_comment`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  
+  
+  
+ALTER TABLE `messages` CHANGE `message_sender_id` `message_user_id` INT NULL DEFAULT NULL COMMENT 'Отправитель';  

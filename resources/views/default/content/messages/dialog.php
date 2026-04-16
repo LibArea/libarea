@@ -20,8 +20,8 @@
             <?php
             $login  = $val['login'];
             $ava    = $val['avatar'];
-            $id     = $val['message_sender_id'];
-            if ($val['message_sender_id'] == $container->user()->id()) :
+            $id     = $val['message_user_id'];
+            if ($val['message_user_id'] == $container->user()->id()) :
               $login  = $container->user()->login();
               $ava    = $container->user()->avatar();
               $id     = $container->user()->id();
@@ -36,11 +36,9 @@
 			  <?php endif; ?>
             </div>
             <div class="content-body">
-              <?= $val['message_content']; ?> 
-			  <?php if($val['message_sender_id'] == $container->user()->id()) : ?>
-			    <?php if ($container->access()->limitTime($val['message_date'], 30) === true) : ?>
-				  <a data-type="editmessage" data-id="<?= $val['message_id']; ?>" class="activ-form right text-sm gray-600"><?= __('app.edit'); ?></a>
-				<?php endif; ?>
+              <?= $val['message_content']; ?>
+			  <?php if ($container->access()->author('message', $val) === true) : ?>
+	  		    <a data-type="editmessage" data-id="<?= $val['message_id']; ?>" class="activ-form right text-sm gray-600"><?= __('app.edit'); ?></a>
 			  <?php endif; ?>
             </div>
 			<div id="el_addentry<?= $val['message_id']; ?>" class="none"></div>

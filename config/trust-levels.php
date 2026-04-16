@@ -77,6 +77,7 @@ return [
     'edit_time_post'    => 60,
     'edit_time_answer'  => 30,
     'edit_time_comment' => 30,
+	'edit_time_message'	=> 30,
     'edit_time_poll'    => 0,
 
     /*
