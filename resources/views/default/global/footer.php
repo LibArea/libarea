@@ -39,43 +39,45 @@
     const update_time = <?= config('general', 'notif_update_time'); ?>;
     const site_name = "<?= config('meta', 'title'); ?>";
 
-    function load_notification() {
-      fetch("/notif", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
-        .then(function(response) {
-          if (!response.ok) {
-            return Promise.reject(new Error(
-              'Response failed: ' + response.status + ' (' + response.statusText + ')'
-            ));
-          }
-          return response.json();
-        }).then(function(data) {
-          if (data != false) {
-            let notif = getById('notif');
-            let number = notif.querySelector('.number-notif');
+	function load_notification() {
+	  fetch("/notif", {
+		method: "POST",
+		headers: {
+		  'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	  })
+	  .then(function(response) {
+		if (!response.ok) {
+		  return Promise.reject(new Error(
+			'Response failed: ' + response.status + ' (' + response.statusText + ')'
+		  ));
+		}
+		return response.json();
+	  })
+	  .then(function(data) {
+		if (data != false) {
+		  let notif = getById('notif');
+		  let number = notif.querySelector('.number-notif');
 
-            notif.firstElementChild.classList.add("active");
+		  notif.firstElementChild.classList.add("active");
+		  number.classList.add("show");
+		  number.innerHTML = data.length;
 
-            number.classList.add("show");
-            number.innerHTML = data.length;
+		  notif_title('\uD83D\uDCAC (+' + data.length + ') ' + site_name + '', '\uD83D\uDD14 (+' + data.length + ') ' + site_name + '');
+		}
+	  })
+	  .catch(function(error) {
+		// error
+		console.error('Ошибка загрузки уведомлений:', error);
+	  });
+	}
 
-            notif_title('\uD83D\uDCAC (+' + data.length + ') ' + site_name + '', '\uD83D\uDD14 (+' + data.length + ') ' + site_name + '');
-          }
-        }).catch(function(error) {
-          // error
-        });
-    }
+	function notif_title(o, a) {
+	  document.title == o ? (document.title = a) : (document.title = o)
+	}
 
-    function notif_title(o, a) {
-      document.title == o ? (document.title = a) : (document.title = o)
-    }
-    setInterval(function() {
-      load_notification();
-    }, update_time);
+	load_notification();
+	setInterval(load_notification, update_time);
   <?php else : ?>
     queryAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
