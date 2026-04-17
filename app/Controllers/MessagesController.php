@@ -227,7 +227,7 @@ class MessagesController extends Controller
         $message = MessagesModel::getMessage($id);
         notEmptyOrView404($message);
 
-        if ($message['message_user_id'] != $this->container->user()->id()) {
+        if (!$this->container->access()->author('message', $message)) {
             Msg::redirect(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
         }
 
