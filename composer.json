@@ -45,7 +45,8 @@
 		"elvanto/litemoji": "dev-master",
 		"respect/validation": "2.4.x-dev",
 		"s2/rose": "dev-master",
-		"php-collective/djot": "dev-master"
+		"php-collective/djot": "dev-master",
+		"dereuromark/media-embed": "dev-master"
     },
     "autoload": {
         "classmap": [

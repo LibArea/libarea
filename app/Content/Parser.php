@@ -16,6 +16,8 @@ use Djot\Extension\ExternalLinksExtension;
 use Djot\Extension\SmartQuotesExtension;
 use Djot\Extension\MentionsExtension;
 
+use MediaEmbed\MediaEmbed;
+
 use App\Models\User\UserModel;
 
 class Parser
@@ -24,7 +26,7 @@ class Parser
     {
         $text = self::parse($content);
         $text = self::gif($text);
-        $text = self::video($text);
+        $text = self::videoTag($text);
 
         return LitEmoji::encodeUnicode($text);
     }
@@ -43,6 +45,8 @@ class Parser
         self::reminders($converter);
 
         self::topic($converter);
+		
+		self::video($converter);
 
         $text = $converter
             ->addExtension(new AutolinkExtension())
@@ -94,6 +98,41 @@ class Parser
         });
     }
 
+    public static function video($converter)
+    {
+		// ADD
+		// https://php-collective.github.io/djot-php/cookbook/#installation
+		
+		$mediaEmbed = new MediaEmbed();
+
+		$converter->on('render.div', function (RenderEvent $event) use ($mediaEmbed): void {
+			$node = $event->getNode();
+			if (!$node instanceof Div) {
+				return;
+			}
+
+			// Check for 'video' class
+			$classes = preg_split('/\s+/', trim((string)$node->getAttribute('class')));
+			if (!in_array('video', $classes, true)) {
+				return;
+			}
+
+			// Extract URL from div content
+			$url = trim(strip_tags($event->getChildrenHtml()));
+			$object = $mediaEmbed->parseUrl($url);
+
+			if ($object === null) {
+				return; // Not a recognized video URL
+			}
+
+			$html = '<figure class="video-embed">' . "\n";
+			$html .= $object->getEmbedCode();
+			$html .= "</figure>\n";
+
+			$event->setHtml($html);
+		});
+    }
+
     public static function gif($content)
     {
         preg_match_all('/\:(\w+)\:/mUs', strip_tags($content), $matchs);
@@ -125,7 +164,7 @@ class Parser
         return  $content;
     }
 
-	public static function video($content)
+	public static function videoTag($content)
 	{
 		preg_match_all('#\[video\](.*?)\[/video\]#is', $content, $matchs);
 

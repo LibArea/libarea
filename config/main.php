@@ -142,6 +142,9 @@ return [
         // For some versions of Elge browser
         'font-src' => [
             'https://libarea.ru',
-        ]
+        ],
+		'frame-src' => [
+			'www.youtube.com',
+		]
     ],
 ];
