@@ -8,9 +8,7 @@ $blog = $data['blog'][0] ?? null;
     <?php if ($item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-yellow mb15 gray-600">
-          <svg class="icon">
-            <use xlink:href="#chevron-right"></use>
-          </svg>
+		  <?= icon('icons', 'chevron-right'); ?>
           <?= __('app.post_merged'); ?>
           <?php foreach ($data['united'] as $merged) : ?>
             (id <?= $merged['post_id']; ?>):
@@ -85,10 +83,7 @@ $blog = $data['blog'][0] ?? null;
         <?php endif; ?>
         <?php if ($item['post_url_domain']) : ?>
           <div class="italic mb15 text-sm table gray">
-            <?= __('app.source'); ?>:
-            <svg class="icon">
-              <use xlink:href="#link"></use>
-            </svg>
+            <?= __('app.source'); ?>: <?= icon('icons', 'link'); ?>
             <a class="gray" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
               <?= $item['post_url_domain']; ?>
             </a>
@@ -100,11 +95,9 @@ $blog = $data['blog'][0] ?? null;
         <?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?>
       <?php endif; ?>
 
-      <div class="flex flex-row items-center text-sm mt15">
+      <div class="flex flex-row items-center text-sm mt15 gray-600">
         <?php if (!empty($data['facets'])) : ?>
-          <svg class="icon gray-600">
-            <use xlink:href="#hash"></use>
-          </svg>
+		  <?= icon('icons', 'hash'); ?>
           <?php foreach ($data['facets'] as $topic) : ?>
             <a class="gray-600 mr15 lowercase" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= htmlEncode($topic['facet_title']); ?></a>
           <?php endforeach; ?>
@@ -124,9 +117,7 @@ $blog = $data['blog'][0] ?? null;
         <div class="items-center flex gap gray-600">
           <?= Html::votes($item, 'post'); ?>
           <div class="items-center flex gap-sm mb-none">
-            <svg class="icon">
-              <use xlink:href="#eye"></use>
-            </svg>
+		    <?= icon('icons', 'eye'); ?>
             <?= $item['post_hits_count'] == 0 ? 1 : Html::formatToHuman($item['post_hits_count']); ?>
           </div>
         </div>
@@ -147,10 +138,8 @@ $blog = $data['blog'][0] ?? null;
             </a>
           <?php endif; ?>
 
-          <div class="pointer" data-a11y-dialog-show="id-share">
-            <svg class="icon gray-600">
-              <use xlink:href="#share"></use>
-            </svg>
+          <div class="pointer gray-600" data-a11y-dialog-show="id-share">
+		    <?= icon('icons', 'share'); ?>
           </div>
           <?php if ($item['post_draft'] == 0) : ?>
             <?= Html::favorite($item['post_id'], 'post', $item['tid']); ?>

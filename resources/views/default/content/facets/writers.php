@@ -4,9 +4,7 @@
   <div class="box">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex gap items-center">
-        <svg class="icon red">
-          <use xlink:href="#award"></use>
-        </svg>
+	    <?= icon('icons', 'award', 24, 'red'); ?>
         <h2 class="gray-600 m0"><?= __('app.by_deposit'); ?></h2>
       </div>
       <hr class="mb20">
@@ -37,9 +35,7 @@
 </main>
 <aside>
   <div class="box gray-600">
-    <svg class="icon">
-      <use xlink:href="#calendar"></use>
-    </svg>
+    <?= icon('icons', 'calendar'); ?>
     <span class="middle"><?= langDate($topic['facet_date']); ?></span>
   </div>
   <?= insert('/_block/facet/topic', ['data' => $data]); ?>

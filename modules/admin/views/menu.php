@@ -11,9 +11,9 @@
 
       <li<?= $class; ?>>
         <a href="<?= url($item['url']); ?>">
-          <?php if (!empty($item['icon'])) : ?><svg class="icon">
-              <use xlink:href="#<?= $item['icon']; ?>"></use>
-            </svg><?php endif; ?>
+          <?php if (!empty($item['icon'])) : ?>
+			<?= icon('icons', $item['icon']); ?>
+		  <?php endif; ?>
           <?= __($item['title']); ?>
         </a>
         </li>

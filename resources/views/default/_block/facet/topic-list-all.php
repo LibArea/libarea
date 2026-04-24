@@ -24,9 +24,7 @@
       <div class="mt10 gray flex justify-between">
         <span class="mb-none"><?= fragment($facet['facet_short_description'], 32); ?></span>
         <span class="right gray-600">
-          <svg class="icon">
-            <use xlink:href="#post"></use>
-          </svg>
+          <?= icon('icons', 'post'); ?>
           <?= $facet['facet_count']; ?>
         </span>
       </div>

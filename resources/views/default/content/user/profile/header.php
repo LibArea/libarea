@@ -34,24 +34,18 @@ $counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
       <div class="right m15">
         <?php if ($profile['id'] == $container->user()->id()) : ?>
           <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
-            <svg class="icon">
-              <use xlink:href="#settings"></use>
-            </svg>
+		    <?= icon('icons', 'settings'); ?>
           </a>
         <?php else : ?>
           <div class="flex gap-lg items-center">
             <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
             <a title="<?= __('app.ignore'); ?>" id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
-              <svg class="icon">
-                <use xlink:href="#lock"></use>
-              </svg></i>
+              <?= icon('icons', 'lock'); ?>
             </a>
 
             <?php if ($data['button_pm'] === true) : ?>
               <a title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
-                <svg class="icon">
-                  <use xlink:href="#mail"></use>
-                </svg>
+                <?= icon('icons', 'mail'); ?>
               </a>
             <?php endif; ?>
           </div>
@@ -66,9 +60,7 @@ $counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
         <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
 
           <?php if ($profile['up_count'] > 0) : ?>
-            <svg class="icon red">
-              <use xlink:href="#heart"></use>
-            </svg>
+		    <?= icon('icons', 'heart', 24, 'con red'); ?>
             <span class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></span>
           <?php endif; ?>
       </h1>
@@ -109,9 +101,7 @@ $counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
   </div>
 
   <div class="gray-600 mt5">
-    <svg class="icon">
-      <use xlink:href="#calendar"></use>
-    </svg>
+    <?= icon('icons', 'calendar'); ?>
     <span class="middle lowercase text-sm">
       <?= langDate($profile['created_at']); ?>
     </span>

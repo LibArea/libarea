@@ -20,7 +20,7 @@ return [
     'notification_info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune.',
 
     'add_post'              => 'Încercați să scrieți cu o formatare adecvată, pentru o citire mai bună.',
-	'add_article' 			=> 'Folosește eticheta <b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br> Se ascunde sub pisica partea de text care urmează etichetei (va fi scris „Citește mai mult”).',
+	'add_article' 			=> 'Folosește eticheta <b>cut</b>.<br> Se ascunde sub pisica partea de text care urmează etichetei (va fi scris „Citește mai mult”).',
 	'add_question' 			=> 'Întrebarea începe cu o literă mare și se termină cu un semn de întrebare.',
 	'add_note'				=> 'Dacă analiza nu a fost finalizată cu succes. Completați manual câmpurile obligatorii.',
 	'add_page'				=> 'Aceasta este documentația oficială. Încercați să scrieți fără greșeli.',

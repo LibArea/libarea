@@ -9,9 +9,7 @@
       <?php if ($container->user()->admin() || $data['facet']['facet_user_id'] == $container->user()->id()) : ?>
         <sup>
           <a class="ml5" href="<?= url('facet.form.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg>
+		    <?= icon('icons', 'edit'); ?>
           </a>
         </sup>
       <?php endif; ?>

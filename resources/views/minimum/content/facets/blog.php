@@ -11,9 +11,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 <?php else : ?>
   <main>
     <div class="box center gray-600">
-      <svg class="icon max">
-        <use xlink:href="#x-octagon"></use>
-      </svg>
+      <?= icon('icons', 'x-octagon', 164); ?>
       <div class="mt5 gray"><?= __('app.remote'); ?></div>
     </div>
   </main>

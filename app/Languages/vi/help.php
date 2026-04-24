@@ -20,7 +20,7 @@ return [
     'notification_info'     => 'You can unsubscribe from all email notifications in this section.',
 
     'add_post'              => 'Cố gắng viết với định dạng thích hợp, để đọc tốt hơn.',
-	'add_article' 			=> 'Use the tag <b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
+	'add_article' 			=> 'Use the tag <b>cut</b>.<br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
 	'add_question' 			=> 'Câu hỏi bắt đầu bằng chữ in hoa và kết thúc bằng dấu chấm hỏi (?).',
 	'add_note'				=> 'Nếu phân tích cú pháp không được hoàn thành rất thành công. Điền thủ công vào các trường bắt buộc.',
 	'add_page'				=> 'Đây là tài liệu chính thức. Cố gắng viết mà không mắc lỗi.',

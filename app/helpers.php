@@ -175,3 +175,27 @@ function modeDayNight()
 	
 	return (config('general', 'night_mode') == 'dark') ? ' dark' : ' light';
 }
+
+function icon($fileName, $iconId, $size = '24', $class = 'icon')
+{
+    $attrs = [];
+    $attrs['class'] = $class;
+    
+    if ($size) {
+        list($width, $height) = explode(' ', $size . ' ' . $size);
+        $attrs['width'] = $width;
+        $attrs['height'] = $height ?: $width;
+    }
+    
+    $attrsString = '';
+    foreach ($attrs as $name => $value) {
+        $attrsString .= ' ' . $name . '="' . htmlspecialchars($value) . '"';
+    }
+    
+    return sprintf(
+        '<svg%s><use href="%s#%s"/></svg>',
+        $attrsString,
+        '/assets/svg/' . $fileName . '.svg',
+        htmlspecialchars($iconId)
+    );
+}

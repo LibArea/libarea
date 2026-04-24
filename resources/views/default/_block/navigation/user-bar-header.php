@@ -1,16 +1,12 @@
 <div class="flex gap-lg items-center">
 	<?php if (empty($dontShowSearchButton)) : ?>
 		<div class="button-search gray-600 pointer ml20 mb-none">
-			<svg class="icon large">
-				<use xlink:href="#search"></use>
-			</svg>
+		    <?= icon('icons', 'search'); ?>
 		</div>
 	<?php endif; ?>
 	<?php if (!$container->user()->active()) : ?>
 		<div id="toggledark" class="gray-600">
-			<svg class="icon large">
-				<use xlink:href="#sun"></use>
-			</svg>
+		    <?= icon('icons', 'sun'); ?>
 		</div>
 		<?php if (config('general', 'invite') == false) : ?>
 			<a class="gray center mb-none block" href="<?= url('register'); ?>">
@@ -24,17 +20,13 @@
 		<?= Html::addPost($facet_id ?? false); ?>
 
 		<a id="toggledark" class="gray-600">
-			<svg class="icon large">
-				<use xlink:href="#sun"></use>
-			</svg>
+		    <?= icon('icons', 'sun'); ?>
 		</a>
 
 		<div class="relative">
 			<div id="el_notif" class="none"></div>
 			<a id="notif" class="add-notif gray-600 relative">
-				<svg class="icon large">
-					<use xlink:href="#bell"></use>
-				</svg>
+				<?= icon('icons', 'bell'); ?>
 				<span class="number-notif"></span>
 			</a>
 		</div>

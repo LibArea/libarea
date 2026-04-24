@@ -6,9 +6,7 @@
         <?= htmlEncode($topic['facet_title']); ?>
         <?php if ($container->user()->admin() || $topic['facet_user_id'] == $container->user()->id()) : ?>
           <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg>
+		    <?= icon('icons', 'edit'); ?>
           </a>
         <?php endif; ?>
       </h1>
@@ -29,38 +27,28 @@
 
   <div class="flex justify-between text-sm gray-600 lowercase">
     <div class="flex gap-sm">
-      <svg class="icon">
-        <use xlink:href="#users"></use>
-      </svg>
+	  <?= icon('icons', 'users'); ?>
       <?= $topic['facet_focus_count']; ?> <span class="mb-none"><?= __('app.reads'); ?></span>
 
-      <svg class="icon ml15">
-        <use xlink:href="#post"></use>
-      </svg>
+      <?= icon('icons', 'post'); ?>	
       <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
 
     <div class="flex gap">
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
-        <svg class="icon">
-          <use xlink:href="#info"></use>
-        </svg>
+	    <?= icon('icons', 'info'); ?>
       </a>
 
       <a class="gray-600" title="<?= __('app.recommended'); ?>" href="<?= url('topic.recommend', ['slug' => $topic['facet_slug']]); ?>">
-        <svg class="icon">
-          <use xlink:href="#activity"></use>
-        </svg>
+	    <?= icon('icons', 'activity'); ?>
       </a>
 
-      <svg class="icon gray-600 pointer" data-a11y-dialog-show="id-share">
-        <use xlink:href="#share"></use>
-      </svg>
+      <span class="icon gray-600 pointer" data-a11y-dialog-show="id-share">
+        <?= icon('icons', 'share'); ?>
+      </span>
 
       <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
-        <svg class="icon">
-          <use xlink:href="#rss"></use>
-        </svg>
+	    <?= icon('icons', 'rss'); ?>
       </a>
     </div>
   </div>

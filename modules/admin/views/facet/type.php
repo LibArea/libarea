@@ -22,9 +22,7 @@
 <?php if ($data['type'] != 'section') : ?>
   <p class="text-xl right mr20">
     <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $data['type']]); ?>">
-      <svg class="icon">
-        <use xlink:href="#plus"></use>
-      </svg>
+	  <?= icon('icons', 'plus'); ?>
       <?= __('app.add'); ?>
     </a>
   </p>
@@ -37,39 +35,35 @@
         <?php $topic['level'] = $topic['level'] ?? null; ?>
         <?php if ($topic['level'] > 0) : ?>
           <?php $color = true; ?>
-          <svg class="icon gray ml<?= $topic['level'] * 10; ?>">
-            <use xlink:href="#corner-down-right"></use>
-          </svg>
+		  <?= icon('icons', 'info', 24, 'icon gray ml' . $topic['level'] * 10); ?>
         <?php endif; ?>
         <a class="<?php if ($topic['level'] == 0) : ?>relative mt5 text-xl items-center hidden<?php endif; ?> <?php if ($topic['level'] > 0) : ?> black<?php endif; ?>" href="<?= url('facet.form.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
           <?php if ($topic['level'] == 0) : ?>
             <?= Img::image($topic['facet_img'], $topic['facet_title'], 'w20 h20 mr5 br-gray', 'logo', 'max'); ?>
           <?php endif; ?>
           <?= $topic['facet_title']; ?>
-          <sup><svg class="icon mr5">
-              <use xlink:href="#edit"></use>
-            </svg></sup>
+          <sup>
+			<?= icon('icons', 'edits'); ?>
+		  </sup>
         </a>
 
         <?php if ($topic['facet_is_deleted'] == 1) : ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><svg class="icon red">
-                <use xlink:href="#trash-2"></use>
-              </svg></sup>
+            <sup class="red">
+			  <?= icon('icons', 'trash-2'); ?>
+    		  </sup>
           </span>
         <?php else : ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><svg class="icon gray-600">
-                <use xlink:href="#trash"></use>
-              </svg></sup>
+            <sup class="gray-600">
+			  <?= icon('icons', 'trash'); ?>
+ 		  </sup>
           </span>
         <?php endif; ?>
 
         <?php if ($topic['matching_list']) : ?>
           <div class="ml<?= $topic['level'] * 10; ?>">
-            <svg class="icon gray-600 text-sm mr5 ml5">
-              <use xlink:href="#chevron-right"></use>
-            </svg>
+		    <?= icon('icons', 'chevron-right', 24, 'icon gray-600 text-sm mr5 ml5'); ?>
             <?= Html::facets($topic['matching_list'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
           </div>
         <?php endif; ?>
@@ -88,24 +82,17 @@
       <?php foreach ($data['pages'] as $page) : ?>
         <div class="mb5">
           <a href="<?= url('page', ['facet_slug' => $data['facets'][0]['facet_slug'], 'slug' => $page['post_slug']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#info"></use>
-            </svg> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
+			<?= icon('icons', 'info'); ?>
+			<?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
           </a>
           <a class="gray-600 ml10" href="<?= url('publication.form.edit', ['id' => $page['post_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg>
+		    <?= icon('icons', 'edit'); ?>
           </a>
           <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
             <?php if ($page['post_is_deleted'] == 1) : ?>
-              <svg class="icon red">
-                <use xlink:href="#trash-2"></use>
-              </svg>
+			  <?= icon('icons', 'trash-2', 24, 'red'); ?>
             <?php else : ?>
-              <svg class="icon gray-600">
-                <use xlink:href="#trash"></use>
-              </svg>
+			  <?= icon('icons', 'trash-2', 24, 'gray-600'); ?>
             <?php endif; ?>
           </a>
         </div>

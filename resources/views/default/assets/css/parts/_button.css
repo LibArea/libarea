@@ -26,7 +26,8 @@
   border-color: var(--button-border-color);
 }
 
-.btn-primary:where(:hover, :focus) {
+.btn-primary:hover, 
+.btn-primary:focus {
   color: var(--button-border-color-hover);
   opacity: 0.8;
 }

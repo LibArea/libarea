@@ -10,9 +10,7 @@ $facet = $data['facet'] ?? false;
   <header<?php if ($post || $facet) : ?> class="scroll-hide-search"<?php endif; ?>>
         <div class="flex flex-auto">
           <div class="box-logo">
-            <svg class="icon large menu__button none">
-              <use xlink:href="#menu"></use>
-            </svg>
+			 <?= icon('icons', 'menu', 28, 'menu__button none'); ?>
             <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
           </div>
 

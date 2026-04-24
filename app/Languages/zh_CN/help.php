@@ -20,7 +20,7 @@ return [
     'notification_info'     => '您可以在此部分取消订阅所有电子邮件通知。',
 
     'add_post'              => '尝试使用适当的格式编写，以便更好地阅读。',
-	'add_article' 			=> '使用标签<b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
+	'add_article' 			=> '使用标签<b>cut</b>.<br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
 	'add_question' 			=> '问题以大写字母开始，以问号结束。',
 	'add_note'				=> '如果解析没有非常成功地完成。 手动填写必填字段。',
 	'add_page'				=> '这是官方文档。 尽量写没有错误',

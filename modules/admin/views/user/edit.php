@@ -51,9 +51,9 @@ use App\Bootstrap\Services\Auth\RegType; ?>
           <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
         <?php endif; ?>
         (ed. <?= $data['user']['updated_at']; ?>) |
-        <svg class="icon">
-          <use xlink:href="#eye"></use>
-        </svg> <?= $data['user']['hits_count']; ?>
+
+		<?= icon('icons', 'eye'); ?>
+		<?= $data['user']['hits_count']; ?>
       </span>
     </fieldset>
 

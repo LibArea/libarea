@@ -6,9 +6,9 @@
       <fieldset>
         <label for="password"><?= __('app.new_password'); ?></label>
         <input id="password" type="password" name="password">
-        <span class="showPassword"><svg class="icon">
-            <use xlink:href="#eye"></use>
-          </svg></span>
+        <span class="showPassword">
+		  <?= icon('icons','eye'); ?>
+		</span>
       </fieldset>
       <p>
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">

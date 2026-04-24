@@ -54,9 +54,7 @@
                       </span>
                     </a>
                     <?php if ($node['comment_is_mobile']) : ?>
-                      <svg class="icon small green">
-                        <use xlink:href="#mobile"></use>
-                      </svg>
+					  <?= icon('icons', 'mobile', '16', 'small green'); ?>
                     <?php endif; ?>
                     <?php if ($item['post_user_id'] == $node['comment_user_id']) : ?>
                       <span class="small lowercase green mb-none">
@@ -75,16 +73,13 @@
                       <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
                     <?php endif; ?>
                     <?php if ($node['comment_lo']) : ?>
-                      <svg class="icon red">
-                        <use xlink:href="#arrow-up"></use>
-                      </svg>
+					  <?= icon('icons', 'arrow-up', '16', 'red'); ?>
                     <?php endif; ?>
 
                     <?php if ($node['comment_parent_id'] > 0) : ?>
                       <a class="reply-to" rel="nofollow" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
-                        <svg class="icon small">
-                          <use xlink:href="#arrow-up"></use>
-                        </svg></a>
+					    <?= icon('icons', 'arrow-up', '16', 'icon small'); ?>
+                      </a>
                     <?php endif; ?>
 
                     <?= insert('/content/comments/menu', ['item' => $item, 'comment' => $node, 'type' => 'discussion']); ?>

@@ -68,10 +68,7 @@
           </div>
         <?php endif; ?>
         <?php if ($item['post_url_domain']) : ?>
-          <?= __('app.source'); ?>:
-          <svg class="icon">
-            <use xlink:href="#link"></use>
-          </svg>
+          <?= __('app.source'); ?>:  <?= icon('icons', 'link'); ?>
           <a class="gray" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
             <?= $item['post_url_domain']; ?>
           </a>
@@ -84,9 +81,7 @@
       <div class="items-center flex gap gray-600">
         <?= Html::votes($item, 'post'); ?>
         <div class="items-center flex gap-sm">
-          <svg class="icon">
-            <use xlink:href="#eye"></use>
-          </svg>
+		   <?= icon('icons', 'eye'); ?>
           <?= $item['post_hits_count'] == 0 ? 1 : $item['post_hits_count']; ?>
         </div>
       </div>

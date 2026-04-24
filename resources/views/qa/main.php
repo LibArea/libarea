@@ -16,24 +16,20 @@ $facet  = $data['facet'] ?? false;
 		 </div>
 		    <div class="wrap mb-none items-center flex gap">
       <a class="p5 black text-sm" href="/topics">
-        <svg class="icon small">
-          <use xlink:href="#hash"></use>
-        </svg> <?= __('app.topics'); ?>
+	    <?= icon('icons', 'hash', 16); ?>
+        <?= __('app.topics'); ?>
       </a>
       <a class="black text-sm" href="/blogs">
-        <svg class="icon small">
-          <use xlink:href="#post"></use>
-        </svg> <?= __('app.blogs'); ?>
+	    <?= icon('icons', 'post', 16); ?>
+        <?= __('app.blogs'); ?>
       </a>
       <a class="black text-sm" href="/users">
-        <svg class="icon small">
-          <use xlink:href="#users"></use>
-        </svg> <?= __('app.users'); ?>
+	    <?= icon('icons', 'users', 16); ?>
+        <?= __('app.users'); ?>
       </a>
       <a class="black text-sm" href="/search">
-        <svg class="icon small">
-          <use xlink:href="#search"></use>
-        </svg> <?= __('app.search'); ?>
+	    <?= icon('icons', 'search', 16); ?>
+        <?= __('app.search'); ?>
       </a>
     </div>
       </div>

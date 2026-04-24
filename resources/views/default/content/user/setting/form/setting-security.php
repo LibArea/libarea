@@ -2,9 +2,9 @@
 	<div class="form-label input-label"><label><?= __('app.old_password'); ?></label></div>
 	<div class="form-element">
 	  <input id="password" name="password" type="password" required="">
-	  <span class="showPassword"><svg class="icon">
-		  <use xlink:href="#eye"></use>
-		</svg></span>
+	  <span class="showPassword">
+     	  <?= icon('icons', 'eye'); ?>
+		</span>
 		</div>
 </fieldset>
 

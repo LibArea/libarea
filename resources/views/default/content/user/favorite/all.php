@@ -17,16 +17,14 @@
         </div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
-          <svg class="icon gray-600">
-            <use xlink:href="#trash"></use>
-          </svg>
+		  <?= icon('icons', 'trash'); ?>
         </span>
 
         <?php if (!$fav['tag_id']) : ?>
           <div class="relative right">
-            <span class="trigger lowercase gray-600 text-sm"><svg class="icon">
-                <use xlink:href="#plus"></use>
-              </svg></span>
+            <span class="trigger lowercase gray-600 text-sm">
+			  <?= icon('icons', 'plus'); ?>
+			</span>
             <span class="dropdown">
               <?php if (!empty($data['tags'])) : ?>
                 <?php foreach ($data['tags'] as $tag) : ?>

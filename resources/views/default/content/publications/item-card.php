@@ -48,9 +48,8 @@
 
           <?php if ($item['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
-              <svg class="icon">
-                <use xlink:href="#link"></use>
-              </svg> <?= $item['post_url_domain']; ?>
+			  <?= icon('icons', 'link'); ?>
+			  <?= $item['post_url_domain']; ?>
             </a>
           <?php endif; ?>
         </div>
@@ -82,9 +81,7 @@
         </div>
 
         <div class="flex gray-600 gap-sm">
-          <svg class="icon">
-            <use xlink:href="#eye"></use>
-          </svg>
+		  <?= icon('icons', 'eye'); ?>
           <?= $item['post_hits_count'] == 0 ? 1 : Html::formatToHuman($item['post_hits_count']); ?>
         </div>
       </div>
@@ -93,9 +90,7 @@
         <hr class="linta-100">
         <a class="flex flex-row items-center justify-between gray-600 gap-sm" href="<?= $url; ?>#comment">
           <div>
-            <svg class="icon">
-              <use xlink:href="#comments"></use>
-            </svg>
+		    <?= icon('icons', 'comments'); ?>
 
             <span class="lowercase text-sm">
               <?php if ($item['post_comments_count'] != 0) : ?>
@@ -106,9 +101,7 @@
             </span>
           </div>
 
-          <svg class="icon">
-            <use xlink:href="#chevron-right"></use>
-          </svg>
+		  <?= icon('icons', 'chevron-right'); ?>
         </a>
       <?php endif; ?>
     </article>

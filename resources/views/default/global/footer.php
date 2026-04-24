@@ -131,8 +131,6 @@
   <?php endif; ?>
 </script>
 
-<?= insert('/global/local-storage'); ?>
-
 <?= insert('/banner/metrika'); ?>
 
 </body>

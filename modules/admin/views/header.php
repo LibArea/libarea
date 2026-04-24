@@ -34,9 +34,7 @@ $lang = Translate::getLang();
 <body class="admin<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <header>
-    <svg class="icon menu__button none">
-      <use xlink:href="#menu"></use>
-    </svg>
+	<?= icon('icons', 'menu', 24, 'menu__button none'); ?>
     <div class="box-logo ml10 mr20">
       <a href="<?= url('admin'); ?>"><?= __('admin.home'); ?></a>
       <div class="gray-600">/</div>
@@ -46,28 +44,20 @@ $lang = Translate::getLang();
     </div>
     <div class="flex gap-lg items-center w-90 ml20">
       <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
-        <svg class="icon mr5">
-          <use xlink:href="#users"></use>
-        </svg>
+		<?= icon('icons', 'users'); ?>
         <span class="mb-none middle text-sm"><?= __('admin.users'); ?></span>
       </a>
       <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
-        <svg class="icon mr5">
-          <use xlink:href="#grid"></use>
-        </svg>
+	    <?= icon('icons', 'grid'); ?>
         <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
       </a>
       <a class="<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
-        <svg class="icon mr5">
-          <use xlink:href="#tool"></use>
-        </svg>
+	    <?= icon('icons', 'tool'); ?>
         <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
       </a>
       <!-- Hide so as not to embarrass
           <a class="<?= is_current(url('admin.settings.general')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.settings.general'); ?>">
-            <svg class="icon mr5">
-              <use xlink:href="#settings"></use>
-            </svg>
+            ...icon  settings
             <span class="mb-none middle text-sm"><?= __('admin.settings'); ?></span>
           </a> -->
     </div>

@@ -10,9 +10,8 @@
 <div class="box">
   <h4 class="uppercase-box">
     <?= __('admin.users'); ?>
-    <a href="<?= url('admin.users'); ?>"><svg class="icon">
-        <use xlink:href="#more-horizontal"></use>
-      </svg>
+    <a href="<?= url('admin.users'); ?>">
+	  <?= icon('icons', 'more-horizontal'); ?>
     </a>
   </h4>
   <?php foreach ($data['last_visit'] as $user) : ?>
@@ -25,9 +24,8 @@
 
   <h4 class="uppercase-box mt15">
     <?= __('admin.search'); ?>
-    <a href="<?= url('admin.logs.search'); ?>"><svg class="icon">
-        <use xlink:href="#more-horizontal"></use>
-      </svg>
+    <a href="<?= url('admin.logs.search'); ?>">
+	  <?= icon('icons', 'more-horizontal'); ?>
     </a>
   </h4>
   <?php foreach ($data['logs'] as $log) : ?>
@@ -45,15 +43,9 @@
   <p><a class="btn btn-outline-primary btn-small" href="<?= url('page.form.add',  endPart: false); ?>">+ <?= __('app.add_page'); ?></a></p>
 
   <h3 class="uppercase-box"><?= __('admin.useful_resources'); ?></h3>
-  <p><svg class="icon">
-      <use xlink:href="#link"></use>
-    </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
-  <p><svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#link"></use>
-    </svg> <a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
-  <p><svg class="icon">
-      <use xlink:href="/assets/svg/icons.svg#link"></use>
-    </svg> <a href="https://vk.com/libarea">ВКонтакте</a></p>
+  <p><?= icon('icons', 'link'); ?> <a href="https://libarea.ru">LibArea.ru</a></p>
+  <p><?= icon('icons', 'link'); ?>	<a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
+  <p><?= icon('icons', 'link'); ?> <a href="https://vk.com/libarea">ВКонтакте</a></p>
   <hr>
   <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
   <p>PHP: <?= PHP_VERSION; ?></p>

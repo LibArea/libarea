@@ -23,14 +23,10 @@
       <div class="mt10 gray flex justify-between">
          <span class="mb-none"><?= fragment($facet['facet_short_description'], 68); ?></span>
         <span class="flex right gap-sm gray-600 text-sm">
-          <svg class="icon">
-            <use xlink:href="#post"></use>
-          </svg>
+		  <?= icon('icons', 'post'); ?>
           <?= $facet['facet_count']; ?>
           <?php if ($facet['facet_focus_count'] > 0) : ?>
-            <svg class="icon">
-              <use xlink:href="#users"></use>
-            </svg>
+		    <?= icon('icons', 'users'); ?>
             <?= $facet['facet_focus_count']; ?>
           <?php endif; ?>
         </span>

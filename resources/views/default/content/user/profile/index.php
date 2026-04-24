@@ -11,10 +11,8 @@
           <div class="box bg-violet">
             <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
               <?php if ($data['profile']['id'] == $container->user()->id()) : ?>
-                <a class="add-profile right" data-post="<?= $data['my_post']['post_id']; ?>">
-                  <svg class="icon gray-600">
-                    <use xlink:href="#trash"></use>
-                  </svg>
+                <a class="add-profile right gray-600" data-post="<?= $data['my_post']['post_id']; ?>">
+				  <?= icon('icons', 'trash'); ?>
                 </a>
               <?php endif; ?>
             </h4>
@@ -26,9 +24,8 @@
                 <?= $data['my_post']['post_date'] ?>
                 <?php if ($data['my_post']['post_comments_count'] != 0) : ?>
                   <span class="right">
-                    <svg class="icon">
-                      <use xlink:href="#comments"></use>
-                    </svg> <?= $data['my_post']['post_comments_count']; ?>
+				    <?= icon('icons', 'comments'); ?>
+                    <?= $data['my_post']['post_comments_count']; ?>
                   </span>
                 <?php endif; ?>
               </div>

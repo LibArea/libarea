@@ -1,17 +1,13 @@
   <div class="menu-comment">
     <span class="trigger gray-600 text-sm">
-      <svg class="icon">
-        <use xlink:href="#more-horizontal"></use>
-      </svg>
+	  <?= icon('icons', 'more-horizontal'); ?>
     </span>
     <ul class="dropdown text-sm">
 
       <?php if ($container->access()->author('comment', $comment) === true) : ?>
         <li>
           <a class="editansw" href="<?= url('comment.form.edit', ['id' => $comment['comment_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg>
+		    <?= icon('icons', 'edit'); ?>
             <?= __('app.edit'); ?>
           </a>
         </li>
@@ -20,9 +16,7 @@
       <?php if ($container->user()->admin()) : ?>
         <li>
           <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
-            <svg class="icon<?php if ($comment['comment_is_deleted'] == 1) : ?> sky<?php endif; ?>">
-              <use xlink:href="#trash-2"></use>
-            </svg>
+			<?= icon('icons', 'trash-2'); ?>
             <?php if ($comment['comment_is_deleted'] == 1) : ?>
               <span class="sky"><?= __('app.recover'); ?></span>
             <?php else : ?>
@@ -32,17 +26,13 @@
         </li>
         <!--li>
           <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#chevron-right"></use>
-            </svg>
+            ...
             <?= __('app.move'); ?>
           </a>
         </li-->
         <li>
           <a href="<?= url('admin.logip', ['item' => $comment['comment_ip']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#info"></use>
-            </svg>
+		    <?= icon('icons', 'info'); ?>
             <?= $comment['comment_ip']; ?>
           </a>
         <li>
@@ -51,9 +41,7 @@
         <?php if ($container->user()->id() != $comment['comment_user_id'] && $container->access()->limitTl(config('trust-levels', 'tl_add_report'))) : ?>
         <li>
           <a data-post_id="<?= $item['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog">
-            <svg class="icon">
-              <use xlink:href="#x-octagon"></use>
-            </svg>
+		    <?= icon('icons', 'x-octagon'); ?>
             <?= __('app.report'); ?>
           </a>
         </li>
@@ -64,9 +52,7 @@
           <?php if ($container->user()->id() == $item['post_user_id'] || $container->user()->admin()) : ?>
             <li>
               <a id="best_<?= $comment['comment_id']; ?>" data-id="<?= $comment['comment_id']; ?>" class="comment-best">
-                <svg class="icon">
-                  <use xlink:href="#award"></use>
-                </svg>
+			    <?= icon('icons', 'award'); ?>
                 <?= __('app.raise_answer'); ?>
               </a>
             </li>
@@ -80,9 +66,7 @@
 
       <li>
         <a rel="nofollow" class="gray-600" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
-          <svg class="icon">
-            <use xlink:href="#anchor"></use>
-          </svg>
+		  <?= icon('icons', 'anchor'); ?>
           <?= __('app.link'); ?>
         </a>
       </li>

@@ -27,9 +27,9 @@
         <th><?= __('admin.type'); ?></th>
         <th><?= __('admin.action'); ?></th>
         <th><?= __('admin.time'); ?></th>
-        <th class="w30"><svg class="icon">
-            <use xlink:href="#eye"></use>
-          </svg></th>
+        <th class="w30">
+		  <?= icon('icons', 'eye'); ?>
+		</th>
       </thead>
       <?php foreach ($data['logs'] as $log) : ?>
         <tr>
@@ -43,9 +43,7 @@
           <td class="gray-600"><?= __('admin.' . $log['action_type']); ?></td>
           <td><?= __('admin.' . $log['action_name'], ['name' => __('admin.' . $log['action_type'])]); ?></td>
           <td class="gray-600"><?= langDate($log['add_date']); ?></td>
-          <td><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><svg class="icon">
-                <use xlink:href="#eye"></use>
-              </svg></a></td>
+          <td><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><?= icon('icons', 'eye'); ?></a></td>
         </tr>
       <?php endforeach; ?>
     </table>

@@ -52,9 +52,7 @@
   <div class="flex flex-wrap gap">
     <?php foreach ($data['lists'] as $topic) : ?>
       <div class="center box">
-        <svg class="icon">
-          <use xlink:href="#<?= $topic; ?>"></use>
-        </svg>
+	    <?= icon('icons', $topic); ?>
         <div class="gray-600"><?= $topic; ?></div>
       </div>
     <?php endforeach; ?>

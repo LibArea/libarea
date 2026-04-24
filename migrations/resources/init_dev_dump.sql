@@ -32,7 +32,7 @@ CREATE TABLE `badges` (
 --
 
 INSERT INTO `badges` (`badge_id`, `badge_icon`, `badge_tl`, `badge_score`, `badge_title`, `badge_description`) VALUES
-(1, '<span title=\"Сообщил об ошибке, которое понравилось команде сайта.\"><svg class=\"icons icon-base red\"><use xlink:href=\"/assets/svg/icons.svg#bug\"></use></svg></span>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
+(1, '<span title=\"Сообщил об ошибке, которое понравилось команде сайта.\"><svg class=\"icons icon-base red\" width=\"24\" height=\"24\"><use xlink:href=\"/assets/svg/icons.svg#bug\"></use></svg></span>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
 
 -- --------------------------------------------------------
 

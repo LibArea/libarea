@@ -24,9 +24,9 @@ $login = $user['login'] ?? false;
           <div class="uppercase text-sm gray-600"><?= __('app.my_blog'); ?></div>
           <b><?= $blog['facet_slug']; ?></b>
         </div>
-        <div class="right text-sm gray-600"><svg class="icon">
-            <use xlink:href="#chevron-right"></use>
-          </svg></div>
+        <div class="right text-sm gray-600">
+		  <?= icon('icons', 'chevron-right'); ?>
+		</div>
       </a>
       <hr>
     </li>
@@ -42,9 +42,9 @@ $login = $user['login'] ?? false;
   <?php if ($user['trust_level'] >= $tl) : ?>
     <li>
       <a href="<?= url($item['url'], endPart: false); ?>">
-        <?php if (!empty($item['icon'])) : ?><svg class="icon">
-            <use xlink:href="#<?= $item['icon']; ?>"></use>
-          </svg><?php endif; ?>
+        <?php if (!empty($item['icon'])) : ?>
+		  <?= icon('icons', $item['icon']); ?>
+		<?php endif; ?>
         <?= __($item['title']); ?>
       </a>
     </li>

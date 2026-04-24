@@ -4,9 +4,9 @@
 
 <fieldset class="max-w-sm mb-max-w-full">
   <input class="w-100" id="password" name="password" type="password" placeholder="<?= __('app.password'); ?>" required="">
-  <span class="showPassword"><svg class="icon">
-      <use xlink:href="#eye"></use>
-    </svg></span>
+  <span class="showPassword">
+    <?= icon('icons', 'eye'); ?>
+  </span>
 </fieldset>
 
 <fieldset class="flex gap-sm gray">

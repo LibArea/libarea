@@ -16,9 +16,7 @@
 
   <div class="box">
     <div class="gray-600 mt5">
-      <svg class="icon">
-        <use xlink:href="#calendar"></use>
-      </svg>
+	  <?= icon('icons', 'calendar'); ?>
       <span class="middle lowercase text-sm">
         <?= langDate($profile['created_at']); ?>
       </span>
@@ -78,13 +76,13 @@
   <div class="box br-lightgray">
     <h4 class="uppercase-box"><?= __('app.badges'); ?></h4>
     <div class="text-3xl">
-      <span title="<?= __('app.medal_reg'); ?>"><svg class="icon sky">
-          <use xlink:href="#gift"></use>
-        </svg></span>
+      <span title="<?= __('app.medal_reg'); ?>">
+	    <?= icon('icons', 'gift', 24, 'icon sky'); ?>
+      </span>
       <?php if ($profile['id'] < 50) : ?>
-        <span title="<?= __('app.first_days'); ?>"><svg class="icon green">
-            <use xlink:href="#award"></use>
-          </svg></span>
+        <span title="<?= __('app.first_days'); ?>">
+		  <?= icon('icons', 'lock', 24, 'icon green'); ?>
+		 </span>
       <?php endif; ?>
       <?php foreach ($data['badges'] as $badge) : ?>
         <?= $badge['badge_icon']; ?>
@@ -97,38 +95,28 @@
       <h4 class="uppercase-box"><?= __('app.admin'); ?></h4>
       <div class="mt5">
         <a class="gray mb5 block" href="<?= url('admin.user.edit.form', ['id' => $profile['id']]); ?>">
-          <svg class="icon">
-            <use xlink:href="#settings"></use>
-          </svg>
+		  <?= icon('icons', 'settings'); ?>
           <span class="middle"><?= __('app.edit'); ?></span>
         </a>
         <a class="gray block mb5" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
-          <svg class="icon">
-            <use xlink:href="#award"></use>
-          </svg>
+		  <?= icon('icons', 'award'); ?>
           <span class="middle"><?= __('app.reward_user'); ?></span>
         </a>
         <?php if ($profile['whisper']) : ?>
           <div class="tips text-sm gray-600">
-            <svg class="icon">
-              <use xlink:href="#info"></use>
-            </svg>
+		    <?= icon('icons', 'info'); ?>
             <?= $profile['whisper']; ?>
           </div>
         <?php endif; ?>
         <?php if ($profile['trust_level'] != 10) : ?>
           <?php if ($profile['ban_list'] == 1) : ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
-              <svg class="icon">
-                <use xlink:href="#user"></use>
-              </svg>
+			  <?= icon('icons', 'user'); ?>
               <span class="red text-sm"><?= __('app.unban'); ?></span>
             </span>
           <?php else : ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
-              <svg class="icon">
-                <use xlink:href="#x-octagon"></use>
-              </svg>
+			  <?= icon('icons', 'x-octagon'); ?>
               <span class="middle"><?= __('app.ban_it'); ?></span>
             </span>
           <?php endif; ?>

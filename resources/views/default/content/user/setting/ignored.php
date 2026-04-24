@@ -11,9 +11,7 @@
             <?= $user['login']; ?>
           </a>
           <a id="ignore_<?= $user['ignored_id']; ?>" class="add-ignore red" data-id="<?= $user['ignored_id']; ?>">
-            <svg class="icon">
-              <use xlink:href="#lock"></use>
-            </svg></i>
+		    <?= icon('icons', 'lock'); ?>
           </a>
         </div>
       <?php endforeach; ?>

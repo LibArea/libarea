@@ -5,9 +5,9 @@
   <div class="box-center">
     <form method="get" action="<?= url('search.go'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
-      <button class="search-button-icon br5 pointer"><svg class="icon">
-          <use xlink:href="#search"></use>
-        </svg></button>
+      <button class="search-button-icon br5 pointer">
+	    <?= icon('icons', 'search'); ?>
+      </button>
     </form>
     <div class="center">
       <div class="text-sm gray-600"><?= __('search.help'); ?></div>
@@ -16,7 +16,5 @@
   </div>
 
 </body>
-
-<?= insert('/global/local-storage'); ?>
 
 </html>

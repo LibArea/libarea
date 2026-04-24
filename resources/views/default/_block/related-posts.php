@@ -4,9 +4,7 @@
     <ul class="list-none">
       <?php foreach ($related_posts as $related) : ?>
         <li class="flex items-center mt10">
-          <svg class="icon gray-600">
-            <use xlink:href="#chevrons-right"></use>
-          </svg>
+		  <?= icon('icons', 'chevrons-right'); ?>
           <a href="<?= post_slug($related['post_type'], $related['id'], $related['post_slug']); ?>">
             <?= $related['value']; ?>
           </a>

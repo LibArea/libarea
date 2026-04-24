@@ -19,9 +19,9 @@
       <fieldset>
         <label for="password"><?= __('app.password'); ?></label>
         <input id="password" name="password" type="password" required>
-        <span class="showPassword"><svg class="icon">
-            <use xlink:href="#eye"></use>
-          </svg></span>
+        <span class="showPassword">
+		  <?= icon('icons', 'eye'); ?>
+		</span>
         <div class="help">>= 8 <?= __('app.characters'); ?>...</div>
       </fieldset>
 

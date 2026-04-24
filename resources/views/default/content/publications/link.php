@@ -12,9 +12,8 @@
         <h4 class="uppercase-box"><?= __('app.domains'); ?></h4>
         <?php foreach ($data['list'] as  $domain) : ?>
           <a class="text-sm gray block mb5" href="<?= url('domain', ['domain' => $domain['post_url_domain']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#link"></use>
-            </svg> <?= $domain['post_url_domain']; ?>
+  		    <?= icon('icons', 'link'); ?>
+            <?= $domain['post_url_domain']; ?>
           </a>
         <?php endforeach; ?>
       <?php else : ?>

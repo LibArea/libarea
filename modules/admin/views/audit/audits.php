@@ -53,9 +53,7 @@
             <?php endif; ?>
             <span class="mr5 ml5"> &#183; </span>
             <a class="mr5 ml5" href="<?= url('admin.user.edit.form', ['id' => $audit['id']]); ?>">
-              <svg class="icon">
-                <use xlink:href="#edit"></use>
-              </svg>
+			  <?= icon('icons', 'edit'); ?>
             </a>
             <span class="mr5 ml5"> &#183; </span>
             <?= $audit['content'][$audit['action_type'] . '_date']; ?>
@@ -104,10 +102,8 @@
               <?php endif; ?>
             <?php else : ?>
               <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
-                <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
-                  <svg class="icon gray">
-                    <use xlink:href="#selected"></use>
-                  </svg>
+                <span class="report-saw gray" data-id="<?= $audit['audit_id']; ?>">
+				  <?= icon('icons', 'selected'); ?>
                 </span>
               </div>
             <?php endif; ?>

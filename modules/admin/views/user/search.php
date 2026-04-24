@@ -48,9 +48,7 @@
     <span class="green"> - <?= $user['email']; ?></span>
     <?php if ($user['trust_level'] != 10) : ?>
       <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit.form', ['id' => $user['id']]); ?>">
-        <svg class="icon">
-          <use xlink:href="#edit"></use>
-        </svg>
+        <?= icon('icons', 'edit'); ?>
       </a>
     <?php endif; ?> 
 	<sup class="gray-600"><?= $user['reg_ip']; ?></sup> <br>

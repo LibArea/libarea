@@ -11,9 +11,7 @@
 </main>
 <aside>
   <div class="box gray-600 bg-beige">
-    <svg class="icon">
-      <use xlink:href="#calendar"></use>
-    </svg>
+    <?= icon('icons', 'calendar'); ?>
     <span class="middle"><?= langDate($topic['facet_date']); ?></span>
   </div>
   <?= insert('/_block/facet/topic', ['data' => $data]); ?>

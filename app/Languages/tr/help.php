@@ -20,7 +20,7 @@ return [
     'notification_info'     => 'YBu bölümdeki tüm e-posta bildirimlerinden aboneliğinizi iptal edebilirsiniz.',
 	
     'add_post'              => 'Daha iyi okunabilmesi için lütfen düzgün yazmaya çalışın.',
-	'add_article' 			=> '<b>cut</b> etiketini kullanın (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).< br><br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
+	'add_article' 			=> '<b>cut</b> etiketini kullanın.<br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
 	'add_question' 			=> 'Soru büyük harfle başlar ve soru işaretiyle biter.',
 	'add_note'				=> 'Parse işlemi tam olarak başarılı olmadıysa. Gerekli alanları manuel olarak doldurun.',
 	'add_page'				=> 'Bu resmi belgelerdir. Hatasız yazmaya çalışın.',

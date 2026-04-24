@@ -200,29 +200,8 @@ article,
 
 /* ========== Icons ========== */
 .icon {
-  width: 24px;
-  height: 24px;
   fill: currentColor;
   vertical-align: middle;
-}
-
-.icon.small {
-  width: 16px;
-}
-
-.icon.large {
-  width: 28px;
-  height: 28px;
-}
-
-.icon.max {
-  width: 121px;
-  height: 121px;
-}
-
-.icon-share {
-  width: 48px;
-  height: 48px;
 }
 
 .icon.vk { color: #07f; }

@@ -20,7 +20,7 @@ return [
     'notification_info'     => 'You can unsubscribe from all email notifications in this section.',
 	
     'add_post'              => 'Try to write with proper formatting, for better reading.',
-	'add_article' 			=> 'Use the tag <b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
+	'add_article' 			=> 'Use the tag <b>cut</b>.<br> It hides under the cat part of the text following the tag (it will be written "Read more").',
 	'add_question' 			=> 'The question begins with a capital letter and ends with a question mark (?).',
 	'add_note'				=> 'If the parsing was not completed very successfully. Manually fill in the required fields.',
 	'add_page'				=> 'This is the official documentation. Try to write without mistakes.',

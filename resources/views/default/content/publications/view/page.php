@@ -21,9 +21,7 @@
         <?= $page['post_modified']; ?>
         <?php if ($container->access()->author('post', $page) === true) : ?>
           <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('publication.form.edit', ['id' => $page['post_id']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg>
+		    <?= icon('icons', 'edit'); ?>
           </a>
         <?php endif; ?>
       </div>
@@ -34,18 +32,17 @@
       <div class="flex gap">
         <h2 class="m0 mb20"><?= __('app.pages'); ?></h2>
         <?php if ($container->user()->admin()) : ?>
-          <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
-              <use xlink:href="#edit"></use>
-            </svg></a>
+          <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>">
+		    <?= icon('icons', 'edit'); ?>
+		 </a>
         <?php endif; ?>
       </div>
 
       <?php foreach ($data['pages'] as $ind => $row) : ?>
         <div class="mt5 mb10">
           <a class="gray" href="<?= url('page', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-            <svg class="icon">
-              <use xlink:href="#chevrons-right"></use>
-            </svg> <?= htmlEncode($row['post_title']); ?>
+		    <?= icon('icons', 'chevrons-right'); ?>
+            <?= htmlEncode($row['post_title']); ?>
           </a>
         </div>
       <?php endforeach; ?>

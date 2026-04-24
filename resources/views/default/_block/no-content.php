@@ -1,15 +1,11 @@
 <?php if ($type == 'small') : ?>
   <div class="box">
-    <svg class="icon green">
-      <use xlink:href="#<?= $icon; ?>"></use>
-    </svg>
+    <?= icon('icons', $icon, '128', 'max green'); ?>
     <span class="middle"><?= $text; ?></span>
   </div>
 <?php else : ?>
   <div id="no_content" class="p15 center gray-600">
-    <svg class="icon max">
-      <use xlink:href="#<?= $icon; ?>"></use>
-    </svg>
+    <?= icon('icons', $icon, '128'); ?>
     <div><?= $text; ?></div>
   </div>
 <?php endif; ?>

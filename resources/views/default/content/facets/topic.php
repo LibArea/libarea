@@ -14,9 +14,7 @@ $topic = $data['facet'];
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']]), '?', $sort); ?>
   <?php else : ?>
     <div class="box center gray-600">
-      <svg class="icon max">
-        <use xlink:href="#x-octagon"></use>
-      </svg>
+	  <?= icon('icons', 'x-octagon'); ?>
       <div class="mt5 gray"><?= __('app.topic_deleted'); ?></div>
     </div>
   <?php endif; ?>

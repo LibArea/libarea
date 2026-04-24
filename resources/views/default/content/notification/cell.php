@@ -8,9 +8,7 @@ $profile = url('profile', ['login' => $notif['login']]);
 	<div class="br-bottom flex items-center <?= $size; ?> gap-sm p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
 	  <div class="relative img-base mr5">
 		<?= Img::avatar($notif['avatar'], $notif['login'], 'img-base', 'min'); ?>
-		<svg class="number-svg <?= $n['css']; ?>">
-		  <use xlink:href="#<?= $n['icon']; ?>"></use>
-		</svg>
+		<?= icon('icons', $n['icon'], 16, 'number-svg ' . $n['css']); ?>
 	  </div>
 	  <div>
 		<a class="black nickname<?php if (Html::loginColor($notif['created_at'])) : ?> new<?php endif; ?>" href="<?= $profile; ?>"><?= $notif['login']; ?></a>

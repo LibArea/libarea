@@ -16,9 +16,7 @@ $day = $container->request()->get('sort')->value();
       <?= __('app.viewed'); ?>
     <?php endif; ?>
   </span>
-  <svg class="icon pointer gray-600">
-    <use xlink:href="#sort-descending"></use>
-  </svg>
+  <?= icon('icons', 'sort-descending'); ?>
 </span>
 <ul class="dropdown menu">
   <li<?php if ($day == 'TopMonth') : ?> class="active" <?php endif; ?>>
