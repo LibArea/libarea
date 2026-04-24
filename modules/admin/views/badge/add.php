@@ -18,7 +18,7 @@
     <fieldset>
       <label for="badge_icon"><?= __('admin.icon'); ?></label>
       <textarea class="add" name="badge_icon" required></textarea>
-      <div class="help"><?= __('admin.example'); ?>: &lt;svg class="icon"&gt;&lt;use xlink:href="#anchor"&gt;&lt;/use&gt;&lt;/svg&gt;</div>
+      <div class="help"><?= __('admin.example'); ?>: &lt;svg class="icon" width="24" height="24"&gt;&lt;use xlink:href="#award"&gt;&lt;/use&gt;&lt;/svg&gt;</div>
     </fieldset>
     <fieldset>
       <label for="badge_tl">Tl</label>
