@@ -58,12 +58,11 @@
     <?php endforeach; ?>
   </div>
 
-  <pre><code>&lt;svg class="icon"&gt;
-   &lt;use xlink:href="#ID"&gt;&lt;/use&gt;
-&lt;/svg&gt;</code></pre>
-
-  <a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>
-
+  <pre><code>&lt;?= icon('icons', 'menu'); ?&gt;</code></pre>
+  <i class="text-sm">Где: icon('имя файла', 'id иконки')</i>
+  <p>
+    <a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>
+  </p>
 </div>
 
 </main>
