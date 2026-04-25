@@ -145,6 +145,7 @@ return [
         ],
 		'frame-src' => [
 			'www.youtube.com',
+			'www.google.com',
 		]
     ],
 ];
