@@ -204,6 +204,12 @@ article,
   vertical-align: middle;
 }
 
+/* фикс наград */
+.box .icon.icon-base {
+  height: 24px;
+  width: 24px;
+}
+
 .icon.vk { color: #07f; }
 .icon.ok { color: #eb722e; height: 47px; width: 44px; }
 .icon.tg { color: #64a9dc; }
