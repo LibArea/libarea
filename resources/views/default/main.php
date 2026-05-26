@@ -1,10 +1,10 @@
 <?php
-$type = $data['type'] ?? false;
-$post = $data['post'] ?? false;
-$facet = $data['facet'] ?? false;
-?>
+ $type = $data['type'] ?? false;
+ $post = $data['post'] ?? false;
+ $facet = $data['facet'] ?? false;
 
-<?= insert('/global/header', ['meta' => $meta, 'type' => $type]); ?>
+ echo insert('/global/header', ['meta' => $meta, 'type' => $type]);
+?>
 
 <body class="<?= $type; ?><?= modeDayNight(); ?>">
   <header<?php if ($post || $facet) : ?> class="scroll-hide-search"<?php endif; ?>>

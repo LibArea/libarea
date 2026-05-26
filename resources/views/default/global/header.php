@@ -1,12 +1,9 @@
 <?php
-
 /**
  * @var $container App\Bootstrap\ContainerInterface 
  */
+  $lang = Translate::getLang(); 
 ?>
-
-<?php $lang = Translate::getLang(); ?>
-
 <!DOCTYPE html>
 <html lang="<?= $lang; ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#" <?php if ($lang == 'ar') : ?> dir="rtl" <?php endif; ?>>
 
