@@ -103,7 +103,23 @@ class Parser
 		// ADD
 		// https://php-collective.github.io/djot-php/cookbook/#installation
 		
-		$mediaEmbed = new MediaEmbed();
+		$customProviders = [
+			[
+				'name' => 'VK',
+				'website' => 'https://vk.com',
+				'url-match' => [
+					// https://vkvideo.ru/video-223862614_456351980
+					'https?:\/\/(vkvideo\.ru)\/video-([0-9]+)_([0-9]+)'
+				],
+				'embed-src' => '',
+				'embed-width' => '640',
+				'embed-height' => '360',
+				// https://vkvideo.ru/video_ext.php?oid=-109880815&id=456240480
+				'iframe-player' => '//vkvideo.ru/video_ext.php?oid=-$3&id=$4',
+			]
+		];
+				
+		$mediaEmbed = new MediaEmbed(['custom_providers' => $customProviders]);
 
 		$converter->on('render.div', function (RenderEvent $event) use ($mediaEmbed): void {
 			$node = $event->getNode();
