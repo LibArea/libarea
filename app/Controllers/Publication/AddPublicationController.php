@@ -228,6 +228,23 @@ class AddPublicationController extends Controller
      */
     public function addUrl(string $post_url)
     {
+	    // Валидация URL
+		if (!filter_var($post_url, FILTER_VALIDATE_URL)) {
+			Msg::redirect(__('msg.incorrect_url'), 'error', redirect());
+		}
+		
+		// Проверка протокола
+		$allowed_schemes = ['http', 'https'];
+		if (!in_array(parse_url($post_url, PHP_URL_SCHEME), $allowed_schemes)) {
+			Msg::redirect(__('msg.invalid_protocol'), 'error', redirect());
+		}
+		
+		// Защита от SSRF
+		$host = parse_url($post_url, PHP_URL_HOST);
+		if (in_array($host, ['localhost', '127.0.0.1', '0.0.0.0'])) {
+			Msg::redirect(__('msg.invalid_url'), 'error', redirect());
+		}
+		
         $domain = new Domain(host($post_url));
 
         $site = [

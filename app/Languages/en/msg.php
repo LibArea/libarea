@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> 'This type of publication is not allowed',
 
     'field_limit'           => 'The number of fields has reached its maximum.',
+	
+	'invalid_url'			=> 'Invalid URL',
+	'incorrect_url'			=> 'Incorrect URL',
+	'invalid_protocol'		=> 'Invalid protocol',
 ];

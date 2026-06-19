@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> 'Acest tip de publicare nu este permis',
 
     'field_limit'           => 'Numărul de câmpuri a atins maximul.',
+	
+	'invalid_url'			=> 'Invalid URL',
+	'incorrect_url'			=> 'Incorrect URL',
+	'invalid_protocol'		=> 'Invalid protocol',
 ];

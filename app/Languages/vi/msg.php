@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> 'Loại ấn phẩm này không được phép',
     
     'field_limit'           => 'Số trường đã đạt giới hạn tối đa.',
+	
+	'invalid_url' 			=> 'URL Không Hợp lệ',
+	'incorrect_url' 		=> 'URL Không Chính xác',
+	'invalid_protocol' 		=>'giao thức Không Hợp lệ',
 ];

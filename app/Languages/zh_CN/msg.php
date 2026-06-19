@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> '这种类型的发布是不允许的',
 
     'field_limit'           => '字段数已达到最大值。',
+	
+	'invalid_url'			=>'无效URL',
+	'incorrect_url'			=>'不正确的URL',
+	'invalid_protocol'		=>'无效协议',
 ];

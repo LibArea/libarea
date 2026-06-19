@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> 'Данные тип публикации не разрешен',
 
     'field_limit'           => 'Число полей достигло своего максимума.',
+	
+	'invalid_url'			=> 'Недопустимый URL',
+	'incorrect_url'			=> 'Некорректный URL',
+	'invalid_protocol'		=> 'Недопустимый протокол',
 ];

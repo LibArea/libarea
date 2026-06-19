@@ -73,4 +73,8 @@ return [
 	'type_not_allowed'		=> 'هذا النوع من النشر غير مسموح به',
 
     'field_limit'           => 'بلغ عدد الحقول الحد الأقصى.',
+	
+	'invalid_url'			=> 'رابط غير صالح',
+	'incorrect_url'			=> 'رابط غير صحيح',
+	'invalid_protocol'		=> 'بروتوكول غير صالح',
 ];
