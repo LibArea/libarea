@@ -325,6 +325,10 @@ class Html
 
     public static function headings($html_string, $slug)
     {
+		if (config('publication', 'headings') === false) {
+			return false;
+		}
+		
         if (!preg_match_all('#<h([1-5])>(.*?)</h[1-5]>#', $html_string, $resultats)) {
             return false;
         }
