@@ -6,189 +6,225 @@ namespace App\Models;
 
 use Hleb\Base\Model;
 use Hleb\Static\DB;
-
-use App\Models\IgnoredModel;
 use Sorting;
-
 
 class HomeModel extends Model
 {
     public static $limit = 15;
+    
+    private const ALLOWED_TYPES = [
+        'feed', 'question', 'post', 'article', 'note', 'all', 'deleted'
+    ];
 
-    /**
-     * Posts on the central page
-     * Посты на центральной странице
-     *
-     * @param integer $page
-     * @param string $type
-     * @return void
-     */
     public static function feed(array $signed, int $page, string $type = 'feed'): array|false
     {
-        $user_id = self::container()->user()->id();
-
-        $resultNotUser = [];
-        $ignored = IgnoredModel::getIgnoredUsers(50);
-        foreach ($ignored as $ind => $row) {
-            $resultNotUser[$ind] = $row['ignored_id'];
+        if (!in_array($type, self::ALLOWED_TYPES, true)) {
+            throw new \InvalidArgumentException("Invalid feed type: $type");
         }
 
-        $ignoring = "post_user_id NOT IN(0) AND";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+        $user_id   = (int) self::container()->user()->id();
+        [$display, $displayParams] = self::display($type);
+        $sort      = Sorting::day($type);
+        $dateCond  = Sorting::getDateCondition();
+        $start     = ($page - 1) * self::$limit;
 
-        $subscription = "";
-        if ($type !== 'all') {
-            if ($user_id) {
-                $subscription = "relation_facet_id IN(0) AND";
-                if ($signed) $subscription = "relation_facet_id IN(" . implode(',', $signed ?? []) . ") AND";
+        // ★ Собираем WHERE через массив условий
+        $conditions = [
+            "p.post_type != 'page'",
+            "p.post_draft = 0",
+        ];
+
+        if (!self::container()->user()->nsfw()) {
+            $conditions[] = "p.post_nsfw = 0";
+        }
+
+        // Добавляем условия из display()
+        $conditions[] = $display;
+
+        // Добавляем условие по дате (если есть)
+        if ($dateCond !== '') {
+            // $dateCond возвращает строку вида "AND p.post_date > ..."
+            // Убираем ведущий AND и добавляем как условие
+            $dateCond = ltrim($dateCond, 'AND ');
+            $conditions[] = $dateCond;
+        }
+
+        $sql = "SELECT 
+                    p.post_id, p.post_title, p.post_slug, p.post_translation,
+                    p.post_draft, p.post_type, p.post_nsfw, p.post_hidden,
+                    p.post_date, p.post_published, p.post_user_id, p.post_votes,
+                    p.post_hits_count, p.post_comments_count, p.post_content,
+                    p.post_content_img, p.post_thumb_img, p.post_merged_id,
+                    p.post_closed, p.post_tl, p.post_lo, p.post_top,
+                    p.post_url_domain, p.post_is_deleted,
+                    u.id AS user_id, u.login, u.avatar, u.created_at,
+                    fav.tid, fav.user_id AS fav_user_id, fav.action_type,
+                    vp.votes_post_item_id, vp.votes_post_user_id
+                FROM posts p
+                INNER JOIN users u ON u.id = p.post_user_id
+                LEFT JOIN favorites fav 
+                    ON fav.tid = p.post_id 
+                    AND fav.user_id = :uid 
+                    AND fav.action_type = 'post'
+                LEFT JOIN votes_post vp 
+                    ON vp.votes_post_item_id = p.post_id 
+                    AND vp.votes_post_user_id = :uid2
+                WHERE " . implode(' AND ', $conditions);
+
+        $params = array_merge([
+            'uid'  => $user_id,
+            'uid2' => $user_id,
+        ], $displayParams);
+
+        // Игнорируемые пользователи
+        if ($user_id) {
+            $sql .= " AND NOT EXISTS (
+                        SELECT 1 FROM users_ignored ui 
+                        WHERE ui.user_id = :uid3 
+                          AND ui.ignored_id = p.post_user_id
+                      )";
+            $params['uid3'] = $user_id;
+        }
+
+        // Подписки
+        if ($type !== 'all' && $user_id) {
+            if (!empty($signed)) {
+                $signed_str = implode(',', array_map('intval', $signed));
+                $sql .= " AND EXISTS (
+                            SELECT 1 FROM facets_posts_relation fpr 
+                            WHERE fpr.relation_post_id = p.post_id 
+                              AND fpr.relation_facet_id IN ($signed_str)
+                         )";
+            } else {
+                return false;
             }
         }
 
-        $display = self::display($type);
-        $sort = Sorting::day($type);
+        $sql .= " $sort LIMIT :start, :limit";
+        $params['start'] = (int) $start;
+        $params['limit'] = (int) self::$limit;
 
-        $nsfw = self::container()->user()->nsfw() ? "" : "post_nsfw = 0 AND";
+        $posts = DB::run($sql, $params)->fetchAll(\PDO::FETCH_ASSOC);
 
-        $start = ($page - 1) * self::$limit;
-        $sql = "SELECT DISTINCT
-                post_id,
-                post_title,
-                post_slug,
-                post_translation,
-                post_draft,
-				post_type,
-                post_nsfw,
-                post_hidden,
-                post_date,
-                post_published,
-                post_user_id,
-                post_votes,
-                post_hits_count,
-                post_comments_count,
-                post_content,
-                post_content_img,
-                post_thumb_img,
-                post_merged_id,
-                post_closed,
-                post_tl,
-                post_lo,
-                post_top,
-                post_url_domain,
-                post_is_deleted,
-                rel.*,
-                votes_post_item_id, votes_post_user_id,
-                u.id, u.login, u.avatar, u.created_at, 
-                fav.tid, fav.user_id, fav.action_type 
-                    FROM facets_posts_relation 
-                        LEFT JOIN posts ON relation_post_id = post_id
-                        LEFT JOIN (
-                            SELECT 
-                                relation_post_id,
-                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
-                                FROM facets
-                                LEFT JOIN facets_posts_relation 
-                                    on facet_id = relation_facet_id
-                                    GROUP BY relation_post_id
-                        ) AS rel
-                             ON rel.relation_post_id= post_id
-                            LEFT JOIN users u ON u.id = post_user_id
-                            LEFT JOIN favorites fav ON fav.tid = post_id 
-                                AND fav.user_id = :uid AND fav.action_type = 'post'  
-                            LEFT JOIN votes_post 
-                                ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
-                                    WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display $sort LIMIT :start, :limit";
-
-        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
-    }
-
-    /**
-     * Number of posts
-     * Количество постов
-     *
-     * @param string $type
-     */
-    public static function feedCount(array $signed, string $type = 'feed')
-    {
-        $resultNotUser = [];
-        $ignored = IgnoredModel::getIgnoredUsers(50);
-        foreach ($ignored as $ind => $row) {
-            $resultNotUser[$ind] = $row['ignored_id'];
+        if (!$posts) {
+            return false;
         }
 
-        $ignoring = "post_user_id NOT IN(0) AND";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+        // Получаем facets только для текущей страницы
+        $post_ids     = array_column($posts, 'post_id');
+        $post_ids_str = implode(',', array_map('intval', $post_ids));
 
-        $subscription = "";
-        if ($type !== 'all') {
-            if (self::container()->user()->id()) {
-                $subscription = "f_id IN(0) AND";
-                if ($signed) $subscription = "f_id IN(" . implode(',', $signed ?? []) . ") AND";
+        $facets_sql = "SELECT 
+                            fpr.relation_post_id,
+                            GROUP_CONCAT(
+                                f.facet_type, '@', f.facet_slug, '@', f.facet_title 
+                                SEPARATOR '@'
+                            ) AS facet_list
+                       FROM facets_posts_relation fpr
+                       INNER JOIN facets f ON f.facet_id = fpr.relation_facet_id
+                       WHERE fpr.relation_post_id IN ($post_ids_str)
+                       GROUP BY fpr.relation_post_id";
+
+        $facets = DB::run($facets_sql)->fetchAll(\PDO::FETCH_ASSOC);
+
+        $facets_map = [];
+        foreach ($facets as $facet) {
+            $facets_map[$facet['relation_post_id']] = $facet['facet_list'];
+        }
+
+        foreach ($posts as &$post) {
+            $post['facet_list'] = $facets_map[$post['post_id']] ?? '';
+        }
+
+        return $posts;
+    }
+
+    public static function feedCount(array $signed, string $type = 'feed'): int
+    {
+        if (!in_array($type, self::ALLOWED_TYPES, true)) {
+            throw new \InvalidArgumentException("Invalid feed type: $type");
+        }
+
+        $user_id   = (int) self::container()->user()->id();
+        [$display, $displayParams] = self::display($type);
+        $dateCond  = Sorting::getDateCondition();
+
+        // ★ Собираем WHERE через массив условий
+        $conditions = [
+            "p.post_type != 'page'",
+            "p.post_draft = 0",
+        ];
+
+        if (!self::container()->user()->nsfw()) {
+            $conditions[] = "p.post_nsfw = 0";
+        }
+
+        $conditions[] = $display;
+
+        if ($dateCond !== '') {
+            $dateCond = ltrim($dateCond, 'AND ');
+            $conditions[] = $dateCond;
+        }
+
+        $sql = "SELECT COUNT(DISTINCT p.post_id)
+                FROM posts p
+                WHERE " . implode(' AND ', $conditions);
+
+        $params = $displayParams;
+
+        if ($user_id) {
+            $sql .= " AND NOT EXISTS (
+                        SELECT 1 FROM users_ignored ui 
+                        WHERE ui.user_id = :uid AND ui.ignored_id = p.post_user_id
+                      )";
+            $params['uid'] = $user_id;
+        }
+
+        if ($type !== 'all' && $user_id) {
+            if (!empty($signed)) {
+                $signed_str = implode(',', array_map('intval', $signed));
+                $sql .= " AND EXISTS (
+                            SELECT 1 FROM facets_posts_relation fpr 
+                            WHERE fpr.relation_post_id = p.post_id 
+                              AND fpr.relation_facet_id IN ($signed_str)
+                         )";
+            } else {
+                return 0;
             }
         }
 
-        $nsfw = (self::container()->user()->tl()) ? "" : "post_nsfw = 0 AND";
-
-        $display = self::display($type);
-
-
-        $sql = "SELECT 
-                    post_id
-                        FROM posts
-                            LEFT JOIN
-                            (
-                                SELECT 
-                                    MAX(facet_id) as f_id,
-                                        relation_post_id
-                                        FROM facets  
-                                            LEFT JOIN facets_posts_relation on facet_id = relation_facet_id GROUP BY relation_post_id
-                            ) AS rel
-                                ON rel.relation_post_id = post_id 
-                                    INNER JOIN users ON id = post_user_id
-                                        WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display";
-
-        return ceil(DB::run($sql)->rowCount() / self::$limit);
+        return (int) DB::run($sql, $params)->fetchColumn();
     }
 
-    public static function display(string $type)
+    public static function display(string $type): array
     {
-        $countLike = config('feed', 'countLike');
-        $trust_level = self::container()->user()->tl();
+        $countLike   = (int) config('feed', 'countLike');
+        $trust_level = (int) self::container()->user()->tl();
 
-        switch ($type) {
-            case 'question':
-			case 'post':
-			case 'article':
-			case 'note':
-                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_type = '$type'";
-                break;
-            case 'deleted':
-                $display =  "post_is_deleted = 1";
-                break;
-            case 'all':
-                $display =  "post_is_deleted = 0 AND post_tl <= $trust_level";
-                break;
-            default:
-                $display =  "post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= $trust_level";
-                if (self::container()->user()->active()) {
-                    $display =  "post_is_deleted = 0 AND post_tl <= $trust_level";
-                }
-        }
-
-        return $display;
+        return match ($type) {
+            'question', 'post', 'article', 'note'
+                => [
+                    "p.post_is_deleted = 0 AND p.post_tl <= $trust_level AND p.post_type = :type",
+                    ['type' => $type]
+                ],
+            'deleted'
+                => ["p.post_is_deleted = 1", []],
+            'all'
+                => ["p.post_is_deleted = 0 AND p.post_tl <= $trust_level", []],
+            default => self::container()->user()->active()
+                ? ["p.post_is_deleted = 0 AND p.post_tl <= $trust_level", []]
+                : ["p.post_is_deleted = 0 AND p.post_votes >= $countLike AND p.post_tl <= $trust_level", []],
+        };
     }
 
-    /**
-     * Facets (topic, blogs) all / subscribed
-     * Фасеты (темы, блоги) все / подписан
-     */
-    public static function getSubscription()
+    public static function getSubscription(): array
     {
-        $sql = "SELECT 
-                    facet_id                  
-                        FROM facets 
-                           LEFT JOIN facets_signed ON signed_facet_id = facet_id 
-                                WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
-                                    ORDER BY facet_id DESC";
+        $sql = "SELECT facet_id                  
+                FROM facets 
+                INNER JOIN facets_signed fs ON fs.signed_facet_id = facets.facet_id 
+                WHERE fs.signed_user_id = :id 
+                    AND facets.facet_type IN ('topic', 'blog')
+                ORDER BY facets.facet_id DESC";
 
         return DB::run($sql, ['id' => self::container()->user()->id()])->fetchAll();
     }

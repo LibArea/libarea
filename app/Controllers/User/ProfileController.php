@@ -16,15 +16,32 @@ class ProfileController extends Controller
 {
     use Views;
 
-    protected $limit = 15;
+    protected int $limit = 15;
 
     /**
      * Member page (profile) 
      * Страница участника (профиль)
-     *
-     * @return void
      */
-    function index(): void
+    public function index(): void
+    {
+        $this->callIndex('profile');
+    }
+
+    /**
+     * User posts
+     * Посты пользователя
+     */
+    public function contents(): void
+    {
+        $this->callIndex('profile_posts');
+    }
+
+    /**
+     * Общая логика для index() и contents()
+     * 
+     * @param string $sheet — тип страницы для Meta::profile()
+     */
+    private function callIndex(string $sheet): void
     {
         $profile = $this->profile();
 
@@ -32,84 +49,87 @@ class ProfileController extends Controller
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $contents = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
+        // ★ Ключевая оптимизация: считаем feedCount только 1 раз
+        // для обложки страниц (sidebar нужен на обеих)
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        render(
-            '/user/profile/index',
-            [
-                'meta'  => Meta::profile('profile', $profile),
-                'data'  => array_merge(
-                    $this->sidebar($pagesCount, $profile),
-                    [
-                        'contents' => $contents,
-                        'participation' => FacetModel::participation($profile['id'])
-                    ]
-                ),
-            ]
-        );
-    }
+        // Для главной страницы показываем полный список постов,
+        // для contents — то же самое, но с другой мета-информацией
+        $contents = ($sheet === 'profile') 
+            ? FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id'])
+            : FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
 
-    /**
-     * User posts
-     *
-     * @return void
-     */
-    public function contents()
-    {
-        $profile	= $this->profile();
+        $view = ($sheet === 'profile') 
+            ? '/user/profile/index' 
+            : '/user/profile/contents';
 
-        $contents	= FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
-        $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
+        $data = [
+            'pagesCount'    => (int) ceil($pagesCount / $this->limit),
+            'pNum'          => Html::pageNumber(),
+            'contents'      => $contents,
+        ];
+
+        if ($sheet === 'profile') {
+            $data['participation'] = FacetModel::participation($profile['id']);
+        }
 
         render(
-            '/user/profile/contents',
+            $view,
             [
-                'meta'  => Meta::profile('profile_posts', $profile),
-                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['contents' => $contents]),
+                'meta' => Meta::profile($sheet, $profile),
+                'data' => array_merge($this->sidebar($pagesCount, $profile), $data),
             ]
         );
     }
 
     /**
      * User comments
-     *
-     * @return void
+     * Комментарии пользователя
      */
-    public function comments()
+    public function comments(): void
     {
-        $profile    = $this->profile();
-        $comments    = CommentModel::userComments(Html::pageNumber(), $profile['id'], $this->container->user()->id());
-        $commentsCount    = CommentModel::userCommentsCount($profile['id']);
+        $profile       = $this->profile();
+        $comments      = CommentModel::userComments(Html::pageNumber(), $profile['id'], $this->container->user()->id());
+        $commentsCount = (int) CommentModel::userCommentsCount($profile['id']);
 
         render(
             '/user/profile/comments',
             [
-                'meta'  => Meta::profile('profile_comments', $profile),
-                'data'  => array_merge($this->sidebar((int)$commentsCount, $profile), ['comments' => $comments]),
+                'meta' => Meta::profile('profile_comments', $profile),
+                'data' => array_merge(
+                    $this->sidebar($commentsCount, $profile),
+                    ['comments' => $comments]
+                ),
             ]
         );
     }
 
-    public function sidebar(int $pagesCount, array $profile)
+    /**
+     * Sidebar data for profile pages
+     * Данные сайдбара для страниц профиля
+     */
+    public function sidebar(int $pagesCount, array $profile): array
     {
         return [
-            'pagesCount'    => ceil($pagesCount / $this->limit),
-            'pNum'          => Html::pageNumber(),
-            'profile'       => $profile,
-            'type'          => 'profile',
-            'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
-            'counts'        => UserModel::contentCount($profile['id'], 'active'),
-            'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),
-            'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
-            'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-            'my_post'       => PublicationModel::getPost($profile['my_post'], 'id'),
-            'button_pm'     => $this->accessPm($profile['id']),
-            'ignored'       => IgnoredModel::getUserIgnored($profile['id']),
+            'pagesCount'  => $pagesCount,
+            'profile'     => $profile,
+            'type'        => 'profile',
+            'delet_count' => UserModel::contentCount($profile['id'], 'remote'),
+            'counts'      => UserModel::contentCount($profile['id'], 'active'),
+            'topics'      => FacetModel::getFacetsTopicProfile($profile['id']),
+            'blogs'       => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+            'badges'      => BadgeModel::getBadgeUserAll($profile['id']),
+            'my_post'     => PublicationModel::getPost($profile['my_post'] ?? null, 'id'),
+            'button_pm'   => $this->accessPm($profile['id']),
+            'ignored'     => IgnoredModel::getUserIgnored($profile['id']),
         ];
     }
 
-    public function profile()
+    /**
+     * Get profile data
+     * Получение данных профиля
+     */
+    public function profile(): array
     {
         $result = Request::param('login')->value();
 
@@ -121,18 +141,19 @@ class ProfileController extends Controller
     }
 
     /**
-     * Sending personal messages
-     *
-     * @param integer $for_user_id
+     * Check access to send personal messages
+     * Проверка доступа к отправке личных сообщений
      */
     public function accessPm(int $for_user_id): bool
     {
         // We forbid sending to ourselves
+        // Запрещаем отправку самому себе
         if ($this->container->user()->id() == $for_user_id) {
             return false;
         }
 
         // If the trust level is less than the established one
+        // Если уровень доверия меньше установленного
         if ($this->container->user()->tl() < config('trust-levels', 'tl_add_pm')) {
             return false;
         }

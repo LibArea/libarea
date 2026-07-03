@@ -11,97 +11,51 @@ use Meta, Html;
 
 class HomeController extends Controller
 {
-    public function feed(): void
-    {
-        $this->callIndex('feed');
-    }
+    public function feed(): void     { $this->callIndex('feed'); }
+    public function questions(): void{ $this->callIndex('question'); }
+    public function posts(): void    { $this->callIndex('post'); }
+    public function articles(): void { $this->callIndex('article'); }
+    public function notes(): void    { $this->callIndex('note'); }
+    public function all(): void      { $this->callIndex('all'); }
+    public function deleted(): void  { $this->callIndex('deleted'); }
 
-    public function questions(): void
-    {
-        $this->callIndex('question');
-    }
-
-    public function posts(): void
-    {
-        $this->callIndex('post');
-    }
-
-    public function articles(): void
-    {
-        $this->callIndex('article');
-    }
-
-    public function notes(): void
-    {
-        $this->callIndex('note');
-    }
-
-    public function all(): void
-    {
-        $this->callIndex('all');
-    }
-
-    public function deleted(): void
-    {
-        $this->callIndex('deleted');
-    }
-
-    /**
-     * The central page of the site
-     * Центральная страница сайта
-     *
-     * @param string $sheet
-     * @return void
-     */
-    private function callIndex(string $sheet)
+    private function callIndex(string $sheet): void
     {
         $subscription = HomeModel::getSubscription();
-
-        $signed = [];
-        foreach ($subscription as $ind => $row) {
-            $signed[$ind] = $row['facet_id'];
-        }
+        $signed = array_column($subscription, 'facet_id');
+        
+        $page = Html::pageNumber();
 
         render(
             'home',
             [
-                'meta'  => Meta::home($sheet),
-                'data'  => [
-                    'pagesCount'        => HomeModel::feedCount($signed, $sheet),
-                    'pNum'              => Html::pageNumber(),
-                    'sheet'             => $sheet,
-                    'type'              => 'main',
-					'topics' 			=> \App\Models\FacetModel::advice($subscription),
-                    'latest_comments'   => CommentModel::latestComments(6),
-                    'contents'			=> HomeModel::feed($signed, Html::pageNumber(), $sheet),
+                'meta' => Meta::home($sheet),
+                'data' => [
+                    'pagesCount'      => HomeModel::feedCount($signed, $sheet),
+                    'pNum'            => $page,
+                    'sheet'           => $sheet,
+                    'type'            => 'main',
+                    'topics'          => \App\Models\FacetModel::advice($subscription),
+                    'latest_comments' => CommentModel::latestComments(6),
+                    'contents'        => HomeModel::feed($signed, $page, $sheet),
                 ],
             ],
         );
     }
 
-    /**
-     * Infinite scroll
-     * Бесконечный скролл
-     *
-     * @return void
-     */
     public function scroll(): void
     {
         $type = Request::param('type')->value() == 'all' ? 'all' : 'main.feed';
 
         $subscription = HomeModel::getSubscription();
-
-        $signed = [];
-        foreach ($subscription as $ind => $row) {
-            $signed[$ind] = $row['facet_id'];
-        }
+        $signed = array_column($subscription, 'facet_id');
 
         insert(
             '/content/publications/choice',
             [
-                'data'  => [
-                    'pages' => Html::pageNumber(),
-                    'sheet' => 'main.feed',
+                'data' => [
+                    'pages'    => Html::pageNumber(),
+                    'sheet'    => 'main.feed',
                     'contents' => HomeModel::feed($signed, Html::pageNumber(), $type),
                 ]
             ]
