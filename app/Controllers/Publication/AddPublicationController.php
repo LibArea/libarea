@@ -11,8 +11,6 @@ use App\Content\Integration\{Discord, Telegram};
 use App\Content\Сheck\{Validator, Availability};
 use UploadImage, URLScraper, Meta, Msg;
 
-use Utopia\Domains\Domain;
-
 use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
@@ -245,11 +243,9 @@ class AddPublicationController extends Controller
 			Msg::redirect(__('msg.invalid_url'), 'error', redirect());
 		}
 		
-        $domain = new Domain(host($post_url));
-
         $site = [
             'og_img'            => self::grabOgImg($post_url),
-            'post_url_domain'   => $domain->getRegisterable(),
+            'post_url_domain'   => parse_url($post_url, PHP_URL_HOST),
         ];
 
         return $site;

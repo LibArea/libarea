@@ -34,7 +34,6 @@
 		"phphleb/muller": "dev-main",
 		"cocur/slugify": "^4.6.0",
 		"donatj/phpuseragentparser": "dev-master",
-		"utopia-php/domains": "^0.5.0",
 		"matthiasmullie/minify": "dev-master",
 		"phpmailer/phpmailer": "^6.9.3",
 		"symfony/dom-crawler": "7.2.x-dev",
