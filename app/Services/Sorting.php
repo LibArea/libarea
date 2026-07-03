@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Services;
+
 use Hleb\Static\Request;
 
 class Sorting
@@ -25,14 +27,13 @@ class Sorting
 
     /**
      * Дополнительное условие WHERE для фильтрации по дате
-     * (раньше было сломано внутри ORDER BY)
      */
     public static function getDateCondition(): string
     {
         return match (Request::get('sort')->value()) {
-            'TopMonth'       => 'AND p.post_date > CURDATE() - INTERVAL 1 WEEK',
-            'TopThreeMonths' => 'AND p.post_date > CURDATE() - INTERVAL 3 WEEK',
-            'TopYear'        => 'AND p.post_date > CURDATE() - INTERVAL 12 WEEK',
+            'TopMonth'       => 'p.post_date > CURDATE() - INTERVAL 1 WEEK',
+            'TopThreeMonths' => 'p.post_date > CURDATE() - INTERVAL 3 WEEK',
+            'TopYear'        => 'p.post_date > CURDATE() - INTERVAL 12 WEEK',
             default          => '',
         };
     }
