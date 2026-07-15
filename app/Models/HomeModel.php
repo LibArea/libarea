@@ -25,34 +25,31 @@ class HomeModel extends Model
             throw new \InvalidArgumentException("Invalid feed type: $type");
         }
 
-        $user_id   = (int) self::container()->user()->id();
-        $trust_level = (int) self::container()->user()->tl();
+        $user_id      = (int) self::container()->user()->id();
+        $trust_level  = (int) self::container()->user()->tl();
         $nsfw_enabled = (bool) self::container()->user()->nsfw();
         [$display, $displayParams] = self::display($type);
-        $sort      = Sorting::day($type);
-        $dateCond  = Sorting::getDateCondition();
-        $start     = ($page - 1) * self::$limit;
+        $sort         = Sorting::day($type);
+        $dateCond     = Sorting::getDateCondition();
+        $start        = ($page - 1) * self::$limit;
 
-        // ★ Используем общие методы из трейта
         $sql = self::buildBaseSelect();
         $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond);
         $conditions[] = $display;
 
+        $params = array_merge([
+            'uid'         => $user_id,
+            'uid2'        => $user_id,
+            'trust_level' => $trust_level,
+        ], $displayParams);
+        
         $sql .= " WHERE " . implode(' AND ', $conditions);
 
-        $params = array_merge([
-            'uid'  => $user_id,
-            'uid2' => $user_id,
-        ], $displayParams);
-
-        // ★ Используем методы из трейта
         $sql = self::addIgnoredFilter($sql, $params, $user_id);
 
         if ($type !== 'all' && $user_id) {
             $result = self::addSubscriptionFilter($sql, $params, $signed);
-            if ($result === false) {
-                return false;
-            }
+            if ($result === false) return false;
             $sql = $result;
         }
 
@@ -61,8 +58,6 @@ class HomeModel extends Model
         $params['limit'] = (int) self::$limit;
 
         $posts = DB::run($sql, $params)->fetchAll(\PDO::FETCH_ASSOC);
-
-        // ★ Используем общий метод из трейта
         return self::fetchFacets($posts) ?: false;
     }
 
@@ -72,26 +67,23 @@ class HomeModel extends Model
             throw new \InvalidArgumentException("Invalid feed type: $type");
         }
 
-        $user_id   = (int) self::container()->user()->id();
-        $trust_level = (int) self::container()->user()->tl();
+        $user_id      = (int) self::container()->user()->id();
+        $trust_level  = (int) self::container()->user()->tl();
         $nsfw_enabled = (bool) self::container()->user()->nsfw();
         [$display, $displayParams] = self::display($type);
-        $dateCond  = Sorting::getDateCondition();
+        $dateCond     = Sorting::getDateCondition();
 
         $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond);
         $conditions[] = $display;
 
-        $sql = "SELECT COUNT(DISTINCT p.post_id) FROM posts p WHERE " . implode(' AND ', $conditions);
-
-        $params = $displayParams;
+        $sql = "SELECT COUNT(p.post_id) FROM posts p WHERE " . implode(' AND ', $conditions);
+        $params = array_merge(['trust_level' => $trust_level], $displayParams);
 
         $sql = self::addIgnoredFilter($sql, $params, $user_id);
 
         if ($type !== 'all' && $user_id) {
             $result = self::addSubscriptionFilter($sql, $params, $signed);
-            if ($result === false) {
-                return 0;
-            }
+            if ($result === false) return 0;
             $sql = $result;
         }
 
@@ -100,8 +92,7 @@ class HomeModel extends Model
 
     public static function display(string $type): array
     {
-        $countLike   = (int) config('feed', 'countLike');
-        $trust_level = (int) self::container()->user()->tl();
+        $countLike = (int) config('feed', 'countLike');
 
         return match ($type) {
             'question', 'post', 'article', 'note'
@@ -115,7 +106,7 @@ class HomeModel extends Model
                 => ["1=1", []],
             default => self::container()->user()->active()
                 ? ["1=1", []]
-                : ["p.post_votes >= $countLike", []],
+                : ["p.post_votes >= :countLike", ['countLike' => $countLike]],
         };
     }
 

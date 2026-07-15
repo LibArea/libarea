@@ -14,72 +14,73 @@ class FacetModel extends Model
 
     // All facets
     // Все фасеты
-    public static function getFacetsAll(int $page, int $limit, string  $sort, string $type)
+    public static function getFacetsAll(int $page, int $limit, string $sort, string $type)
     {
-        $signet = self::sorts($sort, $type);
+        $sortData = self::sorts($sort, $type);
+        $start = ($page - 1) * $limit;
+        
+        $sql = "SELECT 
+                    facet_id, facet_title, facet_description, facet_short_description, 
+                    facet_slug, facet_img, facet_user_id, facet_top_level, 
+                    facet_focus_count, facet_count, signed_facet_id, signed_user_id, 
+                    facet_type, facet_is_deleted
+                FROM facets 
+                LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
+                {$sortData['where']} 
+                LIMIT :start, :limit";
 
-        $start  = ($page - 1) * $limit;
-        $sql    = "SELECT 
-                    facet_id,
-                    facet_title,
-                    facet_description,
-                    facet_short_description,
-                    facet_slug,
-                    facet_img,
-                    facet_user_id,
-                    facet_top_level,
-                    facet_focus_count,
-                    facet_count,
-                    signed_facet_id, 
-                    signed_user_id,
-                    facet_type,
-                    facet_is_deleted
-                        FROM facets 
-                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
-                                $signet LIMIT :start, :limit";
+        $params = array_merge($sortData['params'], [
+            'user_id' => (int) self::container()->user()->id(),
+            'start'   => (int) $start,
+            'limit'   => (int) $limit
+        ]);
 
-        return DB::run($sql, ['start' => $start, 'limit' => $limit, 'user_id' => self::container()->user()->id()])->fetchAll();
+        return DB::run($sql, $params)->fetchAll();
     }
 
-    public static function getFacetsAllCount(string $sort, string $type)
+    public static function getFacetsAllCount(string $sort, string $type): int
     {
-        $signet = self::sorts($sort, $type);
+        $sortData = self::sorts($sort, $type);
+        
+        $sql = "SELECT facet_id FROM facets 
+                LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id 
+                {$sortData['where']}";
 
-        $sql    = "SELECT 
-                    facet_id,
-                    facet_type,
-                    signed_facet_id, 
-                    signed_user_id,
-                    facet_is_deleted
-                        FROM facets 
-                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id $signet";
+        $params = array_merge($sortData['params'], [
+            'user_id' => (int) self::container()->user()->id()
+        ]);
 
-        return DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount();
+        return DB::run($sql, $params)->rowCount();
     }
 
-    public static function sorts(string $sort, string $type)
+   // Возвращает массив с условием и параметрами для безопасной привязки
+    public static function sorts(string $sort, string $type): array
     {
         $type = $type === 'blogs' ? 'blog' : 'topic';
+        $userId = (int) self::container()->user()->id();
 
-        switch ($sort) {
-            case 'my':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  self::container()->user()->id() . " ORDER BY facet_count DESC";
-                break;
-            case 'new':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " ORDER BY facet_id DESC";
-                break;
-            case 'all':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " ORDER BY facet_count DESC";
-                break;
-            case 'ban':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::DELETED . " ORDER BY facet_id DESC";
-                break;
-            default:
-                $signet = "WHERE facet_type = topic ORDER BY facet_count DESC";
-                break;
-        }
-
-        return $signet;
+        return match ($sort) {
+            'my' => [
+                'where' => "WHERE facet_type = :type AND facet_is_deleted = :deleted AND signed_user_id = :user_id ORDER BY facet_count DESC",
+                'params' => ['type' => $type, 'deleted' => self::NO_REMOVAL, 'user_id' => $userId]
+            ],
+            'new' => [
+                'where' => "WHERE facet_type = :type AND facet_is_deleted = :deleted ORDER BY facet_id DESC",
+                'params' => ['type' => $type, 'deleted' => self::NO_REMOVAL]
+            ],
+            'all' => [
+                'where' => "WHERE facet_type = :type AND facet_is_deleted = :deleted ORDER BY facet_count DESC",
+                'params' => ['type' => $type, 'deleted' => self::NO_REMOVAL]
+            ],
+            'ban' => [
+                'where' => "WHERE facet_type = :type AND facet_is_deleted = :deleted ORDER BY facet_id DESC",
+                'params' => ['type' => $type, 'deleted' => self::DELETED]
+            ],
+            default => [
+                'where' => "WHERE facet_type = :type ORDER BY facet_count DESC",
+                'params' => ['type' => 'topic']
+            ]
+        };
     }
 
     // Cell information (id, slug) 
@@ -594,18 +595,23 @@ class FacetModel extends Model
         return DB::run("DELETE FROM facets_users_team WHERE team_facet_id = :facet_id", ['facet_id' => $facet_id]);
     }
 
-    public static function getFacetsTopicProfile($profile_id)
+    // Темы, на которые подписан участник (для профиля)
+    public static function getFacetsTopicProfile(int $profile_id): array
     {
-        $sql    = "SELECT 
-                    facet_id,
-                    facet_title,
-                    facet_slug,
-                    facet_img
-                        FROM facets 
-                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $profile_id
-                                WHERE facet_type = 'topic' AND signed_user_id = $profile_id ORDER BY facet_count DESC LIMIT 10";
+        $sql = "SELECT 
+                    f.facet_id, 
+                    f.facet_title, 
+                    f.facet_slug, 
+                    f.facet_img
+                FROM facets f
+                INNER JOIN facets_signed fs 
+                    ON fs.signed_facet_id = f.facet_id 
+                    AND fs.signed_user_id = :profile_id
+                WHERE f.facet_type = 'topic' 
+                ORDER BY f.facet_count DESC 
+                LIMIT 10";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['profile_id' => (int) $profile_id])->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public static function breadcrumb(int $facet_id)

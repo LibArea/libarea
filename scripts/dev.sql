@@ -1432,3 +1432,20 @@ ALTER TABLE `votes_post`
   
   
 ALTER TABLE `messages` CHANGE `message_sender_id` `message_user_id` INT NULL DEFAULT NULL COMMENT 'Отправитель';  
+
+-- 1. Для быстрой фильтрации главной ленты и сортировки
+ALTER TABLE `posts` ADD INDEX `idx_posts_main_feed` (`post_is_deleted`, `post_draft`, `post_type`, `post_nsfw`, `post_date`);
+ALTER TABLE `posts` ADD INDEX `idx_posts_user_feed` (`post_user_id`, `post_is_deleted`, `post_draft`, `post_date`);
+ALTER TABLE `posts` ADD INDEX `idx_posts_top_date` (`post_top`, `post_date`);
+
+-- 2. Для мгновенного поиска подписок пользователя (критично для ленты)
+ALTER TABLE `facets_signed` ADD INDEX `idx_signed_user_facet` (`signed_user_id`, `signed_facet_id`);
+
+-- 3. Для ускорения связи Тема -> Посты (JOIN в FeedModel)
+ALTER TABLE `facets_posts_relation` ADD INDEX `idx_relation_facet_post` (`relation_facet_id`, `relation_post_id`);
+
+-- 4. Для быстрой проверки игнорируемых пользователей (NOT EXISTS)
+ALTER TABLE `users_ignored` ADD INDEX `idx_ignored_user_pair` (`user_id`, `ignored_id`);
+
+-- 5. Для ускорения проверки избранного (LEFT JOIN)
+ALTER TABLE `favorites` ADD INDEX `idx_favorites_lookup` (`action_type`, `user_id`, `tid`);

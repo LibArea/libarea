@@ -5,14 +5,9 @@ declare(strict_types=1);
 namespace App\Traits;
 
 use Hleb\Static\DB;
-use App\Services\Sorting;
 
 trait PostQueryTrait
 {
-    /**
-     * Build base SELECT query
-     * Базовый SELECT запрос
-     */
     protected static function buildBaseSelect(): string
     {
         return "SELECT 
@@ -37,17 +32,13 @@ trait PostQueryTrait
                     AND vp.votes_post_user_id = :uid2";
     }
 
-    /**
-     * Build base WHERE conditions
-     * Базовые условия WHERE
-     */
     protected static function buildBaseConditions(int $trust_level, bool $nsfw_enabled, string $dateCond = ''): array
     {
         $conditions = [
             "p.post_type != 'page'",
             "p.post_draft = 0",
             "p.post_is_deleted = 0",
-            "p.post_tl <= $trust_level",
+            "p.post_tl <= :trust_level",
         ];
 
         if (!$nsfw_enabled) {
@@ -55,41 +46,90 @@ trait PostQueryTrait
         }
 
         if ($dateCond !== '') {
-            $dateCond = ltrim($dateCond, 'AND ');
-            $conditions[] = $dateCond;
+            $conditions[] = ltrim($dateCond, 'AND ');
         }
 
         return $conditions;
     }
 
-    /**
-     * Fetch facets for posts
-     * Получение facets для постов
-     */
-    protected static function fetchFacets(array $posts): array
+    protected static function buildFeedSpecificConditions(string $sheet, string|int $slug, string $topic): array
     {
-        if (!$posts) {
-            return [];
+        $conditions = [];
+        $joins = "";
+        $params = [];
+
+        switch ($sheet) {
+            case 'facet.feed':
+            case 'question':
+            case 'article':
+            case 'post':
+            case 'note':
+            case 'recommend':
+                $joins = "INNER JOIN facets_posts_relation fpr ON fpr.relation_post_id = p.post_id
+                          INNER JOIN facets f ON f.facet_id = fpr.relation_facet_id AND f.facet_slug = :slug";
+                $params['slug'] = (string) $slug;
+                
+                if (in_array($sheet, ['question', 'article', 'post', 'note'], true)) {
+                    $conditions[] = "p.post_type = :sheet_type";
+                    $params['sheet_type'] = $sheet;
+                }
+                if ($sheet === 'recommend') {
+                    $conditions[] = "p.post_is_recommend = 1";
+                }
+                if (!self::container()->user()->admin()) {
+                    $conditions[] = "p.post_hidden = 0";
+                }
+                break;
+
+            case 'facet.feed.topic':
+                $joins = "INNER JOIN facets_posts_relation fpr1 ON fpr1.relation_post_id = p.post_id
+                          INNER JOIN facets f1 ON f1.facet_id = fpr1.relation_facet_id AND f1.facet_slug = :slug
+                          INNER JOIN facets_posts_relation fpr2 ON fpr2.relation_post_id = p.post_id
+                          INNER JOIN facets f2 ON f2.facet_id = fpr2.relation_facet_id AND f2.facet_slug = :topic";
+                $params['slug']  = (string) $slug;
+                $params['topic'] = (string) $topic;
+                $conditions[] = "p.post_type = 'post'";
+                if (!self::container()->user()->admin()) {
+                    $conditions[] = "p.post_hidden = 0";
+                }
+                break;
+
+            case 'web.feed':
+                $conditions[] = "p.post_url_domain = :slug";
+                $params['slug'] = (string) $slug;
+                if (!self::container()->user()->admin()) {
+                    $conditions[] = "p.post_hidden = 0";
+                }
+                break;
+
+            case 'profile.posts':
+                $conditions[] = "p.post_user_id = :user_id";
+                $params['user_id'] = (int) $slug;
+                break;
         }
 
-        $post_ids     = array_column($posts, 'post_id');
-        $post_ids_str = implode(',', array_map('intval', $post_ids));
+        return [
+            'conditions' => $conditions,
+            'joins'      => $joins,
+            'params'     => $params
+        ];
+    }
 
+    protected static function fetchFacets(array $posts): array
+    {
+        if (!$posts) return [];
+
+        $post_ids_str = implode(',', array_map('intval', array_column($posts, 'post_id')));
         $facets_sql = "SELECT 
-                            fpr.relation_post_id,
-                            GROUP_CONCAT(
-                                f.facet_type, '@', f.facet_slug, '@', f.facet_title 
-                                SEPARATOR '@'
-                            ) AS facet_list
-                       FROM facets_posts_relation fpr
-                       INNER JOIN facets f ON f.facet_id = fpr.relation_facet_id
-                       WHERE fpr.relation_post_id IN ($post_ids_str)
-                       GROUP BY fpr.relation_post_id";
-
-        $facets = DB::run($facets_sql)->fetchAll(\PDO::FETCH_ASSOC);
+                            relation_post_id,
+                            GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                       FROM facets_posts_relation
+                       INNER JOIN facets ON facet_id = relation_facet_id
+                       WHERE relation_post_id IN ($post_ids_str)
+                       GROUP BY relation_post_id";
 
         $facets_map = [];
-        foreach ($facets as $facet) {
+        foreach (DB::run($facets_sql)->fetchAll(\PDO::FETCH_ASSOC) as $facet) {
             $facets_map[$facet['relation_post_id']] = $facet['facet_list'];
         }
 
@@ -100,28 +140,18 @@ trait PostQueryTrait
         return $posts;
     }
 
-    /**
-     * Add ignored users filter
-     * Добавить фильтр игнорируемых пользователей
-     */
     protected static function addIgnoredFilter(string $sql, array &$params, int $user_id): string
     {
         if ($user_id) {
             $sql .= " AND NOT EXISTS (
                         SELECT 1 FROM users_ignored ui 
-                        WHERE ui.user_id = :uid_ignored 
-                          AND ui.ignored_id = p.post_user_id
+                        WHERE ui.user_id = :uid_ignored AND ui.ignored_id = p.post_user_id
                       )";
             $params['uid_ignored'] = $user_id;
         }
-
         return $sql;
     }
 
-    /**
-     * Add subscription filter
-     * Добавить фильтр подписок
-     */
     protected static function addSubscriptionFilter(string $sql, array &$params, array $signed): string|false
     {
         if (!empty($signed)) {
@@ -134,7 +164,6 @@ trait PostQueryTrait
         } else {
             return false;
         }
-
         return $sql;
     }
 }

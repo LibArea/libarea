@@ -39,12 +39,11 @@
               </a>
             <?php endif; ?>
           </div>
-          <?php if ($item['post_type'] = 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
+          <?php if ($item['post_type'] === 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
             <div class="cut-content">
               <?= fragment($item['post_content'], 250); ?>
             </div>
-            <?php if ($item['post_type'] = 'post') : ?>
-            </a><?php endif; ?>
+            <?php if ($item['post_type'] === 'post') : ?></a><?php endif; ?>
         </div>
 
         <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>

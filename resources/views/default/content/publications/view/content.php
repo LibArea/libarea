@@ -2,7 +2,6 @@
 $item = $data['contents'];
 $blog = $data['blog'][0] ?? null;
 ?>
-
 <main>
   <article<?php if ($item['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
