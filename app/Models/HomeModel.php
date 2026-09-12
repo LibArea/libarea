@@ -34,7 +34,7 @@ class HomeModel extends Model
         $start        = ($page - 1) * self::$limit;
 
         $sql = self::buildBaseSelect();
-        $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond);
+        $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond, $type);
         $conditions[] = $display;
 
         $params = array_merge([
@@ -73,7 +73,7 @@ class HomeModel extends Model
         [$display, $displayParams] = self::display($type);
         $dateCond     = Sorting::getDateCondition();
 
-        $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond);
+        $conditions = self::buildBaseConditions($trust_level, $nsfw_enabled, $dateCond, $type);
         $conditions[] = $display;
 
         $sql = "SELECT COUNT(p.post_id) FROM posts p WHERE " . implode(' AND ', $conditions);

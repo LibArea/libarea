@@ -32,14 +32,17 @@ trait PostQueryTrait
                     AND vp.votes_post_user_id = :uid2";
     }
 
-    protected static function buildBaseConditions(int $trust_level, bool $nsfw_enabled, string $dateCond = ''): array
+    protected static function buildBaseConditions(int $trust_level, bool $nsfw_enabled, string $dateCond = '', string $type = ''): array
     {
         $conditions = [
             "p.post_type != 'page'",
             "p.post_draft = 0",
-            "p.post_is_deleted = 0",
             "p.post_tl <= :trust_level",
         ];
+
+        if ($type !== 'deleted') {
+            $conditions[] = "p.post_is_deleted = 0";
+        }
 
         if (!$nsfw_enabled) {
             $conditions[] = "p.post_nsfw = 0";

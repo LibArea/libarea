@@ -163,6 +163,7 @@ class UserModel extends Model
                     post_title,
                     post_slug,
 					post_type,
+					post_content,
                     comment_id,
                     comment_post_id,
                     comment_content
@@ -171,7 +172,7 @@ class UserModel extends Model
                             LEFT JOIN comments ON comment_id = fav.tid AND fav.action_type = 'comment'
                               LEFT JOIN folders_relation fr ON fr.tid = fav.tid
                               LEFT JOIN folders fol ON folder_id = fol.id AND fol.user_id = :uid2
-                                WHERE fav.action_type != 'website' AND fav.user_id = :user_id $tag ORDER BY fav.id DESC LIMIT 100";
+                                WHERE fav.action_type != 'website' AND post_is_deleted = 0 AND fav.user_id = :user_id $tag ORDER BY fav.id DESC LIMIT 100";
 
         return DB::run($sql, ['user_id' => $user_id, 'uid2' => $user_id])->fetchAll();
     }
