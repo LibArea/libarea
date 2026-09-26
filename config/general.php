@@ -71,4 +71,8 @@ return [
     // Check email (during registration)? If false, then the SMTP (and PHP Mail) settings in config/integration.php will not work.
     // Проверять почту (при регистрации)? Если false, то настройки SMTP (и PHP Mail) в config/integration.php работать не будут.
     'mail_check'        =>  true,
+	
+    // How many accounts can be registered from one device (browser fingerprint)?
+    // Сколько аккаунтов можно зарегистрировать с одного устройства (отпечатка браузера)?
+    'reg_device_limit'  => 3,
 ];

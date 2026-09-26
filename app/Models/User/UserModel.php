@@ -70,6 +70,7 @@ class UserModel extends Model
                                     limiting_mode, 
                                     activated, 
                                     reg_ip, 
+                                    reg_device_id, 
                                     trust_level, 
                                     invitation_id) 
                                     
@@ -82,6 +83,7 @@ class UserModel extends Model
                                     :limiting_mode, 
                                     :activated, 
                                     :reg_ip, 
+                                    :reg_device_id, 
                                     :trust_level, 
                                     :invitation_id)";
 

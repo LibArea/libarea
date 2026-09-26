@@ -1449,3 +1449,8 @@ ALTER TABLE `users_ignored` ADD INDEX `idx_ignored_user_pair` (`user_id`, `ignor
 
 -- 5. Для ускорения проверки избранного (LEFT JOIN)
 ALTER TABLE `favorites` ADD INDEX `idx_favorites_lookup` (`action_type`, `user_id`, `tid`);
+
+
+ALTER TABLE `users`
+    ADD COLUMN `reg_device_id` VARCHAR(64) NULL DEFAULT NULL AFTER `reg_ip`,
+    ADD INDEX `idx_reg_device_id` (`reg_device_id`);

@@ -7,6 +7,7 @@ namespace App\Content\Сheck;
 use Hleb\Static\Container;
 use App\Models\FacetModel;
 use App\Models\Auth\AuthModel;
+use App\Models\ActionModel;
 use App\Models\User\InvitationModel;
 use Msg;
 
@@ -179,6 +180,12 @@ class Validator
 
         if ($facet_type === 'blog') {
             if (!$container->user()->admin()) {
+                // Creating a blog requires a minimum contribution (posts, comments, answers)
+                // Для создания блога нужен минимальный вклад (посты, комментарии, ответы)
+                if (ActionModel::allContentUserCount($container->user()->id()) < (int)config('trust-levels', 'total_contribution')) {
+                    Msg::redirect(__('msg.blog_need_contribution'), 'error', $redirect);
+                }
+
                 if (in_array($data['facet_slug'], config('stop-blog', 'list'))) {
                     Msg::redirect(__('msg.went_wrong'), 'error', $redirect);
                 }

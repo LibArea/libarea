@@ -14,7 +14,7 @@ class DeviceIDModel extends Model
         return DB::run("SELECT device_id FROM users_agent_logs WHERE user_id = ? ORDER BY id DESC", [self::container()->user()->id()])->fetch();
     }
 	
-    public static function create(int $device_id): \PDOStatement
+    public static function create(string $device_id): \PDOStatement
     {
 		$user_id = self::container()->user()->id();
  

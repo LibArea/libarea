@@ -17,7 +17,13 @@ class DeviceController extends Controller
 
     public static function set(): bool
     {
-        $id = Request::post('id')->asInt();
+        $id = trim((string)Request::post('id')->value());
+
+        // Store the fingerprint as a string (do not truncate to int), max 64 chars
+        // Храним отпечаток строкой (не усекаем в int), максимум 64 символа
+        if ($id === '' || mb_strlen($id) > 64) {
+            return false;
+        }
 
         DeviceIDModel::create($id);
 

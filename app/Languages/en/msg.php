@@ -25,6 +25,7 @@ return [
     'yes_repost'            => 'Complaint sent!',
     'post_added'            => 'Post added!',
     'blog_added'            => 'Blog added!',
+    'blog_need_contribution' => 'To create a blog, add some value to the community: post, comment or answer',
     'command_executed'      => 'Command completed',
     'cover_removed'         => 'Cover removed',
     'select_topic'          => 'Choose a theme',

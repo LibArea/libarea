@@ -43,6 +43,24 @@ class AuthModel extends Model
         return DB::run($sql, ['ip' => $ip])->fetch();
     }
 
+    /**
+     * How many accounts have already been registered from a given device (browser fingerprint)
+     * Сколько аккаунтов уже зарегистрировано с данного устройства (отпечатка браузера)
+     *
+     * @param string $device_id
+     * @return int
+     */
+    public static function countDeviceRegistration(string $device_id): int
+    {
+        $sql = "SELECT COUNT(*) AS cnt
+                    FROM users
+                    WHERE reg_device_id = :device_id";
+
+        $row = DB::run($sql, ['device_id' => $device_id])->fetch();
+
+        return (int)($row['cnt'] ?? 0);
+    }
+
     public static function getAuthTokenByUserId(int $user_id): array|bool
     {
         $sql = "SELECT

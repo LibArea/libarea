@@ -29,6 +29,9 @@
         <?php if (!empty($user['device_id'])) : ?>
           <sup class="red"><?= $user['device_id']; ?></sup>
         <?php endif; ?>
+        <?php if (!empty($user['reg_device_id'])) : ?>
+          <sup class="red">reg: <?= $user['reg_device_id']; ?></sup>
+        <?php endif; ?>
         <div class="gray-600">
           <?= $user['email']; ?> |
           <?= $user['created_at']; ?> |

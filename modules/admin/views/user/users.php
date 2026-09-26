@@ -84,6 +84,12 @@ use App\Bootstrap\Services\Auth\RegType; ?>
               <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
             <?php endif; ?>
             <br>
+            <?php if (!empty($user['reg_device_id'])) : ?>
+              <a class="gray-600 text-sm" href="<?= url('admin.device', ['item' => $user['reg_device_id']]); ?>">
+                <?= $user['reg_device_id']; ?>
+              </a>
+              <br>
+            <?php endif; ?>
             <?= $user['created_at']; ?>
           </td>
           <td class="text-sm align-right mb-none">

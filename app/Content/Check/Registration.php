@@ -24,6 +24,15 @@ class Registration
             Msg::redirect(__('msg.multiple_accounts'), 'error', $redirect);
         }
 
+        // Limit of registrations from one device (browser fingerprint)
+        // Лимит регистраций с одного устройства (отпечатка браузера)
+        $device_id = $data['device_id'] ?? null;
+        if (is_string($device_id) && $device_id !== '' && mb_strlen($device_id) <= 64) {
+            if (AuthModel::countDeviceRegistration($device_id) >= (int)config('general', 'reg_device_limit')) {
+                Msg::redirect(__('msg.multiple_accounts'), 'error', $redirect);
+            }
+        }
+
 
         // Let's check the verification code
         // Проверим код проверки

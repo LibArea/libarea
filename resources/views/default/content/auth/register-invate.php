@@ -33,8 +33,22 @@
       <fieldset>
         <input type="hidden" name="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
         <input type="hidden" name="invitation_id" value="<?= $data['invate']['uid']; ?>">
+        <input type="hidden" name="device_id" id="register_device_id" value="">
         <?= Html::sumbit(__('app.registration')); ?>
       </fieldset>
     </form>
+
+    <script nonce="<?= config('main', 'nonce'); ?>">
+      (function () {
+        var s = document.createElement('script');
+        s.src = '/assets/js/device/client.base.min.js';
+        s.onload = function () {
+          var client = new ClientJS();
+          var el = document.getElementById('register_device_id');
+          if (el) el.value = client.getFingerprint();
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
   </div>
 </main>

@@ -37,6 +37,7 @@ class UserModel extends Model
                     invitation_id,
                     limiting_mode,
                     reg_ip,
+                    reg_device_id,
                     ban_list,
                     is_deleted,
                     banlist_user_id,
@@ -78,6 +79,7 @@ class UserModel extends Model
                     activated,
                     limiting_mode,
                     reg_ip,
+                    reg_device_id,
                     email,
                     avatar,
                     trust_level,
@@ -153,14 +155,15 @@ class UserModel extends Model
                     u.avatar,
                     u.created_at,
                     u.reg_ip,
+                    u.reg_device_id,
                     u.invitation_id,
                     u.trust_level,
                     u.ban_list
                         FROM users_agent_logs log
 						    LEFT JOIN users u ON u.id = log.user_id 
-								WHERE log.device_id = :item";
+								WHERE log.device_id = :item OR u.reg_device_id = :item_reg";
 
-        return DB::run($sql, ['item' => $item])->fetchAll();
+        return DB::run($sql, ['item' => $item, 'item_reg' => $item])->fetchAll();
     }
 
     public static function getUserSearchRegIp(string $item)

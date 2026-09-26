@@ -5,7 +5,21 @@
     <form class="max-w-sm mb-max-w-full" action="<?= config('meta', 'url'); ?><?= url('register.add', method: 'post'); ?>" id="registration" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/registration'); ?>
+      <input type="hidden" name="device_id" id="register_device_id" value="">
     </form>
+
+    <script nonce="<?= config('main', 'nonce'); ?>">
+      (function () {
+        var s = document.createElement('script');
+        s.src = '/assets/js/device/client.base.min.js';
+        s.onload = function () {
+          var client = new ClientJS();
+          var el = document.getElementById('register_device_id');
+          if (el) el.value = client.getFingerprint();
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
 
     <p><?= __('app.agree_rules'); ?>.</p>
     <p><?= __('help.security_info'); ?></p>

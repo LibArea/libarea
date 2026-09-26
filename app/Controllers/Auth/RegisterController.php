@@ -57,6 +57,11 @@ class RegisterController extends Controller
         $data    = Request::allPost();
         $inv_uid = Registration::rules($data, $reg_ip, $inv_user_id);
 
+        // Device fingerprint (browser). Cleaned up here, also checked in Registration::rules
+        // Отпечаток устройства (браузера). Очистка здесь, проверка также в Registration::rules
+        $device_id = trim((string)($data['device_id'] ?? ''));
+        $device_id = ($device_id === '') ? null : mb_substr($device_id, 0, 64);
+
         $active_uid = UserModel::create(
             [
                 'login'                => $data['login'],
@@ -68,6 +73,7 @@ class RegisterController extends Controller
                 'limiting_mode'        => 0, // режим заморозки выключен
                 'activated'            => Register::activated($inv_uid),
                 'reg_ip'               => $reg_ip,
+                'reg_device_id'        => $device_id,
                 'trust_level'          => Register::trustLevel(),
                 'invitation_id'        => $inv_uid,
             ]
