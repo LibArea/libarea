@@ -69,7 +69,7 @@
 
           <a class="black" href="<?= $url; ?>">
             <?php $arr = Parser::cut($item['post_content']);
-            echo markdown($arr['content']); ?>
+            echo preg_replace('#</?a[^>]*>#i', '', markdown($arr['content'])); ?>
           </a>
         </div>
       </div>
