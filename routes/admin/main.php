@@ -82,7 +82,7 @@ Route::toGroup()
 
 	Route::get('/logip/{item}')->module('admin', UsersController::class, 'logip')->where(['item' => '[0-9].+'])->name('admin.logip');
 	Route::get('/regip/{item}')->module('admin', UsersController::class, 'regip')->where(['item' => '[0-9].+'])->name('admin.regip');
-	Route::get('/deviceid/{item}')->module('admin', UsersController::class, 'deviceid')->where(['item' => '[0-9].+'])->name('admin.device');
+	Route::get('/deviceid/{item}')->module('admin', UsersController::class, 'deviceid')->where(['item' => '[a-zA-Z0-9]+'])->name('admin.device');
 
 	Route::get('/badges/add')->module('admin', BadgesController::class, 'add')->name('admin.badges.add');
 	Route::get('/badges/{id}/edit')->module('admin', BadgesController::class, 'editBadge')->where(['id' => '[0-9]+'])->name('admin.badges.edit');
